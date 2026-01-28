@@ -1,12 +1,14 @@
 {
-  "name": "barn-gym-venue-scraper",
+  "name": "barn-gym-retreat-booking",
   "version": "1.0.0",
-  "description": "Scraper for venue websites",
+  "description": "Barn Gym Retreat Booking System",
   "main": "scrape-venues.js",
   "scripts": {
+    "start": "npx serve dist",
     "scrape": "node scrape-venues.js"
   },
   "dependencies": {
-    "playwright": "^1.40.0"
+    "playwright": "^1.40.0",
+    "serve": "^14.2.1"
   }
 }
