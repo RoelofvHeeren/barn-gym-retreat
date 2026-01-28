@@ -1,0 +1,33 @@
+The Bell Inn - Scrape Summary
+============================================================
+
+Total Pages Scraped: 4
+Total Images Found: 118
+Total Headings: 38
+Total Paragraphs: 35
+
+Pages:
+
+1. Rooms - The Bell in Ticehurst
+   URL: https://www.thebellinticehurst.com/rooms/
+   Images: 101
+   Headings: 27
+   Paragraphs: 17
+
+2. Events - The Bell in Ticehurst
+   URL: https://www.thebellinticehurst.com/events/
+   Images: 11
+   Headings: 7
+   Paragraphs: 14
+
+3. Page not found - The Bell in Ticehurst
+   URL: https://www.thebellinticehurst.com/meetings/
+   Images: 3
+   Headings: 2
+   Paragraphs: 2
+
+4. Page not found - The Bell in Ticehurst
+   URL: https://www.thebellinticehurst.com/gallery/
+   Images: 3
+   Headings: 2
+   Paragraphs: 2

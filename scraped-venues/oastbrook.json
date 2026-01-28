@@ -1,0 +1,542 @@
+{
+  "name": "Oastbrook Vineyard",
+  "id": "oastbrook",
+  "baseUrl": "https://oastbrook.com",
+  "scrapedAt": "2026-01-28T07:45:07.344Z",
+  "pages": [
+    {
+      "url": "https://oastbrook.com/accommodation/vineyard-hollow/",
+      "title": "Vineyard Hollow - Vineyard B&B | Oastbrook Estate Vineyard",
+      "content": {
+        "headings": [
+          {
+            "level": 1,
+            "text": "The Vineyard Hollow at Oastbrook"
+          },
+          {
+            "level": 2,
+            "text": "Reserve Your Stay at the Vineyard Hollow"
+          },
+          {
+            "level": 2,
+            "text": "Facilities &amp; Amenities"
+          },
+          {
+            "level": 2,
+            "text": "Recognised As A Top UK Stay"
+          },
+          {
+            "level": 2,
+            "text": "Frequently Asked Questions"
+          },
+          {
+            "level": 2,
+            "text": "Vineyard Hollow Gallery"
+          },
+          {
+            "level": 2,
+            "text": "Our Accommodation at Oastbrook"
+          },
+          {
+            "level": 2,
+            "text": "Finding Us"
+          },
+          {
+            "level": 3,
+            "text": "Address"
+          },
+          {
+            "level": 3,
+            "text": "Contact"
+          }
+        ],
+        "paragraphs": [
+          "Home » Accommodation » Vineyard Hollow",
+          "The Vineyard Hollow is nestled deep in the heart of the Rother Valley.&nbsp; Furthermore it’s only a short walk from Bodiam Castle and in the midst of our Sussex vineyard.",
+          "Nestled seamlessly into the natural curve of a hillside, the house appears as though it has been cradled by the earth itself, harmoniously blending with the surrounding landscape.",
+          "This distinctive integration not only preserves the untouched beauty of the terrain but also positions the dwelling to capture the most breathtaking panoramas of the sprawling valley below.",
+          "Every window and terrace becomes a frame for the ever-changing tapestry of nature, from dawn’s first light to the fiery hues of sunset.",
+          "Built with a deep respect for the land, every brick, beam, and tile tells a tale of the region’s rich heritage. Local craftsmen, with generational knowledge passed down, were entrusted with bringing this architectural dream to life.",
+          "Employing indigenous materials sourced right from the heart of the valley, they ensured that the house is both a testament to artisanal skill and a sustainable vision.",
+          "The result is more than just luxury accommodation—it’s an immersive experience where tradition meets elegance, offering guests a genuine feel of the locale’s spirit and charm.",
+          "Vineyard Hollow is an embodiment of luxury and comfort, featuring two sumptuously appointed bedrooms designed with unique charm.",
+          "These sanctuaries can comfortably accommodate up to four discerning guests, making it perfect for families or intimate gatherings of friends.",
+          "Every bedroom is graced with a plush king-size bed, enveloped in fine linens, ensuring a restful night’s sleep. Additionally, each room is complemented by a private en-suite bathroom, furnished with rustic fixtures and bath essentials for a refreshing shower.",
+          "The heart of the home lies in its spacious kitchen, fully equipped with all the essential amenities that a culinary enthusiast might require.",
+          "Whether you’re preparing a simple breakfast or a gourmet dinner, the kitchen’s open-plan design ensures you’re never far from the conversations and laughter in the living area.&nbsp;",
+          "For those chilly evenings or romantic nights in, the house proudly features its own indoor stove, exuding warmth and creating an ambiance of cozy contentment.",
+          "But the pinnacle of relaxation can be found in the house’s private hot tub, inviting guests to immerse themselves in its soothing waters, letting the day’s stresses melt away.",
+          "Keep the hollow cozy and warm on a chilly day with the rustic wood fire stove.",
+          "Equipped with a full service kitchen, providing the option to dine-in.",
+          "Enjoy a soak in the private, outdoor hot tub just outside the front door.",
+          "Relax by the fire with a glass of wine and a book in the reading nook.",
+          "Each room has a spacious king size bed for you to enjoy a perfect night.",
+          "Relax outdoors in the English countryside with a glass of fine Sussex wine.",
+          "Yes the Vineyard Hollow has its own private garden and is well away from other buildings",
+          "Yes you can book a tour at a discounted rate and you can pre-order wine to be there when you arrive",
+          "We ask for a £200 security deposit which is taken as a hold on your card which is returned if there is no damage.",
+          "Yes kids are welcome to stay but the beds are king size so if you have two beds they will need to share",
+          "Unfortunately dogs are not allowed.",
+          "The house is self catering so you will need to bring provisions everything else is provided",
+          "Check in is for 4-6pm and checkout is at 10 am. We will come around to check you in",
+          "The house is on one floor and is accessible to wheelchair users although the path has low steps. There are no rails in the bathroom but it is an open wet room.",
+          "Yes there is a car park by the winery&nbsp;",
+          "The house has amazing heat insulation and has a ground source heat pump and a biogester",
+          "Spend a night at the “UK’s quirkiest Place to Stay”, in our specially crafted Vineyard Hollow.",
+          "Spend some time under the stars, in our luxurious glamping options within the vineyard.",
+          "Enjoy a stay at this stunning Scandinavean style lodge on the water front with private balcony and hot-tub.",
+          "Oastbrook, Junction RdBodiam, Robertsbridge TN32 5XA",
+          "07808 890428info@oastbrook.com",
+          "© Copyright 2022 Oastbrook Estates Limited",
+          "Design by Please Bring Me My Wine"
+        ],
+        "listItems": [
+          "Wine Events",
+          "Corporate Events",
+          "Winery Tour &amp; Tastings (Nov-Mar)",
+          "Wine Tastings",
+          "Vineyard Tours and Tastings (April-Oct)",
+          "Vineyard Hollow",
+          "Avalon Waterside Lodge",
+          "Luxury Glamping",
+          "Wine Club",
+          "Wine Events",
+          "Corporate Events",
+          "Winery Tour &amp; Tastings (Nov-Mar)",
+          "Wine Tastings",
+          "Vineyard Tours and Tastings (April-Oct)",
+          "Vineyard Hollow",
+          "Avalon Waterside Lodge",
+          "Luxury Glamping",
+          "Wine Club"
+        ]
+      },
+      "images": [
+        "https://oastbrook.com/wp-content/uploads/elementor/thumbs/Oastbrook-Logo_Black-Icon-rgi99n15chbz8x3g4r2jy94q93auv64peac0fnvza4.png",
+        "https://oastbrook.com/wp-content/uploads/2023/09/1546572-SX93820-20Exterior-1024x683.jpg",
+        "https://oastbrook.com/wp-content/uploads/2023/09/1561851-SX93820-20Dining20Area20-20View202-1024x678.jpg",
+        "https://oastbrook.com/wp-content/uploads/2023/09/JH-394-1024x683.jpg",
+        "https://oastbrook.com/wp-content/uploads/2023/09/1561846-SX3820-20Sitting20Area20-20View202-1024x676.jpg",
+        "https://oastbrook.com/wp-content/uploads/2023/09/IMG_6919-1024x683.jpg",
+        "https://oastbrook.com/wp-content/uploads/2023/09/1561859-SX93820-20Kitchen20-20View202-1024x678.jpg",
+        "https://oastbrook.com/wp-content/uploads/2022/04/JH-1080-1024x682.jpg",
+        "https://oastbrook.com/wp-content/uploads/2022/04/JH-395-1024x682.jpg",
+        "https://oastbrook.com/wp-content/uploads/2023/09/1561850-SX93820-20Bedroom202-e1695203629987-1024x682.jpg",
+        "https://oastbrook.com/wp-content/uploads/2023/09/IMG_8341-1-e1695203713625.jpg",
+        "https://oastbrook.com/wp-content/uploads/2020/04/Hobbit-House-at-Oastbrook-Outside-view-of-the-Hobbit-House-1024x683.jpg",
+        "https://oastbrook.com/wp-content/uploads/2022/04/Blanco-Exterior-2-1024x683.jpeg",
+        "https://oastbrook.com/wp-content/uploads/2022/05/avalon-ext-1024x683.jpg",
+        "https://www.facebook.com/tr?id=78600258619473&amp;ev=PageView&amp;noscript=1&amp;dpo=LDU&amp;dpoco=0&amp;dpost=0"
+      ]
+    },
+    {
+      "url": "https://oastbrook.com/accommodation/avalon-waterside-lodge/",
+      "title": "Avalon Waterside Vineyard Lodge | Oastbrook Estate Vineyard",
+      "content": {
+        "headings": [
+          {
+            "level": 1,
+            "text": "Avalon Waterside Lodge at Oastbrook"
+          },
+          {
+            "level": 2,
+            "text": "A Unique Vineyard Lodge Stay"
+          },
+          {
+            "level": 2,
+            "text": "Reserve Your Stay at the Waterside Lodge"
+          },
+          {
+            "level": 2,
+            "text": "Facilities &amp; Amenities"
+          },
+          {
+            "level": 2,
+            "text": "Frequently Asked Questions"
+          },
+          {
+            "level": 2,
+            "text": "Avalon Waterside Lodge Gallery"
+          },
+          {
+            "level": 2,
+            "text": "Our Accommodation at Oastbrook"
+          },
+          {
+            "level": 2,
+            "text": "Finding Us"
+          },
+          {
+            "level": 3,
+            "text": "Address"
+          },
+          {
+            "level": 3,
+            "text": "Contact"
+          }
+        ],
+        "paragraphs": [
+          "Home » Accommodation » Avalon Waterside Lodge",
+          "Avalon Waterside Lodge, is a stunning Scandinavian style ‘A’ frame lodge with an elevated decking and hot tub overlooking the Oastbrook pond and the vineyard itself. So come and experience the English wine country from the comfort of a vineyard lodge with sparkling wine in the hot tub watching the sun go down.",
+          "Perched beside a waterside glade, the lodge boasts breathtaking views of the vineyard and the expansive winery property.",
+          "Encircled by trees, the lodge exudes the feel of a secluded woodland retreat. Every window frames a view so enchanting, it’s akin to a living painting.",
+          "Amidst the rolling green hills and historic charm of the region, guests are transported to a world of viniculture magic. The sound of clinking wine glasses mingles with the hum of the countryside, and days are spent meandering between rows of grapevines, sampling local varietals, and learning the art of winemaking.",
+          "As the sun sets over the picturesque landscape, guests retreat to cozy accommodations, reflecting on the timeless beauty of the Sussex terroir and anticipating another day of oenological exploration.",
+          "Avalon Waterside Lodge, our Scandinavian ‘A’ frame lodge, epitomizes minimalist elegance and coziness. Thoughtfully designed, it boasts a master bedroom adorned with clean lines and neutral tones, providing a serene retreat for two adults. This sanctuary is equipped with an en-suite bathroom, featuring sleek fixtures and essentials for a rejuvenating experience.",
+          "Adjoining the master bedroom is an upstairs chamber, offering flexible sleeping arrangements—choose between two singles or a merged double to suit your needs. The main living area’s ambiance is elevated by a functional sofa bed, which can be used in place of the upstairs chamber, allowing the lodge to comfortably accommodate up to four guests in two separate sleeping areas.",
+          "This space offers the perfect fusion of modern Scandinavian design and homely comfort, making it an idyllic getaway for families or close-knit groups.",
+          "The soul of the home resides in its expansive kitchen, replete with all the must-have features any cooking aficionado would appreciate.",
+          "Whether you’re whipping up a quick morning meal or crafting an elaborate dinner, the kitchen’s open-concept layout keeps you in the heart of household activity, ensuring you’re always part of the conversation and shared moments in the adjoining living space.",
+          "In the embrace of the cool weather, our Scandinavian-style ‘A’ frame lodge stands as a sanctuary of warmth and intimacy.",
+          "Crafted with Nordic elegance, its interiors radiate comfort with an indoor stove, while outside, a private hot tub beckons, offering a soothing escape from daily concerns.",
+          "The lodge’s design, a harmonious blend of nature and minimalist architecture, promises a grounding yet luxurious experience.",
+          "Keep your stay cozy and warm on a chilly day with the rustic wood fire stove.",
+          "Equipped with a full service kitchen, providing the option to dine-in.",
+          "Enjoy a soak in the private, outdoor hot tub just outside the front door.",
+          "The master bedroom has a spacious king size bed for you to enjoy a perfect night.",
+          "Relax outdoors in the English countryside with a glass of fine Sussex wine.",
+          "Relax with a glass of wine and let the world roll by as you enjoy the calming waters.",
+          "Yes the Avalon Waterside Lodge has its own private patio and decking area, and is well away from other buildings",
+          "Yes you can book a tour at a discounted rate and you can pre-order wine to be there when you arrive",
+          "We ask for a £200 security deposit which is taken as a hold on your card which is returned if there is no damage.",
+          "Yes kids are welcome to stay. One bedroom has a king size, the other room has two single beds.",
+          "Unfortunately dogs are not allowed.",
+          "The house is self catering so you will need to bring provisions everything else is provided",
+          "Check in is for 4-6pm and checkout is at 10 am. We will come around to check you in",
+          "The house is based on one floor, with the mezzanine used for the second bedroom. It is accessible to wheelchair users although the path has low steps. There are no rails in the bathroom but it is an open wet room.",
+          "Yes there is a car park by the winery&nbsp;",
+          "The house has amazing heat insulation and has a ground source heat pump and a biogester",
+          "Spend a night at the “UK’s quirkiest Place to Stay”, in our specially crafted Vineyard Hollow.",
+          "Spend some time under the stars, in our luxurious glamping options within the vineyard.",
+          "Enjoy a stay at this stunning Scandinavean style lodge on the water front with private balcony and hot-tub.",
+          "Oastbrook, Junction RdBodiam, Robertsbridge TN32 5XA",
+          "07808 890428info@oastbrook.com",
+          "© Copyright 2022 Oastbrook Estates Limited",
+          "Design by Please Bring Me My Wine"
+        ],
+        "listItems": [
+          "Wine Events",
+          "Corporate Events",
+          "Winery Tour &amp; Tastings (Nov-Mar)",
+          "Wine Tastings",
+          "Vineyard Tours and Tastings (April-Oct)",
+          "Vineyard Hollow",
+          "Avalon Waterside Lodge",
+          "Luxury Glamping",
+          "Wine Club",
+          "Wine Events",
+          "Corporate Events",
+          "Winery Tour &amp; Tastings (Nov-Mar)",
+          "Wine Tastings",
+          "Vineyard Tours and Tastings (April-Oct)",
+          "Vineyard Hollow",
+          "Avalon Waterside Lodge",
+          "Luxury Glamping",
+          "Wine Club"
+        ]
+      },
+      "images": [
+        "https://oastbrook.com/wp-content/uploads/elementor/thumbs/Oastbrook-Logo_Black-Icon-rgi99n15chbz8x3g4r2jy94q93auv64peac0fnvza4.png",
+        "https://oastbrook.com/wp-content/uploads/2023/09/Outside-1024x856.jpg",
+        "https://oastbrook.com/wp-content/uploads/2023/09/Kitchen-1024x853.jpg",
+        "https://oastbrook.com/wp-content/uploads/2023/09/Kitchen-1-1024x851.jpg",
+        "https://oastbrook.com/wp-content/uploads/2022/05/IMG_1933-768x1024.jpg",
+        "https://oastbrook.com/wp-content/uploads/2023/09/Wood-Fire-1024x659.jpg",
+        "https://oastbrook.com/wp-content/uploads/2023/09/Modern-Kitchen-1024x659.jpg",
+        "https://oastbrook.com/wp-content/uploads/2023/09/Hot-Tub-1024x659.jpg",
+        "https://oastbrook.com/wp-content/uploads/2023/09/Master-Bedroom-1-1024x659.jpg",
+        "https://oastbrook.com/wp-content/uploads/2023/09/Patio-Outdoor-Furniture-1024x659.jpg",
+        "https://oastbrook.com/wp-content/uploads/2023/09/Peaceful-River-View-1024x659.jpg",
+        "https://oastbrook.com/wp-content/uploads/2020/04/Hobbit-House-at-Oastbrook-Outside-view-of-the-Hobbit-House-1024x683.jpg",
+        "https://oastbrook.com/wp-content/uploads/2022/04/Blanco-Exterior-2-1024x683.jpeg",
+        "https://oastbrook.com/wp-content/uploads/2022/05/avalon-ext-1024x683.jpg",
+        "https://www.facebook.com/tr?id=78600258619473&amp;ev=PageView&amp;noscript=1&amp;dpo=LDU&amp;dpoco=0&amp;dpost=0"
+      ]
+    },
+    {
+      "url": "https://oastbrook.com/luxury-sussex-glamping/",
+      "title": "Luxury Sussex Glamping | Oastbrook Estate",
+      "content": {
+        "headings": [
+          {
+            "level": 1,
+            "text": "Oastbrook Estate Luxury Glamping"
+          },
+          {
+            "level": 2,
+            "text": "Luxury Sussex Glamping in Bodiam"
+          },
+          {
+            "level": 2,
+            "text": "Delivering a 5* service"
+          },
+          {
+            "level": 2,
+            "text": "Luxury Under Canvas"
+          },
+          {
+            "level": 2,
+            "text": "Tailored Experiences"
+          },
+          {
+            "level": 2,
+            "text": "Explore some of our Tailored Experiences"
+          },
+          {
+            "level": 2,
+            "text": "Vineyard Tour"
+          },
+          {
+            "level": 2,
+            "text": "Wine on Arrival"
+          },
+          {
+            "level": 2,
+            "text": "One of the 10 best UK glamping sites for foodies"
+          }
+        ],
+        "paragraphs": [
+          "Home » Oastbrook Estate Luxury Sussex Glamping",
+          "Experience Luxury Sussex Glamping and the natural beauty of the countryside around Bodiam and immerse yourself in rural Oastbrook life, from the comfort of your very own luxury bell tent.&nbsp;",
+          "Experience the great outdoors around a camp fire and enjoy the high quality Glamping accommodation. Uniquely we&nbsp;have eight boutique bell tents each with its own firepit and a shared campfire.&nbsp;",
+          "Take advantage of discounts for longer stays 15% for a minimum of two nights and 30% for more than five nights. When booking your Sussex canvas experience&nbsp; please remember to choose both the number of tents and the number of people.",
+          "The moment you enter the spacious quintessential bell tents you will realise this is not a normal tent, from the king size bed, to soft lighting and luxury throws. We have put our unique twist on life under canvas incorporating different elements from our own experiences.",
+          "We have also custom built luxury individual washrooms with a heated electric shower, wash basin and vanity unit, this is located next to the winery and each have private entry/access with lock. All bathing products and thick comfy towels will be provided.",
+          "Our glamping visitors have access to the Estate’s collection of wines, including our Sparkling Rosé and Pinot Gris. You will also be able to join us on one of our vineyard tours and enjoy some alfresco cooking on your tent’s own Weber BBQ.",
+          "Our helpful Oastbrook team can make recommendations on local eateries and activities.",
+          "National Geographic named Oastbrook one of the 10 best UK glamping sites for foodies in 2021. We were praised for our outstanding location, unique tours and wine-pairing",
+          "© Copyright 2022 Oastbrook Estates Limited",
+          "Design by Please Bring Me My Wine"
+        ],
+        "listItems": [
+          "Wine Events",
+          "Corporate Events",
+          "Winery Tour &amp; Tastings (Nov-Mar)",
+          "Wine Tastings",
+          "Vineyard Tours and Tastings (April-Oct)",
+          "Vineyard Hollow",
+          "Avalon Waterside Lodge",
+          "Luxury Glamping",
+          "Wine Club",
+          "Wine Events",
+          "Corporate Events",
+          "Winery Tour &amp; Tastings (Nov-Mar)",
+          "Wine Tastings",
+          "Vineyard Tours and Tastings (April-Oct)",
+          "Vineyard Hollow",
+          "Avalon Waterside Lodge",
+          "Luxury Glamping",
+          "Wine Club"
+        ]
+      },
+      "images": [
+        "https://oastbrook.com/wp-content/uploads/elementor/thumbs/Oastbrook-Logo_Black-Icon-rgi99n15chbz8x3g4r2jy94q93auv64peac0fnvza4.png",
+        "https://oastbrook.com/wp-content/uploads/elementor/thumbs/Oastbrook_090821_54-rgi99soj9yrz996b83vrfm8962ycz8lesyfvs7kke8.jpg",
+        "https://oastbrook.com/wp-content/uploads/elementor/thumbs/Oastbrook_HighRes_240321_5-1-rgi99uk7nmujwh3kx4p0klr6cup3emsvh7quqrhs1s.jpg",
+        "https://www.facebook.com/tr?id=78600258619473&amp;ev=PageView&amp;noscript=1&amp;dpo=LDU&amp;dpoco=0&amp;dpost=0"
+      ]
+    },
+    {
+      "url": "https://oastbrook.com/corporate-events/",
+      "title": "Corporate Events - East Sussex - Oastbrook Estate Vineyards",
+      "content": {
+        "headings": [
+          {
+            "level": 1,
+            "text": "Oastbrook Estate Corporate Events"
+          },
+          {
+            "level": 2,
+            "text": "The Perfect Setting For Your Event"
+          },
+          {
+            "level": 2,
+            "text": "Create Your Unique Visit"
+          },
+          {
+            "level": 2,
+            "text": "Bespoke Corporate Event Spaces"
+          },
+          {
+            "level": 2,
+            "text": "Pool Patio"
+          },
+          {
+            "level": 2,
+            "text": "Custom Tailored Tours &amp; Tastings"
+          },
+          {
+            "level": 2,
+            "text": "Food and Dining Options"
+          },
+          {
+            "level": 2,
+            "text": "Accommodation &amp; Activities"
+          },
+          {
+            "level": 2,
+            "text": "Where Are We Located?"
+          },
+          {
+            "level": 2,
+            "text": "Directions from Nearby Cities"
+          },
+          {
+            "level": 2,
+            "text": "Testimonials"
+          },
+          {
+            "level": 3,
+            "text": "Tasting Room"
+          },
+          {
+            "level": 3,
+            "text": "Address"
+          },
+          {
+            "level": 3,
+            "text": "Contact"
+          },
+          {
+            "level": 3,
+            "text": "Maidstone"
+          },
+          {
+            "level": 3,
+            "text": "Canterbury"
+          },
+          {
+            "level": 3,
+            "text": "Tunbridge Wells"
+          },
+          {
+            "level": 3,
+            "text": "Dartford"
+          }
+        ],
+        "paragraphs": [
+          "Home » Corporate Events",
+          "Oastbrook Estate Vineyards set in East Sussex, just minutes from the Kent border, offers a effortless English Countryside approach to your next corporate event. Join us in the vineyards for your next company outing. Whether you want to want a productive day away or a fun escape or a combination of the two. A day at Oastbrook is guaranteed to put a smile on your face.",
+          "No matter the size of your team, we have the ability to accommodate events of all sizes. From employee training sessions and team-building workshops to high-end corporate functions, our distinct event venues, professional event staff, and comprehensive catering services guarantee a seamless and effective execution of your event.",
+          "Our vineyard is the destination your company has been looking for.",
+          "An iconic interior design reminiscent of a Scandinavian long house perfect for events, dinners and meetings with full AV capability, a 3 m screen and surround sound. Annexed by a full commercial kitchen with a terrace area with fantastic elevated views across the vineyard.",
+          "Availability: {Fri – Sun}",
+          "There is tropical feel to this open space with its own kitchen and BBQ area, a great area for al fresco dining or cocktails at the end of the day. There is a nearby gazebo for an exclusive dining experience.",
+          "&nbsp;Availability: {Fri – Sun}",
+          "Experience an exclusive corporate outing with a twist at our Oastbrook estate located in Sussex, where vineyard owner, America Brewer, will guide your team through our remarkable vineyards. This outing is not merely a tour; it’s an educational journey that uncovers the history of our vineyard and reveals our future plans. Your team will encounter our diverse grape varieties and engage in enlightening interactive activities along the way.",
+          "The highlight of this event, no doubt, is the wine tasting. Your group will get to savour our award-winning wines complemented by a delectable cheese platter. For companies looking to enrich their knowledge about the burgeoning English wine industry, a private vineyard tour could be just the ticket. Your team will gain insights into the wine-making process, understand the art of pairing food with wine, and learn to taste wine like a connoisseur. Additionally, we will share details about our wine partners.",
+          "Treat your team to an unforgettable experience and deepen their appreciation of the fascinating world of wine.",
+          "We offer an extensive range of menus provided by local chefs. Please contact us for more information.",
+          "Host your company onsite at our estate vineyard property in a&nbsp;Luxury Glamping Tents,&nbsp;Vineyard Hollow House, or&nbsp;Avalon Waterside Lodge&nbsp;. Discover the idyllic beauty of the English countryside in Sussex and experience life on the vineyard. Need more space, we offer partner accommodations so everyone can experience the countryside and stay near the vineyards.",
+          "In the verdant heart of the English countryside, a plethora of exhilarating activities await those seeking an authentic outdoor experience. You can test your precision and focus with archery, aiming for the bullseye while appreciating the tranquility of the surroundings. Or try your hand at axe throwing, an ancient skill that brings a primal thrill and a sense of historical connection.",
+          "For a touch of nobility, you might participate in falconry, an age-old hunting tradition where you can interact with majestic birds of prey and learn about their fascinating lives. Alternatively, engage in the modern twist on a classic pastime with laser clay pigeon shooting, a thrilling yet environmentally friendly activity. With the gentle hum of the laser, you can hone your shooting skills against the backdrop of the stunning, pastoral English landscape. All these experiences immerse you in the natural beauty of the countryside, offering an exciting escape from the hustle and bustle of city life.",
+          "Just under an hour and a half outside of London, a straight shot down A21, and near major airports.",
+          "Oastbrook, Junction RdBodiam, Robertsbridge TN32 5XA",
+          "07808 890428info@oastbrook.com",
+          "Start on the A229 heading south, switch to the A21 at the Lamberhurst bypass, then continue south until you reach the turn-off for the B2089 near Robertsbridge. Follow this road north and it will lead you straight to Oastbrook Estate Vineyards.",
+          "Take the A28 towards Ashford, then switch to the A2070. Head south until you hit the A21, continue south to the turn-off for the B2089 near Robertsbridge, then follow this route northwards to reach the vineyard.",
+          "Begin on the A26 going south, then join the A21 heading south-east. Continue until you see the turn-off for the B2089 near Robertsbridge. Follow this road north and it will bring you directly to Oastbrook Estate Vineyards.",
+          "Begin on the A26 going south, then join the A21 heading south-east. Continue until you see the turn-off for the B2089 near Robertsbridge. Follow this road north and it will bring you directly to Oastbrook Estate Vineyards.",
+          "© Copyright 2022 Oastbrook Estates Limited",
+          "Design by Please Bring Me My Wine"
+        ],
+        "listItems": [
+          "Wine Events",
+          "Corporate Events",
+          "Winery Tour &amp; Tastings (Nov-Mar)",
+          "Wine Tastings",
+          "Vineyard Tours and Tastings (April-Oct)",
+          "Vineyard Hollow",
+          "Avalon Waterside Lodge",
+          "Luxury Glamping",
+          "Wine Club",
+          "Wine Events",
+          "Corporate Events",
+          "Winery Tour &amp; Tastings (Nov-Mar)",
+          "Wine Tastings",
+          "Vineyard Tours and Tastings (April-Oct)",
+          "Vineyard Hollow",
+          "Avalon Waterside Lodge",
+          "Luxury Glamping",
+          "Wine Club"
+        ]
+      },
+      "images": [
+        "https://oastbrook.com/wp-content/uploads/elementor/thumbs/Oastbrook-Logo_Black-Icon-rgi99n15chbz8x3g4r2jy94q93auv64peac0fnvza4.png",
+        "https://www.facebook.com/tr?id=78600258619473&amp;ev=PageView&amp;noscript=1&amp;dpo=LDU&amp;dpoco=0&amp;dpost=0"
+      ]
+    },
+    {
+      "url": "https://oastbrook.com/accommodation/",
+      "title": "Vineyard Stays & Accommodation in Sussex",
+      "content": {
+        "headings": [
+          {
+            "level": 1,
+            "text": "Basket"
+          },
+          {
+            "level": 1,
+            "text": "Accommodation at Oastbrook"
+          },
+          {
+            "level": 2,
+            "text": "Stay with us"
+          },
+          {
+            "level": 2,
+            "text": "Vineyard Hollow"
+          },
+          {
+            "level": 2,
+            "text": "Luxury Sussex Glamping"
+          },
+          {
+            "level": 2,
+            "text": "Avalon Lodge"
+          }
+        ],
+        "paragraphs": [
+          "Basket0BasketClose BasketYou don’t have any items in your cart.",
+          "A stay at Oastbrook is always unique and as relaxing or adventurous as you’d like it to be. Each of our accommodation options have been lovingly put together to give you the home-away-from home experience that you’ve been looking for and they’re perfectly positioned for countryside wanderings beyond the Oastbrook estate.",
+          "Our Vineyard Hollow is a one of a kind, home-away-from-home, nestled in its own private corner of the Oastbrook Estate.",
+          "This cosy hideaway was built by local craftsmen, using local materials and is nestled snugly into a bank, which creates a rustic, burrow-like appearance. Outside, you’ll enjoy beautiful views of the valley from your very own hot tub, which will keep you warm even in the colder months.",
+          "Inside, The Vineyard Hollow has two luxury bedrooms with a king size bed and ensuite bathroom, which comfortably sleeps up to four people – perfect for small families or two couples. The kitchen is fully equipped with all the basics, and leads into the open plan living area.",
+          "The Oastbrook estate, where our Vineyard Hollow resides, is nestled deep in the heart of the Rother Valley, a short walk from Bodiam Castle and plenty of local walking spots, plus places to eat.",
+          "Enjoy a luxury stay under the stars and soak up everything that the Sussex countryside has to offer. Complete with their own wine cooler and king size bed, each of our elegant, 5-star bell tents have been fully equipped for you to experience a relaxed staycation, in style.",
+          "Our lavish shower rooms are just a short walk from the main campsite and are fully equipped with everything you might need, including an electric heated shower and vanity mirror. We’ll also provide toiletries and thick, fluffy towels.",
+          "Book a romantic stay with someone special or come along with a group of like-minded friends and reconnect with nature from our beautiful vineyard in the Rother Valley.",
+          "Our brand new, hand crafted, Avalon Waterside Lodge has been built with Scandinavian style in mind. It is set out perfectly for two adults and two children, the latter of which can sleep in a gallery bedroom, which is accessed from the master bedroom. For guests who would like to visit as two couples and would like extra privacy, there is a sofa bed in the main living area. Whilst staying here, you’ll be just minutes away from accessing the most beautiful countryside walking trails and local eateries.",
+          "© Copyright 2022 Oastbrook Estates Limited",
+          "Design by Please Bring Me My Wine"
+        ],
+        "listItems": [
+          "Wine Events",
+          "Corporate Events",
+          "Winery Tour &amp; Tastings (Nov-Mar)",
+          "Wine Tastings",
+          "Vineyard Tours and Tastings (April-Oct)",
+          "Vineyard Hollow",
+          "Avalon Waterside Lodge",
+          "Luxury Glamping",
+          "Wine Club",
+          "Wine Events",
+          "Corporate Events",
+          "Winery Tour &amp; Tastings (Nov-Mar)",
+          "Wine Tastings",
+          "Vineyard Tours and Tastings (April-Oct)",
+          "Vineyard Hollow",
+          "Avalon Waterside Lodge",
+          "Luxury Glamping",
+          "Wine Club"
+        ]
+      },
+      "images": [
+        "https://oastbrook.com/wp-content/uploads/elementor/thumbs/Oastbrook-Logo_Black-Icon-rgi99n15chbz8x3g4r2jy94q93auv64peac0fnvza4.png",
+        "https://oastbrook.com/wp-content/uploads/2022/04/Oastbrook_140621_43-1-1024x683.jpg",
+        "https://oastbrook.com/wp-content/uploads/2023/09/Outside-across-pond-1-1024x708.jpg",
+        "https://www.facebook.com/tr?id=78600258619473&amp;ev=PageView&amp;noscript=1&amp;dpo=LDU&amp;dpoco=0&amp;dpost=0"
+      ]
+    }
+  ]
+}

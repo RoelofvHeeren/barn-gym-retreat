@@ -1,0 +1,12 @@
+{
+  "name": "barn-gym-venue-scraper",
+  "version": "1.0.0",
+  "description": "Scraper for venue websites",
+  "main": "scrape-venues.js",
+  "scripts": {
+    "scrape": "node scrape-venues.js"
+  },
+  "dependencies": {
+    "playwright": "^1.40.0"
+  }
+}

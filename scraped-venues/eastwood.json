@@ -1,0 +1,636 @@
+{
+  "name": "Eastwood Observatory",
+  "id": "eastwood",
+  "baseUrl": "https://www.eastwoodobservatory.co.uk",
+  "scrapedAt": "2026-01-28T07:45:24.524Z",
+  "pages": [
+    {
+      "url": "https://www.eastwoodobservatory.co.uk/bedrooms/",
+      "title": "Bedrooms - Eastwood Observatory",
+      "content": {
+        "headings": [
+          {
+            "level": 1,
+            "text": "Rooms"
+          },
+          {
+            "level": 2,
+            "text": "perfect for large groups"
+          },
+          {
+            "level": 3,
+            "text": "Striking interiors"
+          },
+          {
+            "level": 3,
+            "text": "Second floor double room"
+          },
+          {
+            "level": 3,
+            "text": "First floor turret room"
+          },
+          {
+            "level": 3,
+            "text": "Second floor turret room"
+          },
+          {
+            "level": 3,
+            "text": "Second floor double room"
+          },
+          {
+            "level": 3,
+            "text": "Spacious second floor room"
+          },
+          {
+            "level": 3,
+            "text": "First floor turret room"
+          },
+          {
+            "level": 3,
+            "text": "First floor double room"
+          },
+          {
+            "level": 3,
+            "text": "First floor double room"
+          },
+          {
+            "level": 3,
+            "text": "Second floor double room"
+          },
+          {
+            "level": 3,
+            "text": "Second floor bunk room"
+          },
+          {
+            "level": 3,
+            "text": "First floor double room"
+          },
+          {
+            "level": 3,
+            "text": "First floor double room"
+          },
+          {
+            "level": 3,
+            "text": "Info"
+          },
+          {
+            "level": 3,
+            "text": "ABOUT"
+          },
+          {
+            "level": 3,
+            "text": "Quick Links"
+          }
+        ],
+        "paragraphs": [
+          "Eastwood is perfectly set up to accommodate large family groups of up to 24 people seeking a luxurious self-catering holiday experience. At Eastwood, all bookings are for the exclusive use of each group, ensuring that guests can enjoy the full privacy of the beautifully maintained 32 acre estate without disturbance.",
+          "While Eastwood Observatory exudes a welcoming informality, a dedicated team is always on hand to provide as much help as is needed. For groups wanting some assistance with the catering, we offer a comprehensive housekeeping service, which includes a perfectly prepared breakfast and coffee. For those in search of a truly personalized culinary experience, our talented private chef is available to create delicious three-course dinners tailored to the group’s specific requirements.",
+          "Equally, for companies running away days and corporate retreats, we have a full programme of team-building activities that can be arranged on site.",
+          "Second floor double room with en-suite bathroom and shower. Views over walled garden and clock tower.",
+          "Turret room with ensuite bathroom, with bath and separate shower. Situated on the first floor with wonderful views of the garden.",
+          "Second floor turret room, with separate private bathroom with shower immediately adjacent.",
+          "Second floor double room with ensuite bathroom with shower. Glorious views over the garden and tennis court.",
+          "Spacious second floor bedroom with freestanding stone bath and separate WC. With lovely views over the walled garden, a day bed and room for additional guest bed (available by request).",
+          "First floor turret room with views of the swimming pool. Private bathroom with shower immediately adjacent.",
+          "Spacious first floor double room with views over walled garden. En-suite bathroom with shower.",
+          "First floor double room with en-suite bathroom and shower. Views of walled garden.",
+          "Second floor double room with freestanding bath and separate WC. Lovely views of the garden and tennis court.",
+          "Second floor bunk room, with en-suite bathroom and shower. Space for extra guest bed (available by request).",
+          "First floor double room with en-suite bathroom with free-standing bath. Lovely views of tennis court and gardens.",
+          "First floor double room with en-suite bathroom and freestanding bath. Lovely views of the tennis court and gardens."
+        ],
+        "listItems": [
+          "Bedrooms",
+          "Facilities",
+          "Activities",
+          "Weddings",
+          "Gallery",
+          "Contact",
+          "Bedrooms",
+          "Facilities",
+          "Activities",
+          "Contact",
+          "Facebook",
+          "Google maps",
+          "Herstmonceux Observatory",
+          "Reviews"
+        ]
+      },
+      "images": [
+        "https://www.eastwoodobservatory.co.uk/wp-content/uploads/2022/06/2022-06-11-Eastwood-House-Ed-Ovenden-117-580x420.jpg"
+      ]
+    },
+    {
+      "url": "https://www.eastwoodobservatory.co.uk/corporate/",
+      "title": "Corporate retreats - Eastwood Observatory",
+      "content": {
+        "headings": [
+          {
+            "level": 1,
+            "text": "Corporate retreats"
+          },
+          {
+            "level": 2,
+            "text": "and Company Away Days"
+          },
+          {
+            "level": 3,
+            "text": "Corporate retreats"
+          },
+          {
+            "level": 3,
+            "text": "Second floor double room"
+          },
+          {
+            "level": 3,
+            "text": "Bedroom 8"
+          },
+          {
+            "level": 3,
+            "text": "First floor turret room"
+          },
+          {
+            "level": 3,
+            "text": "Bedroom 1"
+          },
+          {
+            "level": 3,
+            "text": "Second floor turret room"
+          },
+          {
+            "level": 3,
+            "text": "Bedroom 12"
+          },
+          {
+            "level": 3,
+            "text": "Second floor double room"
+          },
+          {
+            "level": 3,
+            "text": "Bedroom 11"
+          },
+          {
+            "level": 3,
+            "text": "Spacious second floor room"
+          },
+          {
+            "level": 3,
+            "text": "Bedroom 7"
+          },
+          {
+            "level": 3,
+            "text": "First floor turret room"
+          },
+          {
+            "level": 3,
+            "text": "Bedroom 2"
+          },
+          {
+            "level": 3,
+            "text": "First floor double room"
+          },
+          {
+            "level": 3,
+            "text": "Bedroom 4"
+          },
+          {
+            "level": 3,
+            "text": "First floor double room"
+          },
+          {
+            "level": 3,
+            "text": "Bedroom 3"
+          },
+          {
+            "level": 3,
+            "text": "Second floor double room"
+          },
+          {
+            "level": 3,
+            "text": "Bedroom 9"
+          },
+          {
+            "level": 3,
+            "text": "Second floor bunk room"
+          },
+          {
+            "level": 3,
+            "text": "Bedroom 10"
+          },
+          {
+            "level": 3,
+            "text": "Info"
+          },
+          {
+            "level": 3,
+            "text": "ABOUT"
+          },
+          {
+            "level": 3,
+            "text": "Quick Links"
+          }
+        ],
+        "paragraphs": [
+          "Eastwood Observatory is, in many ways, the ideal venue for a corporate retreat. The idyllic rural setting and unparalleled beauty of the surroundings provide an exceptional sense of escapism from the outside world. All bookings at Eastwood are for exclusive use, meaning that groups are free to use the space as suits them best at times that work best for them.",
+          "Whilst there is no doubt that Eastwood provides a sense of grand informality, there is a dedicated team on hand to help make sure guests are incredibly well cared for – in much the same way as you’d expect from a very attentive boutique hotel. There is an option of a full housekeeping service including breakfast and coffee whenever required, not to mention a personal chef who can create delicious three course dinners to the clients’ specific requirements. And there are a range of options for meeting rooms and presentation facilities, that work for small groups on a corporate retreat or larger groups on company away days.",
+          "Once the work is done for the day, Eastwood is brilliantly set up for corporate team building. There are a multitude of activities available – all of which are available within the grounds of the 32 acre estate. Clay pigeon shooting takes place in the rolling pastures to the east of the main house, with friendly and experienced instructors able to set up a series of stations to suit any experience level. Equally, the in-house chef, can run fully immersive cooking courses culminating in fabulous dinner served to the group, which is wonderful way of informal team building. Another activity that is really popular with corporate groups is a full height mobile climbing wall that brings you face to face with Eastwood’s famous lion on the top floor of the building!",
+          "No matter what kind of group, there is plenty to keep you occupied at the property too; a swimming pool which is heated in summer, a hot tub and tennis court amongst the facilities available.",
+          "Second floor double room with en-suite bathroom and shower. Views over walled garden and clock tower.",
+          "Turret room with ensuite bathroom, with bath and separate shower. Situated on the first floor with wonderful views of the garden.",
+          "Second floor turret room, with separate private bathroom with shower immediately adjacent.",
+          "Second floor double room with ensuite bathroom with shower. Glorious views over the garden and tennis court.",
+          "Spacious second floor bedroom with freestanding stone bath and separate WC. With lovely views over the walled garden, a day bed and room for additional guest bed (available by request).",
+          "First floor turret room with views of the swimming pool. Private bathroom with shower immediately adjacent.",
+          "Spacious first floor double room with views over walled garden. En-suite bathroom with shower.",
+          "First floor double room with en-suite bathroom and shower. Views of walled garden.",
+          "Second floor double room with freestanding bath and separate WC. Lovely views of the garden and tennis court.",
+          "Second floor bunk room, with en-suite bathroom and shower. Space for extra guest bed (available by request)."
+        ],
+        "listItems": [
+          "Bedrooms",
+          "Facilities",
+          "Activities",
+          "Weddings",
+          "Gallery",
+          "Contact",
+          "Bedrooms",
+          "Facilities",
+          "Activities",
+          "Contact",
+          "Facebook",
+          "Google maps",
+          "Herstmonceux Observatory",
+          "Reviews"
+        ]
+      },
+      "images": [
+        "https://www.eastwoodobservatory.co.uk/wp-content/uploads/2023/06/shooting-at-eastwood-scaled.jpg",
+        "https://www.eastwoodobservatory.co.uk/wp-content/uploads/2022/06/2022-06-11-Eastwood-House-Ed-Ovenden-169-e1655984624976.jpg",
+        "https://www.eastwoodobservatory.co.uk/wp-content/uploads/2022/06/2022-06-11-Eastwood-House-Ed-Ovenden-115-e1656070888340.jpg",
+        "https://www.eastwoodobservatory.co.uk/wp-content/uploads/2023/06/climbing-at-eastwood2-scaled.jpg"
+      ]
+    },
+    {
+      "url": "https://www.eastwoodobservatory.co.uk/activities/",
+      "title": "Activities - Eastwood Observatory",
+      "content": {
+        "headings": [
+          {
+            "level": 1,
+            "text": "Activities"
+          },
+          {
+            "level": 2,
+            "text": "at Eastwood"
+          },
+          {
+            "level": 2,
+            "text": "Stargazing"
+          },
+          {
+            "level": 2,
+            "text": "Clay Pigeon Shooting"
+          },
+          {
+            "level": 2,
+            "text": "Tutored wine tasting"
+          },
+          {
+            "level": 2,
+            "text": "Cocktails"
+          },
+          {
+            "level": 2,
+            "text": "BBQ"
+          },
+          {
+            "level": 2,
+            "text": "Climbing"
+          },
+          {
+            "level": 2,
+            "text": "Tennis lessons"
+          },
+          {
+            "level": 2,
+            "text": "Yoga"
+          },
+          {
+            "level": 2,
+            "text": "Pamper party"
+          },
+          {
+            "level": 3,
+            "text": "Activities"
+          },
+          {
+            "level": 3,
+            "text": "Info"
+          },
+          {
+            "level": 3,
+            "text": "ABOUT"
+          },
+          {
+            "level": 3,
+            "text": "Quick Links"
+          }
+        ],
+        "paragraphs": [
+          "Jarvis is director of the planetarium for the Observatory Science Centre at Herstmonceux; the former home of the Royal Greenwich Observatory. He offers&nbsp;tailored courses, and brings with him an array of telescopes to help you observe and understand the night sky. If the sky is clear, he’ll help you identify the Milky Way, see the rings of Saturn and count the moons of Neptune all from the comfort of the Eastwood courtyard.",
+          "Clay pigeon shooting can be organised for family or corporate groups in Eastwood’s own grounds. Our friendly (and fully licenced) instructors will set up a variety of different traps to suit all ages and experience levels. Please drop Rosie a line to get this organised.",
+          "Eastwood is situated in the heart of the English wine growing region and sampling the local produce is an essential part of the Eastwood experience! Our wine tutor has spent years cultivating her knowledge and love of wine and works with some of the best local vineyards in East Sussex. She offers exclusive wine tastings at Eastwood and can offer tasting sessions in locally sourced sparkling and wines but can also offer tastings from around the world if you would prefer.",
+          "Rosie, our resident mixologist, will rustle up some incredible pre-dinner cocktails. These can be served on the sun terrace, around the pool or, on winter’s evenings around the roaring log fire in the hall.",
+          "Our chef is available for BBQs, as well as 3 course dinners. With fresh salads, freshly baked bread and locally sourced rare-bread meat, this is in a class of its own. Available for £15 per head for a generous main course (with seconds!), or £20 per head including a fruit tart desert.",
+          "For guests wanting the fun bringing to them, we can arrange for a mobile climbing wall to come to you at Eastwood. With four separate climbing routes, harnesses, helmets and belays, you can scale the wall and end up eye-to-eye with the famous Eastwood lion! Ideal for company away days or family groups.",
+          "Our resident tennis coach will help you get match ready. Coaching is available for guests of any age and level.",
+          "Find your zen in our wooden den. And for those who want a little more of a workout, we also offer personal training sessions.",
+          "We offer pamper parties on site at Eastwood, including facials, massages, manicure, pedicure and gel polish. Available individually or for groups, our guests often opt to combine this with our nanny services to give a moment of indulgent relaxation!"
+        ],
+        "listItems": [
+          "Bedrooms",
+          "Facilities",
+          "Activities",
+          "Weddings",
+          "Gallery",
+          "Contact",
+          "Bedrooms",
+          "Facilities",
+          "Activities",
+          "Contact",
+          "Facebook",
+          "Google maps",
+          "Herstmonceux Observatory",
+          "Reviews"
+        ]
+      },
+      "images": [
+        "https://www.eastwoodobservatory.co.uk/wp-content/uploads/2022/06/2022-06-11-Eastwood-House-Ed-Ovenden-149-200x300.jpg",
+        "https://www.eastwoodobservatory.co.uk/wp-content/uploads/2023/06/shooting-at-eastwood-300x225.jpg"
+      ]
+    },
+    {
+      "url": "https://www.eastwoodobservatory.co.uk/facilities/",
+      "title": "Facilities - Eastwood Observatory",
+      "content": {
+        "headings": [
+          {
+            "level": 1,
+            "text": "Facilities"
+          },
+          {
+            "level": 2,
+            "text": "at Eastwood"
+          },
+          {
+            "level": 2,
+            "text": "at Eastwood"
+          },
+          {
+            "level": 2,
+            "text": "Swimming pool"
+          },
+          {
+            "level": 2,
+            "text": "Hot tub"
+          },
+          {
+            "level": 2,
+            "text": "Games room"
+          },
+          {
+            "level": 2,
+            "text": "Tennis Court"
+          },
+          {
+            "level": 2,
+            "text": "Outdoor games"
+          },
+          {
+            "level": 2,
+            "text": "Cinema room"
+          },
+          {
+            "level": 2,
+            "text": "Playhouse"
+          },
+          {
+            "level": 2,
+            "text": "Lakes"
+          },
+          {
+            "level": 2,
+            "text": "Sleeps 24+"
+          },
+          {
+            "level": 3,
+            "text": "Rooms"
+          },
+          {
+            "level": 3,
+            "text": "First floor double room"
+          },
+          {
+            "level": 3,
+            "text": "Bedroom 6"
+          },
+          {
+            "level": 3,
+            "text": "First floor double room"
+          },
+          {
+            "level": 3,
+            "text": "Bedroom 5"
+          },
+          {
+            "level": 3,
+            "text": "First floor double room"
+          },
+          {
+            "level": 3,
+            "text": "Bedroom 3"
+          },
+          {
+            "level": 3,
+            "text": "First floor double room"
+          },
+          {
+            "level": 3,
+            "text": "Bedroom 4"
+          },
+          {
+            "level": 3,
+            "text": "First floor turret room"
+          },
+          {
+            "level": 3,
+            "text": "Bedroom 2"
+          },
+          {
+            "level": 3,
+            "text": "First floor turret room"
+          },
+          {
+            "level": 3,
+            "text": "Bedroom 1"
+          },
+          {
+            "level": 3,
+            "text": "Second floor bunk room"
+          },
+          {
+            "level": 3,
+            "text": "Bedroom 10"
+          },
+          {
+            "level": 3,
+            "text": "Second floor double room"
+          },
+          {
+            "level": 3,
+            "text": "Bedroom 9"
+          },
+          {
+            "level": 3,
+            "text": "Second floor double room"
+          },
+          {
+            "level": 3,
+            "text": "Bedroom 11"
+          },
+          {
+            "level": 3,
+            "text": "Second floor double room"
+          },
+          {
+            "level": 3,
+            "text": "Bedroom 8"
+          },
+          {
+            "level": 3,
+            "text": "Second floor turret room"
+          },
+          {
+            "level": 3,
+            "text": "Bedroom 12"
+          },
+          {
+            "level": 3,
+            "text": "Spacious second floor room"
+          },
+          {
+            "level": 3,
+            "text": "Bedroom 7"
+          },
+          {
+            "level": 3,
+            "text": "Facilities"
+          },
+          {
+            "level": 3,
+            "text": "Make Reservation"
+          },
+          {
+            "level": 3,
+            "text": "Info"
+          },
+          {
+            "level": 3,
+            "text": "ABOUT"
+          },
+          {
+            "level": 3,
+            "text": "Quick Links"
+          }
+        ],
+        "paragraphs": [
+          "First floor double room with en-suite bathroom and freestanding bath. Lovely views of the tennis court and gardens.",
+          "First floor double room with en-suite bathroom with free-standing bath. Lovely views of tennis court and gardens.",
+          "First floor double room with en-suite bathroom and shower. Views of walled garden.",
+          "Spacious first floor double room with views over walled garden. En-suite bathroom with shower.",
+          "First floor turret room with views of the swimming pool. Private bathroom with shower immediately adjacent.",
+          "Turret room with ensuite bathroom, with bath and separate shower. Situated on the first floor with wonderful views of the garden.",
+          "Second floor bunk room, with en-suite bathroom and shower. Space for extra guest bed (available by request).",
+          "Second floor double room with freestanding bath and separate WC. Lovely views of the garden and tennis court.",
+          "Second floor double room with ensuite bathroom with shower. Glorious views over the garden and tennis court.",
+          "Second floor double room with en-suite bathroom and shower. Views over walled garden and clock tower.",
+          "Second floor turret room, with separate private bathroom with shower immediately adjacent.",
+          "Spacious second floor bedroom with freestanding stone bath and separate WC. With lovely views over the walled garden, a day bed and room for additional guest bed (available by request).",
+          "We’ve got 12 fabulous double bedrooms available, with an additional room on the ground floor for anyone needing disabled access. All of our bedrooms have ensuite bathrooms or a private bathroom immediately adjacent. The rooms on the first floor have fantastic Georgian proportions, and the ones on the top floor have wonderful views of surrounding estate and grounds.",
+          "We’re very lucky to be able to offer a whole host of facilities at Eastwood. Our swimming pool is heated from April to September, and our hot tub is operational year round. Activities are available for both family groups and company retreats. Our chef and team of housekeepers can provide a full range of catering possibilities. And for corporate groups, we offer seminar facilities with a full range of audio and visual equipment for hire."
+        ],
+        "listItems": [
+          "Bedrooms",
+          "Facilities",
+          "Activities",
+          "Weddings",
+          "Gallery",
+          "Contact",
+          "Bedrooms",
+          "Facilities",
+          "Activities",
+          "Contact",
+          "Facebook",
+          "Google maps",
+          "Herstmonceux Observatory",
+          "Reviews"
+        ]
+      },
+      "images": []
+    },
+    {
+      "url": "https://www.eastwoodobservatory.co.uk/gallery/",
+      "title": "Gallery - Eastwood Observatory",
+      "content": {
+        "headings": [
+          {
+            "level": 1,
+            "text": "Gallery"
+          },
+          {
+            "level": 2,
+            "text": "Image Gallery"
+          },
+          {
+            "level": 3,
+            "text": "Info"
+          },
+          {
+            "level": 3,
+            "text": "ABOUT"
+          },
+          {
+            "level": 3,
+            "text": "Quick Links"
+          }
+        ],
+        "paragraphs": [],
+        "listItems": [
+          "Bedrooms",
+          "Facilities",
+          "Activities",
+          "Weddings",
+          "Gallery",
+          "Contact",
+          "Bedrooms",
+          "Facilities",
+          "Activities",
+          "Contact",
+          "Facebook",
+          "Google maps",
+          "Herstmonceux Observatory",
+          "Reviews"
+        ]
+      },
+      "images": [
+        "https://www.eastwoodobservatory.co.uk/wp-content/uploads/2022/06/2022-06-11-Eastwood-House-Ed-Ovenden-043-1.jpg",
+        "https://www.eastwoodobservatory.co.uk/wp-content/uploads/2022/06/2022-06-11-Eastwood-House-Ed-Ovenden-178-e1656086731230.jpg",
+        "https://www.eastwoodobservatory.co.uk/wp-content/uploads/2022/06/2022-06-11-Eastwood-House-Ed-Ovenden-170-e1656086748141.jpg",
+        "https://www.eastwoodobservatory.co.uk/wp-content/uploads/2022/06/2022-06-10-Eastwood-House-Ed-Ovenden-014-e1656087036743.jpg",
+        "https://www.eastwoodobservatory.co.uk/wp-content/uploads/2022/06/2022-06-11-Eastwood-House-Ed-Ovenden-140-e1656086801286.jpg",
+        "https://www.eastwoodobservatory.co.uk/wp-content/uploads/2022/06/2022-06-11-Eastwood-House-Ed-Ovenden-177-e1656087343757.jpg",
+        "https://www.eastwoodobservatory.co.uk/wp-content/uploads/2022/06/2022-06-11-Eastwood-House-Ed-Ovenden-109-e1656086816524.jpg"
+      ]
+    }
+  ]
+}

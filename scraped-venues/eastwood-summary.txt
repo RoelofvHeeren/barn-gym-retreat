@@ -1,0 +1,39 @@
+Eastwood Observatory - Scrape Summary
+============================================================
+
+Total Pages Scraped: 5
+Total Images Found: 14
+Total Headings: 106
+Total Paragraphs: 52
+
+Pages:
+
+1. Bedrooms - Eastwood Observatory
+   URL: https://www.eastwoodobservatory.co.uk/bedrooms/
+   Images: 1
+   Headings: 18
+   Paragraphs: 15
+
+2. Corporate retreats - Eastwood Observatory
+   URL: https://www.eastwoodobservatory.co.uk/corporate/
+   Images: 4
+   Headings: 26
+   Paragraphs: 14
+
+3. Activities - Eastwood Observatory
+   URL: https://www.eastwoodobservatory.co.uk/activities/
+   Images: 2
+   Headings: 15
+   Paragraphs: 9
+
+4. Facilities - Eastwood Observatory
+   URL: https://www.eastwoodobservatory.co.uk/facilities/
+   Images: 0
+   Headings: 42
+   Paragraphs: 14
+
+5. Gallery - Eastwood Observatory
+   URL: https://www.eastwoodobservatory.co.uk/gallery/
+   Images: 7
+   Headings: 5
+   Paragraphs: 0

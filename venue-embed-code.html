@@ -1,0 +1,570 @@
+<div id="venue-modal-container">
+    <!-- Venue Modal Styles -->
+    <style>
+        /* Core Variables & Resets */
+        :root {
+            --venue-primary: #2d5016;
+            --venue-primary-dark: #1e3a0f;
+            --venue-text: #333333;
+            --venue-text-light: #666666;
+            --venue-bg: #ffffff;
+            --venue-bg-alt: #f9f9f9;
+        }
+
+        #venue-modal-container * {
+            box-sizing: border-box;
+        }
+
+        /* Modal Overlay */
+        .venue-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 9999;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            padding: 20px;
+        }
+
+        .venue-modal-overlay.active {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Modal Content Wrapper */
+        .venue-modal-content {
+            background: white;
+            width: 100%;
+            max-width: 1200px;
+            border-radius: 16px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+            animation: modalSlideUp 0.4s ease-out;
+        }
+
+        @keyframes modalSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Close Button */
+        .venue-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .venue-modal-close:hover {
+            transform: scale(1.1);
+        }
+
+        /* --- COPY OF VENUE DETAIL STYLES (Scoped) --- */
+
+        /* Hero Section */
+        .venue-hero {
+            position: relative;
+            width: 100%;
+            height: 60vh;
+            min-height: 400px;
+            background: #1a1a1a;
+        }
+
+        .hero-carousel {
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+
+        .hero-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            z-index: 10;
+        }
+
+        .carousel-nav:hover {
+            background: white;
+        }
+
+        .carousel-nav.prev {
+            left: 20px;
+        }
+
+        .carousel-nav.next {
+            right: 20px;
+        }
+
+        .hero-info-card {
+            position: absolute;
+            bottom: 40px;
+            left: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+
+        .hero-info-card h1 {
+            margin: 0 0 10px 0;
+            font-size: 32px;
+            color: var(--venue-text);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .hero-info-card .tagline {
+            margin: 0 0 15px 0;
+            font-size: 16px;
+            color: var(--venue-text-light);
+            font-style: italic;
+        }
+
+        .hero-info-card .pricing {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--venue-primary);
+        }
+
+        /* Quick Facts */
+        .quick-facts-bar {
+            padding: 30px 40px;
+            background: var(--venue-bg-alt);
+            border-bottom: 1px solid #eee;
+        }
+
+        .quick-facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 20px;
+        }
+
+        .quick-fact {
+            text-align: center;
+        }
+
+        .quick-fact-icon img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            margin-bottom: 8px;
+        }
+
+        .quick-fact-label {
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .quick-fact-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--venue-text);
+        }
+
+        /* Content Layout */
+        .venue-content {
+            padding: 40px;
+        }
+
+        .venue-section {
+            margin-bottom: 60px;
+        }
+
+        .venue-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            color: var(--venue-primary);
+            margin-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+
+        /* Grid Layouts */
+        .accommodation-grid,
+        .activities-grid,
+        .facilities-grid {
+            display: grid;
+            gap: 24px;
+        }
+
+        .accommodation-grid {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .activities-grid {
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        }
+
+        /* Cards */
+        .info-card {
+            background: white;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            padding: 24px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .info-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .info-card h3 {
+            color: var(--venue-primary);
+            margin-top: 0;
+            font-size: 18px;
+        }
+
+        .info-card p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        /* Lists */
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0 0 0;
+        }
+
+        .feature-list li {
+            padding-left: 20px;
+            position: relative;
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 6px;
+        }
+
+        .feature-list li::before {
+            content: "•";
+            color: var(--venue-primary);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        /* Booking Bar */
+        .booking-bar {
+            background: var(--venue-bg-alt);
+            padding: 20px 40px;
+            border-top: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            bottom: 0;
+            z-index: 50;
+        }
+
+        .action-btn {
+            background: var(--venue-primary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+
+        .action-btn:hover {
+            background: var(--venue-primary-dark);
+        }
+
+        /* Mobile Optimization */
+        @media (max-width: 768px) {
+            .venue-modal-overlay {
+                padding: 0;
+            }
+
+            .venue-modal-content {
+                border-radius: 0;
+                margin: 0;
+                height: 100vh;
+                max-height: 100vh;
+                overflow-y: auto;
+            }
+
+            .venue-hero {
+                height: 40vh;
+                min-height: 300px;
+            }
+
+            .hero-info-card {
+                position: static;
+                margin: -60px 20px 0 20px;
+                width: auto;
+                max-width: none;
+            }
+
+            .quick-facts-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .venue-content {
+                padding: 20px;
+            }
+
+            .booking-bar {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .booking-bar-info {
+                margin-bottom: 10px;
+            }
+
+            .action-btn {
+                width: 100%;
+            }
+        }
+    </style>
+
+    <!-- Modal HTML Structure -->
+    <div id="venueModal" class="venue-modal-overlay">
+        <div class="venue-modal-content">
+            <button class="venue-modal-close" onclick="closeVenueModal()">×</button>
+
+            <div id="venueModalBody">
+                <!-- Dynamic Content Injected Here -->
+            </div>
+
+            <div class="booking-bar">
+                <div class="booking-bar-info">
+                    <h3 id="modalBookingTitle" style="margin:0; color:var(--venue-primary);">Ready to book?</h3>
+                    <div id="modalBookingPrice" style="font-size:14px; color:#666;"></div>
+                </div>
+                <button class="action-btn" onclick="selectVenueAndClose()">Select This Venue</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- VENUE DATA (Condensed) ---
+        const embedVenuesDB = {
+            bell: {
+                name: 'The Bell in Ticehurst',
+                tagline: 'Quirky 16th Century Coaching Inn',
+                capacity: 'Up to 32 guests',
+                price: 'From £150 per room',
+                description: 'In the quintessentially English village of Ticehurst, discover the storybook charm of The Bell. A creative paradise blending old and new.',
+                images: ['Retreat Images/The Bell/The Bell 1.webp', 'Retreat Images/The Bell/The Bell 2.jpg', 'Retreat Images/The Bell/The Bell 3 .avif'],
+                facts: [
+                    { icon: 'Retreat Images/Icons/icon_capacity.png', label: 'Capacity', value: '32 Guests' },
+                    { icon: 'Retreat Images/Icons/icon_accommodation.png', label: 'Rooms', value: '16 Rooms' },
+                    { icon: 'Retreat Images/Icons/icon_rating.png', label: 'Rating', value: '5-Star AA' }
+                ],
+                accommodation: [
+                    { name: 'Hotel Bedrooms', desc: '7 Eccentric rooms over the pub', features: ['Handmade mattresses', 'Copper baths'] },
+                    { name: 'Garden Lodges', desc: '4 Fantastical lodges with fire pits', features: ['Private patios', 'Wood burners'] }
+                ],
+                activities: ['Analogue Adventures', 'Wine Masterclass', 'Creative Workshops']
+            },
+            oastbrook: {
+                name: 'Oastbrook Estate',
+                tagline: 'Luxury Vineyard Retreat',
+                capacity: 'Up to 20 guests',
+                price: 'From £200 per unit',
+                description: 'Set in the heart of Rother Valley, a working vineyard combining rustic charm with modern luxury lodges and glamping.',
+                images: ['Retreat Images/Oastbrook/Oastbrook 1.avif', 'Retreat Images/Oastbrook/Oastbrook 2.webp', 'Retreat Images/Oastbrook/Oastbrook 3.webp'],
+                facts: [
+                    { icon: 'Retreat Images/Icons/icon_capacity.png', label: 'Capacity', value: '20 Guests' },
+                    { icon: 'Retreat Images/Icons/icon_dining.png', label: 'Dining', value: 'Vineyard' },
+                    { icon: 'Retreat Images/Icons/icon_rating.png', label: 'Awards', value: 'Nat Geo' }
+                ],
+                accommodation: [
+                    { name: 'Vineyard Hollow', desc: 'Earth-sheltered luxury', features: ['Hot tub', 'Valley views'] },
+                    { name: 'Glamping Tents', desc: '8 Luxury bell tents', features: ['King beds', 'Fire pits'] }
+                ],
+                activities: ['Vineyard Tours', 'Tasting Room', 'Archery']
+            },
+            eastwood: {
+                name: 'Eastwood Observatory',
+                tagline: 'Exclusive 32-Acre Estate',
+                capacity: 'Up to 24 guests',
+                price: 'From £3500 exclusive use',
+                description: 'Idyllic rural setting with unparalleled beauty. Exclusive use of the entire estate, swimming pool, and science center.',
+                images: ['Retreat Images/Eastwood/Eastwood 1.webp', 'Retreat Images/Eastwood/Eastwood 2.webp', 'Retreat Images/Eastwood/Eastwood 4.webp'],
+                facts: [
+                    { icon: 'Retreat Images/Icons/icon_capacity.png', label: 'Capacity', value: '24+ Guests' },
+                    { icon: 'Retreat Images/Icons/icon_meeting_v2.png', label: 'Estate', value: '32 Acres' },
+                    { icon: 'Retreat Images/Icons/icon_activities.png', label: 'Activities', value: 'Science' }
+                ],
+                accommodation: [
+                    { name: 'Main House', desc: '13 Bedrooms with Georgian proportions', features: ['En-suite bathrooms', 'Estate views'] }
+                ],
+                activities: ['Stargazing', 'Clay Shooting', 'Mobile Climbing Wall']
+            }
+        };
+
+        let currentModalVenueId = null;
+
+        // Open Modal Function
+        function openVenueDetail(venueId) {
+            const venue = embedVenuesDB[venueId];
+            if (!venue) return console.error('Venue not found:', venueId);
+
+            currentModalVenueId = venueId;
+            const modalBody = document.getElementById('venueModalBody');
+            const priceLabel = document.getElementById('modalBookingPrice');
+
+            priceLabel.textContent = venue.price;
+
+            // Build HTML
+            let html = `
+                <div class="venue-hero">
+                    <img src="${venue.images[0]}" style="width:100%; height:100%; object-fit:cover;">
+                    <div class="hero-info-card">
+                        <h1>${venue.name}</h1>
+                        <p class="tagline">${venue.tagline}</p>
+                        <p class="pricing">${venue.price}</p>
+                    </div>
+                </div>
+                
+                <div class="quick-facts-bar">
+                    <div class="quick-facts-grid">
+                        ${venue.facts.map(f => `
+                            <div class="quick-fact">
+                                <div class="quick-fact-icon"><img src="${f.icon}"></div>
+                                <span class="quick-fact-label">${f.label}</span>
+                                <span class="quick-fact-value">${f.value}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="venue-content">
+                    <section class="venue-section">
+                        <h2>About</h2>
+                        <p style="font-size:16px; line-height:1.6;">${venue.description}</p>
+                    </section>
+
+                    <section class="venue-section">
+                        <h2>Accommodation</h2>
+                        <div class="accommodation-grid">
+                            ${venue.accommodation.map(a => `
+                                <div class="info-card">
+                                    <h3>${a.name}</h3>
+                                    <p>${a.desc}</p>
+                                    <ul class="feature-list">
+                                        ${a.features.map(feat => `<li>${feat}</li>`).join('')}
+                                    </ul>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </section>
+
+                     <section class="venue-section">
+                        <h2>Activities & Highlights</h2>
+                        <div class="activities-grid">
+                            ${venue.activities.map(act => `
+                                <div class="info-card" style="text-align:center;">
+                                    <h3 style="font-size:16px;">${act}</h3>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </section>
+                </div>
+            `;
+
+            modalBody.innerHTML = html;
+            document.getElementById('venueModal').classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        // Close Modal Function
+        function closeVenueModal() {
+            document.getElementById('venueModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Selection Action
+        function selectVenueAndClose() {
+            // Check if we are in the retreat builder context
+            if (typeof handleCardClick === 'function') {
+                // Simulate selection logic if needed, or redirect
+                const cardMap = { 'bell': 'card-bell', 'oastbrook': 'card-oast', 'eastwood': 'card-eastwood' };
+                const nameMap = { 'bell': 'The Bell in Ticehurst', 'oastbrook': 'Oastbrook Vineyards', 'eastwood': 'Eastwood Observatory' };
+
+                const card = document.getElementById(cardMap[currentModalVenueId]);
+                if (card) {
+                    handleCardClick(card, nameMap[currentModalVenueId]);
+                    closeVenueModal();
+                    // Scroll to next step or similar
+                    document.getElementById('step-2').scrollIntoView({ behavior: 'smooth' });
+                }
+            } else {
+                alert('Venue Selected: ' + currentModalVenueId);
+                closeVenueModal();
+            }
+        }
+
+        // Close on clicking outside
+        document.getElementById('venueModal').addEventListener('click', function (e) {
+            if (e.target === this) closeVenueModal();
+        });
+    </script>
+</div>

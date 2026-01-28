@@ -1,0 +1,39 @@
+Oastbrook Vineyard - Scrape Summary
+============================================================
+
+Total Pages Scraped: 5
+Total Images Found: 40
+Total Headings: 53
+Total Paragraphs: 122
+
+Pages:
+
+1. Vineyard Hollow - Vineyard B&B | Oastbrook Estate Vineyard
+   URL: https://oastbrook.com/accommodation/vineyard-hollow/
+   Images: 15
+   Headings: 10
+   Paragraphs: 38
+
+2. Avalon Waterside Vineyard Lodge | Oastbrook Estate Vineyard
+   URL: https://oastbrook.com/accommodation/avalon-waterside-lodge/
+   Images: 15
+   Headings: 10
+   Paragraphs: 37
+
+3. Luxury Sussex Glamping | Oastbrook Estate
+   URL: https://oastbrook.com/luxury-sussex-glamping/
+   Images: 4
+   Headings: 9
+   Paragraphs: 11
+
+4. Corporate Events - East Sussex - Oastbrook Estate Vineyards
+   URL: https://oastbrook.com/corporate-events/
+   Images: 2
+   Headings: 18
+   Paragraphs: 24
+
+5. Vineyard Stays & Accommodation in Sussex
+   URL: https://oastbrook.com/accommodation/
+   Images: 4
+   Headings: 6
+   Paragraphs: 12

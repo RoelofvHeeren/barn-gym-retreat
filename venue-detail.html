@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Venue Details - Barn Gym Retreat Booking</title>
+    <link rel="stylesheet" href="retreat-builder.css">
+    <style>
+        /* Venue Detail Specific Styles */
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .venue-detail-container {
+            max-width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Hero Section */
+        .venue-hero {
+            position: relative;
+            width: 100%;
+            height: 70vh;
+            min-height: 500px;
+            overflow: hidden;
+            background: #1a1a1a;
+        }
+
+        .hero-carousel {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+
+        .hero-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #333;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .carousel-nav:hover {
+            background: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-nav.prev {
+            left: 20px;
+        }
+
+        .carousel-nav.next {
+            right: 20px;
+        }
+
+        .carousel-dots {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-dot.active {
+            background: white;
+            transform: scale(1.3);
+        }
+
+        .hero-info-card {
+            position: absolute;
+            top: 50%;
+            right: 40px;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            z-index: 10;
+        }
+
+        .hero-info-card h1 {
+            margin: 0 0 10px 0;
+            font-size: 28px;
+            color: #1a1a1a;
+        }
+
+        .hero-info-card .tagline {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .hero-info-card .location {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .hero-info-card .capacity {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .hero-info-card .pricing {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2d5016;
+            margin-bottom: 20px;
+        }
+
+        .hero-info-card .pricing span {
+            font-size: 14px;
+            font-weight: 400;
+            color: #666;
+        }
+
+        .hero-cta {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #2d5016 0%, #3d6b1f 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(45, 80, 22, 0.3);
+        }
+
+        .view-gallery-btn {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .view-gallery-btn:hover {
+            background: white;
+            transform: translateY(-2px);
+        }
+
+        /* Quick Facts Bar */
+        .quick-facts-bar {
+            background: white;
+            padding: 40px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .quick-facts-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .quick-facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 30px;
+        }
+
+        .quick-fact {
+            text-align: center;
+        }
+
+        .quick-fact-icon {
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .quick-fact-icon img {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+        }
+
+        .quick-fact-label {
+            font-size: 12px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .quick-fact-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* Content Sections */
+        .venue-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        .venue-section {
+            margin-bottom: 80px;
+        }
+
+        .section-header {
+            margin-bottom: 30px;
+        }
+
+        .section-header h2 {
+            font-size: 32px;
+            color: #1a1a1a;
+            margin: 0 0 10px 0;
+        }
+
+        .section-header p {
+            font-size: 16px;
+            color: #666;
+            margin: 0;
+        }
+
+        /* About Section */
+        .about-description {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .highlights-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .highlights-list li {
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+            font-size: 16px;
+            color: #555;
+        }
+
+        .highlights-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #2d5016;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        /* Accommodation Section */
+        .accommodation-categories {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .accommodation-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .accommodation-card:hover {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .accommodation-header {
+            padding: 24px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f9f9f9;
+        }
+
+        .accommodation-header:hover {
+            background: #f5f5f5;
+        }
+
+        .accommodation-title {
+            flex: 1;
+        }
+
+        .accommodation-title h3 {
+            margin: 0 0 5px 0;
+            font-size: 22px;
+            color: #1a1a1a;
+        }
+
+        .accommodation-title .meta {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .expand-icon {
+            font-size: 24px;
+            color: #666;
+            transition: transform 0.3s ease;
+        }
+
+        .accommodation-card.expanded .expand-icon {
+            transform: rotate(180deg);
+        }
+
+        .accommodation-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .accommodation-card.expanded .accommodation-content {
+            max-height: 2000px;
+        }
+
+        .accommodation-body {
+            padding: 24px;
+        }
+
+        .accommodation-description {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .features-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 20px 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 10px;
+        }
+
+        .features-list li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .features-list li:before {
+            content: "•";
+            position: absolute;
+            left: 10px;
+            color: #2d5016;
+            font-weight: bold;
+        }
+
+        /* Activities Grid */
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .activity-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .activity-card:hover {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px);
+        }
+
+        .activity-category {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #f0f7eb;
+            color: #2d5016;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .activity-card h3 {
+            margin: 0 0 10px 0;
+            font-size: 18px;
+            color: #1a1a1a;
+        }
+
+        .activity-card p {
+            margin: 0;
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .activity-highlight {
+            margin-top: 12px;
+            padding: 8px 12px;
+            background: #fff9e6;
+            border-left: 3px solid #ffc107;
+            font-size: 13px;
+            color: #856404;
+        }
+
+        /* Facilities Grid */
+        .facilities-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .facility-category h3 {
+            font-size: 20px;
+            color: #1a1a1a;
+            margin: 0 0 20px 0;
+        }
+
+        .facility-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .facility-list li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            font-size: 15px;
+            color: #555;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .facility-list li:last-child {
+            border-bottom: none;
+        }
+
+        .facility-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #2d5016;
+            font-weight: bold;
+        }
+
+        /* Recognition Section */
+        .recognition-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .recognition-badge {
+            background: linear-gradient(135deg, #f9f9f9 0%, #ffffff 100%);
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            font-size: 15px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        /* Sticky Booking Bar */
+        .sticky-booking-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid #e0e0e0;
+            padding: 20px 40px;
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .sticky-booking-bar.visible {
+            transform: translateY(0);
+        }
+
+        .booking-bar-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .booking-bar-info h3 {
+            margin: 0 0 5px 0;
+            font-size: 18px;
+            color: #1a1a1a;
+        }
+
+        .booking-bar-info p {
+            margin: 0;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .booking-bar-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .booking-bar-btn {
+            padding: 14px 32px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .booking-bar-btn.primary {
+            background: linear-gradient(135deg, #2d5016 0%, #3d6b1f 100%);
+            color: white;
+        }
+
+        .booking-bar-btn.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(45, 80, 22, 0.3);
+        }
+
+        .booking-bar-btn.secondary {
+            background: white;
+            color: #2d5016;
+            border: 2px solid #2d5016;
+        }
+
+        .booking-bar-btn.secondary:hover {
+            background: #f0f7eb;
+        }
+
+        /* Lightbox */
+        .lightbox-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-overlay.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .lightbox-nav.prev {
+            left: 20px;
+        }
+
+        .lightbox-nav.next {
+            right: 20px;
+        }
+
+        /* Back Button */
+        .back-to-builder {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-builder:hover {
+            background: white;
+            transform: translateX(-4px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-info-card {
+                position: static;
+                transform: none;
+                margin: 20px;
+                max-width: none;
+            }
+
+            .venue-hero {
+                height: auto;
+                min-height: 400px;
+            }
+
+            .venue-content {
+                padding: 40px 20px;
+            }
+
+            .quick-facts-container {
+                padding: 0 20px;
+            }
+
+            .quick-facts-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            .activities-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .facilities-categories {
+                grid-template-columns: 1fr;
+            }
+
+            .booking-bar-content {
+                flex-direction: column;
+                gap: 15px;
+                align-items: stretch;
+            }
+
+            .booking-bar-actions {
+                flex-direction: column;
+            }
+
+            .sticky-booking-bar {
+                padding: 15px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button class="back-to-builder" onclick="window.location.href='retreat-builder.html'">
+        ← Back to Builder
+    </button>
+
+    <div class="venue-detail-container">
+        <!-- Hero Section -->
+        <section class="venue-hero">
+            <div class="hero-carousel" id="heroCarousel">
+                <!-- Slides will be inserted here -->
+            </div>
+            <button class="carousel-nav prev" onclick="changeSlide(-1)">‹</button>
+            <button class="carousel-nav next" onclick="changeSlide(1)">›</button>
+            <div class="carousel-dots" id="carouselDots"></div>
+
+            <div class="hero-info-card" id="heroInfoCard">
+                <!-- Info card content will be inserted here -->
+            </div>
+
+            <button class="view-gallery-btn" onclick="openLightbox(0)">View All Photos</button>
+        </section>
+
+        <!-- Quick Facts Bar -->
+        <section class="quick-facts-bar">
+            <div class="quick-facts-container">
+                <div class="quick-facts-grid" id="quickFactsGrid">
+                    <!-- Quick facts will be inserted here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content -->
+        <div class="venue-content">
+            <!-- About Section -->
+            <section class="venue-section" id="aboutSection">
+                <div class="section-header">
+                    <h2>About This Venue</h2>
+                </div>
+                <div id="aboutContent"></div>
+            </section>
+
+            <!-- Accommodation Section -->
+            <section class="venue-section" id="accommodationSection">
+                <div class="section-header">
+                    <h2>Accommodation</h2>
+                    <p id="accommodationOverview"></p>
+                </div>
+                <div class="accommodation-categories" id="accommodationCategories">
+                    <!-- Accommodation cards will be inserted here -->
+                </div>
+            </section>
+
+            <!-- Corporate Facilities Section -->
+            <section class="venue-section" id="facilitiesSection">
+                <div class="section-header">
+                    <h2>Corporate Facilities</h2>
+                    <p>Professional spaces and services for productive retreats</p>
+                </div>
+                <div id="facilitiesContent"></div>
+            </section>
+
+            <!-- Activities Section -->
+            <section class="venue-section" id="activitiesSection">
+                <div class="section-header">
+                    <h2>Team Building & Activities</h2>
+                    <p>Engaging experiences to strengthen your team</p>
+                </div>
+                <div class="activities-grid" id="activitiesGrid">
+                    <!-- Activity cards will be inserted here -->
+                </div>
+            </section>
+
+            <!-- Amenities Section -->
+            <section class="venue-section" id="amenitiesSection">
+                <div class="section-header">
+                    <h2>Facilities & Amenities</h2>
+                </div>
+                <div class="facilities-categories" id="amenitiesContent">
+                    <!-- Amenities will be inserted here -->
+                </div>
+            </section>
+
+            <!-- Recognition Section -->
+            <section class="venue-section" id="recognitionSection">
+                <div class="section-header">
+                    <h2>Awards & Recognition</h2>
+                </div>
+                <div class="recognition-grid" id="recognitionGrid">
+                    <!-- Recognition badges will be inserted here -->
+                </div>
+            </section>
+        </div>
+
+        <!-- Sticky Booking Bar -->
+        <div class="sticky-booking-bar" id="stickyBookingBar">
+            <div class="booking-bar-content">
+                <div class="booking-bar-info">
+                    <h3 id="bookingBarTitle"></h3>
+                    <p id="bookingBarPrice"></p>
+                </div>
+                <div class="booking-bar-actions">
+                    <button class="booking-bar-btn secondary" onclick="contactVenue()">Contact Venue</button>
+                    <button class="booking-bar-btn primary" onclick="requestQuote()">Request Quote</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lightbox -->
+        <div class="lightbox-overlay" id="lightboxOverlay" onclick="closeLightbox(event)">
+            <button class="lightbox-close" onclick="closeLightbox()">×</button>
+            <button class="lightbox-nav prev" onclick="lightboxNavigate(-1)">‹</button>
+            <button class="lightbox-nav next" onclick="lightboxNavigate(1)">›</button>
+            <div class="lightbox-content">
+                <img id="lightboxImage" src="" alt="">
+            </div>
+        </div>
+    </div>
+
+    <script src="venue-data.js"></script>
+    <script src="venue-detail.js"></script>
+</body>
+
+</html>
