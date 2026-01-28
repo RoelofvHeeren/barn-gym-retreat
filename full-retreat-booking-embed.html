@@ -260,23 +260,29 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.3);
-            color: white;
+            background: rgba(255, 255, 255, 0.9) !important;
+            color: var(--color-primary) !important;
             border: none;
-            width: 30px;
-            height: 30px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 10;
-            opacity: 0;
-            transition: opacity 0.3s;
+            opacity: 0.8 !important;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
         .card-option:hover .carousel-arrow {
-            opacity: 1;
+            opacity: 1 !important;
+        }
+
+        .carousel-arrow:hover {
+            background: white !important;
+            transform: translateY(-50%) scale(1.1);
         }
 
         .carousel-prev {
@@ -285,6 +291,34 @@
 
         .carousel-next {
             right: 10px;
+        }
+
+        /* Gallery Grid */
+        .venue-gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .venue-gallery-item {
+            height: 120px;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .venue-gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .venue-gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
 
@@ -573,8 +607,22 @@
             background: #f9f9f9;
             border-top: 1px solid #eee;
             display: flex;
-            justify-content: flex-end;
-            gap: 10px;
+            justify-content: stretch;
+            gap: 15px;
+        }
+
+        .modal-footer .btn {
+            flex: 1;
+            margin: 0;
+        }
+
+        /* Step Activities Image Scaling */
+        .activity-card:hover .activity-img-placeholder {
+            transform: scale(1.1);
+        }
+
+        .activity-img-placeholder {
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
         /* Responsive */
@@ -887,7 +935,7 @@
                 category: 'Essential',
                 priceLow: 400,
                 priceHigh: 550,
-                image: 'Activities/Circuit Training.jpeg',
+                image: 'Activities/Circuit_Training.jpeg',
                 description: 'High-energy group fitness sessions that build teamwork through shared physical challenges. Our circuits combine strength, cardio, and functional movements in fun, competitive formats that encourage collaboration and mutual support.',
                 features: [
                     'Team-based exercise stations',
@@ -902,7 +950,7 @@
                 category: 'Essential',
                 priceLow: 350,
                 priceHigh: 450,
-                image: 'Activities/Country running.jpeg',
+                image: 'Activities/Country_running.jpeg',
                 description: 'Guided running experiences through our beautiful countryside setting. Our qualified running coaches lead teams through scenic routes, teaching proper technique while building camaraderie through shared physical achievement and natural beauty.',
                 features: [
                     'Professional running coach instruction',
@@ -932,7 +980,7 @@
                 category: 'Essential',
                 priceLow: 450,
                 priceHigh: 650,
-                image: 'Activities/Ice bath.jpeg',
+                image: 'Activities/Ice_bath.jpeg',
                 description: 'Experience the transformative power of cold therapy with professional guidance. This unique wellness experience builds mental resilience, reduces stress, and creates powerful team bonding through shared challenge and overcome adversity together.',
                 features: [
                     'Professional cold therapy guidance',
@@ -1780,7 +1828,15 @@
                 capacity: 'Up to 32 guests',
                 price: 'From £150 per room',
                 description: 'In the quintessentially English village of Ticehurst, discover the storybook charm of The Bell. A creative paradise blending old and new.',
-                images: ['Retreat Images/The Bell/The Bell 1.webp', 'Retreat Images/The Bell/The Bell 2.jpg', 'Retreat Images/The Bell/The Bell 3 .avif'],
+                images: [
+                    'Retreat Images/The Bell/The Bell 1.webp',
+                    'Retreat Images/The Bell/The Bell 2.jpg',
+                    'Retreat Images/The Bell/The Bell 3 .avif',
+                    'https://www.thebellinticehurst.com/wp-content/uploads/2022/01/The-Bell-Rooms-Banner-Image-02-scaled.jpg',
+                    'https://www.thebellinticehurst.com/wp-content/uploads/2024/02/The-Bell-Events-Banner-Image-02-scaled.jpg',
+                    'https://www.thebellinticehurst.com/wp-content/uploads/2020/11/The-Bell-Benefit-of-Doubt2.jpg',
+                    'https://www.thebellinticehurst.com/wp-content/uploads/2023/08/The-Bell-The-Moon-Wild3-scaled.jpg'
+                ],
                 facts: [
                     { icon: 'Retreat Images/Icons/icon_capacity.png', label: 'Capacity', value: '32 Guests' },
                     { icon: 'Retreat Images/Icons/icon_accommodation.png', label: 'Rooms', value: '16 Rooms' },
@@ -1798,7 +1854,15 @@
                 capacity: 'Up to 20 guests',
                 price: 'From £200 per unit',
                 description: 'Set in the heart of Rother Valley, a working vineyard combining rustic charm with modern luxury lodges and glamping.',
-                images: ['Retreat Images/Oastbrook/Oastbrook 1.avif', 'Retreat Images/Oastbrook/Oastbrook 2.webp', 'Retreat Images/Oastbrook/Oastbrook 3.webp'],
+                images: [
+                    'Retreat Images/Oastbrook/Oastbrook 1.avif',
+                    'Retreat Images/Oastbrook/Oastbrook 2.webp',
+                    'Retreat Images/Oastbrook/Oastbrook 3.webp',
+                    'https://oastbrook.com/wp-content/uploads/2023/09/1546572-SX93820-20Exterior-1024x683.jpg',
+                    'https://oastbrook.com/wp-content/uploads/2023/09/Outside-1024x856.jpg',
+                    'https://oastbrook.com/wp-content/uploads/2023/09/Hot-Tub-1024x659.jpg',
+                    'https://oastbrook.com/wp-content/uploads/2023/09/Master-Bedroom-1-1024x659.jpg'
+                ],
                 facts: [
                     { icon: 'Retreat Images/Icons/icon_capacity.png', label: 'Capacity', value: '20 Guests' },
                     { icon: 'Retreat Images/Icons/icon_dining.png', label: 'Dining', value: 'Vineyard' },
@@ -1816,10 +1880,18 @@
                 capacity: 'Up to 24 guests',
                 price: 'From £3500 exclusive use',
                 description: 'Idyllic rural setting with unparalleled beauty. Exclusive use of the entire estate, swimming pool, and science center.',
-                images: ['Retreat Images/Eastwood/Eastwood 1.webp', 'Retreat Images/Eastwood/Eastwood 2.webp', 'Retreat Images/Eastwood/Eastwood 4.webp'],
+                images: [
+                    'Retreat Images/Eastwood/Eastwood 1.webp',
+                    'Retreat Images/Eastwood/Eastwood 2.webp',
+                    'Retreat Images/Eastwood/Eastwood 4.webp',
+                    'https://www.eastwoodobservatory.co.uk/wp-content/uploads/2022/06/2022-06-11-Eastwood-House-Ed-Ovenden-117-580x420.jpg',
+                    'https://www.eastwoodobservatory.co.uk/wp-content/uploads/2023/06/shooting-at-eastwood-scaled.jpg',
+                    'https://www.eastwoodobservatory.co.uk/wp-content/uploads/2022/06/2022-06-11-Eastwood-House-Ed-Ovenden-170-e1656086748141.jpg',
+                    'https://www.eastwoodobservatory.co.uk/wp-content/uploads/2022/06/2022-06-10-Eastwood-House-Ed-Ovenden-014-e1656087036743.jpg'
+                ],
                 facts: [
                     { icon: 'Retreat Images/Icons/icon_capacity.png', label: 'Capacity', value: '24+ Guests' },
-                    { icon: 'Retreat Images/Icons/icon_meeting_v2.png', label: 'Estate', value: '32 Acres' },
+                    { icon: 'Retreat Images/Icons/icon_meeting.png', label: 'Estate', value: '32 Acres' },
                     { icon: 'Retreat Images/Icons/icon_activities.png', label: 'Activities', value: 'Science' }
                 ],
                 accommodation: [
@@ -1871,6 +1943,17 @@
                         <p style="font-size:16px; line-height:1.6;">${venue.description}</p>
                     </section>
 
+                    <section class="venue-section">
+                        <h2>Gallery</h2>
+                        <div class="venue-gallery-grid">
+                            ${venue.images.map(img => `
+                                <div class="venue-gallery-item" onclick="window.open('${img}', '_blank')">
+                                    <img src="${img}" loading="lazy">
+                                </div>
+                            `).join('')}
+                        </div>
+                    </section>
+                    
                     <section class="venue-section">
                         <h2>Accommodation</h2>
                         <div class="accommodation-grid">

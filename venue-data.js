@@ -20,7 +20,7 @@ const venuesDB = {
         quickFacts: [
             { icon: '<img src="Retreat Images/Icons/icon_capacity.png" alt="Capacity">', label: 'Capacity', value: 'Up to 32 guests' },
             { icon: '<img src="Retreat Images/Icons/icon_accommodation.png" alt="Accommodation">', label: 'Accommodation', value: '16 unique rooms' },
-            { icon: '<img src="Retreat Images/Icons/icon_meeting_v2.png" alt="Event Space">', label: 'Event Space', value: 'Seats 90 for dinner' },
+            { icon: '<img src="Retreat Images/Icons/icon_meeting.png" alt="Event Space">', label: 'Event Space', value: 'Seats 90 for dinner' },
             { icon: '<img src="Retreat Images/Icons/icon_dining.png" alt="Dining">', label: 'Dining', value: '2 AA Rosettes' },
             { icon: '<img src="Retreat Images/Icons/icon_rating.png" alt="Rating">', label: 'Rating', value: '5-Star AA Inn' },
             { icon: '<img src="Retreat Images/Icons/icon_activities.png" alt="Activities">', label: 'Activities', value: 'Analogue Adventures' }
@@ -256,7 +256,7 @@ const venuesDB = {
         quickFacts: [
             { icon: '<img src="Retreat Images/Icons/icon_capacity.png" alt="Capacity">', label: 'Capacity', value: 'Up to 20 guests' },
             { icon: '<img src="Retreat Images/Icons/icon_accommodation.png" alt="Accommodation">', label: 'Accommodation', value: '2 lodges + 8 tents' },
-            { icon: '<img src="Retreat Images/Icons/icon_meeting_v2.png" alt="Event Space">', label: 'Event Space', value: 'Tasting Room with AV' },
+            { icon: '<img src="Retreat Images/Icons/icon_meeting.png" alt="Event Space">', label: 'Event Space', value: 'Tasting Room with AV' },
             { icon: '<img src="Retreat Images/Icons/icon_dining.png" alt="Dining">', label: 'Experience', value: 'Award-winning vineyard' },
             { icon: '<img src="Retreat Images/Icons/icon_rating.png" alt="Recognition">', label: 'Recognition', value: 'National Geographic featured' },
             { icon: '<img src="Retreat Images/Icons/icon_activities.png" alt="Activities">', label: 'Activities', value: 'Archery, falconry, tours' }
@@ -497,7 +497,7 @@ const venuesDB = {
         quickFacts: [
             { icon: '<img src="Retreat Images/Icons/icon_capacity.png" alt="Capacity">', label: 'Capacity', value: 'Up to 24+ guests' },
             { icon: '<img src="Retreat Images/Icons/icon_accommodation.png" alt="Bedrooms">', label: 'Bedrooms', value: '13 rooms (12 double + bunk)' },
-            { icon: '<img src="Retreat Images/Icons/icon_meeting_v2.png" alt="Estate">', label: 'Estate', value: '32-acre exclusive use' },
+            { icon: '<img src="Retreat Images/Icons/icon_meeting.png" alt="Estate">', label: 'Estate', value: '32-acre exclusive use' },
             { icon: '<img src="Retreat Images/Icons/icon_dining.png" alt="Catering">', label: 'Catering', value: 'Personal chef available' },
             { icon: '<img src="Retreat Images/Icons/icon_rating.png" alt="Service">', label: 'Service', value: 'Boutique hotel standard' },
             { icon: '<img src="Retreat Images/Icons/icon_activities.png" alt="Activities">', label: 'Activities', value: 'Clay shooting, climbing, more' }
