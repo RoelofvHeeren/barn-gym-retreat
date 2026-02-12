@@ -910,69 +910,90 @@
                 <!-- Dynamically populated by renderActivities() -->
             </div>
 
-            <div class="summary-thumb" id="sum-thumb"></div>
-            <div>
-                <h3 id="sum-location" style="margin-bottom: 5px;">Location Name</h3>
-                <p style="margin-bottom: 5px;"><strong id="sum-guests">0</strong> Guests • <strong
-                        id="sum-duration">--</strong></p>
-                <p style="font-size: 0.85rem; color: #666;" id="sum-month">Month</p>
+            <!-- STEP 4 NAVIGATION -->
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" onclick="prevStep(3)">Back</button>
+                <button class="btn" onclick="nextStep(5)">Review & Finish</button>
             </div>
         </div>
 
-        <h4>Proposed Itinerary</h4>
-        <div class="itinerary-container" id="itinerary-list">
-            <!-- JS Generated content -->
-        </div>
-    </div>
+        <!-- STEP 5: SUMMARY -->
+        <div id="step-5" class="step-container">
+            <h2>Your Retreat Summary</h2>
+            <p style="margin-bottom: 20px;">We've drafted a preliminary itinerary for you.</p>
 
-    <h3>Contact Details</h3>
-    <div class="flex-row" style="margin-top: 15px;">
-        <input type="text" class="form-input" placeholder="Full Name">
-        <input type="email" class="form-input" placeholder="Email Address">
-    </div>
-    <div class="flex-row" style="margin-top: 15px;">
-        <input type="text" class="form-input" placeholder="Company Name">
-        <input type="tel" class="form-input" placeholder="Phone Number">
-    </div>
-
-    <button class="btn" style="width: 100%; margin-top: 30px;"
-        onclick="alert('Thank you! Your retreat request has been sent to our team.')">Request Quote</button>
-
-    <div class="nav-buttons">
-        <button class="btn btn-secondary" onclick="prevStep(4)">Back</button>
-    </div>
-    </div>
-
-    </div>
-
-    <!-- MODAL STRUCTURE -->
-    <div id="activity-modal" class="modal-overlay" onclick="closeModal(event)">
-        <div class="modal-card" onclick="event.stopPropagation()">
-            <div class="modal-image-header" id="modal-img">
-                <button class="modal-close-btn" onclick="closeModal()"><i class="fa-solid fa-times"></i></button>
-            </div>
-            <div class="modal-body">
-                <h2 class="modal-title" id="modal-title">Activity Name</h2>
-                <div class="modal-meta">
-                    <span id="modal-category"><i class="fa-solid fa-tag"></i> Category</span>
-                    <span id="modal-price"><i class="fa-solid fa-sterling-sign"></i> 0</span>
+            <div class="summary-box">
+                <div class="summary-header">
+                    <div class="summary-thumb" id="sum-thumb"></div>
+                    <div>
+                        <h3 id="sum-location" style="margin-bottom: 5px;">Location Name</h3>
+                        <p style="margin-bottom: 5px;"><strong id="sum-guests">0</strong> Guests • <strong
+                                id="sum-duration">--</strong></p>
+                        <p style="font-size: 0.85rem; color: #666;" id="sum-month">Month</p>
+                    </div>
                 </div>
-                <div class="modal-description" id="modal-desc">
-                    Description goes here...
+
+                <h4>Proposed Itinerary</h4>
+                <div class="itinerary-container" id="itinerary-list">
+                    <!-- JS Generated content -->
                 </div>
-                <ul class="modal-features" id="modal-features"
-                    style="margin-left: 20px; color: #555; font-size: 0.95rem; line-height: 1.8;">
-                    <!-- Features populated by JS -->
-                </ul>
             </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" onclick="closeModal()">Close</button>
-                <button class="btn" id="modal-action-btn" onclick="toggleFromModal()">Add to Retreat</button>
+
+            <h3>Contact Details</h3>
+            <div class="flex-row" style="margin-top: 15px;">
+                <input type="text" class="form-input" id="contact-name" placeholder="Full Name">
+                <input type="email" class="form-input" id="contact-email" placeholder="Email Address">
+            </div>
+            <div class="flex-row" style="margin-top: 15px;">
+                <input type="text" class="form-input" id="contact-company" placeholder="Company Name">
+                <input type="tel" class="form-input" id="contact-phone" placeholder="Phone Number">
+            </div>
+
+            <p id="pricing-disclaimer"
+                style="text-align: center; margin-top: 20px; font-size: 0.9em; color: #666; font-style: italic;">
+                * Pricing is based upon submission of the form and may vary.
+            </p>
+
+            <!-- Booking Handler Script -->
+            <script src="scripts/booking-handler.js"></script>
+
+            <button class="btn" id="btn-finish" style="width: 100%; margin-top: 30px;"
+                onclick="if(window.submitBookingHandler) window.submitBookingHandler(); else alert('Booking submitted!')">Request
+                Quote</button>
+
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" onclick="prevStep(4)">Back</button>
             </div>
         </div>
-    </div>
 
-    <script>
+        <!-- MODAL STRUCTURE -->
+        <div id="activity-modal" class="modal-overlay" onclick="closeModal(event)">
+            <div class="modal-card" onclick="event.stopPropagation()">
+                <div class="modal-image-header" id="modal-img">
+                    <button class="modal-close-btn" onclick="closeModal()"><i class="fa-solid fa-times"></i></button>
+                </div>
+                <div class="modal-body">
+                    <h2 class="modal-title" id="modal-title">Activity Name</h2>
+                    <div class="modal-meta">
+                        <span id="modal-category"><i class="fa-solid fa-tag"></i> Category</span>
+                        <span id="modal-price"><i class="fa-solid fa-sterling-sign"></i> 0</span>
+                    </div>
+                    <div class="modal-description" id="modal-desc">
+                        Description goes here...
+                    </div>
+                    <ul class="modal-features" id="modal-features"
+                        style="margin-left: 20px; color: #555; font-size: 0.95rem; line-height: 1.8;">
+                        <!-- Features populated by JS -->
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+                    <button class="btn" id="modal-action-btn" onclick="toggleFromModal()">Add to Retreat</button>
+                </div>
+            </div>
+        </div>
+
+        <script>
         const retreatData = {
             location: null,
             locationId: null, // 'bell', 'eastwood', 'oast'
@@ -1503,7 +1524,7 @@
 
         // Init
         initCarousels();
-    </script>
+        </script>
 </body>
 <div id="venue-modal-container">
     <!-- Venue Modal Styles -->
