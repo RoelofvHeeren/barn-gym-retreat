@@ -652,24 +652,86 @@
         /* Responsive */
         @media (max-width: 600px) {
             .step-hero h1 {
-                font-size: 2.2rem;
+                font-size: 2rem;
+            }
+
+            .step-hero p {
+                font-size: 1rem;
             }
 
             .flex-row {
                 flex-direction: column;
-                gap: 10px;
+                gap: 15px;
             }
 
             .barn-glass-card {
-                padding: 25px;
+                padding: 20px;
+                border-radius: 16px;
             }
 
             .activity-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            .activity-card .activity-content span {
+                font-size: 0.9rem;
             }
 
             .carousel-container {
+                height: 200px;
+                /* Keep decent height for images */
+            }
+
+            /* Modal Mobile Improvements */
+            .modal-card {
+                width: 95%;
+                max-height: 95vh;
+                border-radius: 16px;
+            }
+
+            .modal-image-header {
                 height: 180px;
+            }
+
+            .modal-body {
+                padding: 20px;
+            }
+
+            .modal-title {
+                font-size: 1.5rem;
+            }
+
+            .modal-meta {
+                flex-direction: column;
+                gap: 8px;
+                font-size: 0.85rem;
+            }
+
+            .venue-gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+
+            .venue-gallery-item {
+                height: 100px;
+            }
+
+            .btn {
+                width: 100%;
+                /* Full width buttons on mobile */
+                text-align: center;
+                margin-top: 10px;
+            }
+
+            .nav-buttons {
+                flex-direction: column-reverse;
+                /* Stack buttons, Next on top */
+                gap: 10px;
+            }
+
+            .nav-buttons .btn {
+                margin: 0;
             }
         }
     </style>
@@ -848,55 +910,38 @@
                 <!-- Dynamically populated by renderActivities() -->
             </div>
 
-            <div id="pricing-note" style="margin-top: 15px; font-size: 0.9rem; color: #666; font-style: italic;">
-                * Pricing adjusts based on group size (High rate applies for groups > 8 due to additional staffing).
-            </div>
-
-            <div class="nav-buttons">
-                <button class="btn btn-secondary" onclick="prevStep(3)">Back</button>
-                <button class="btn" onclick="nextStep(5)">Review & Finish</button>
-            </div>
-        </div>
-
-        <!-- STEP 5: SUMMARY -->
-        <div id="step-5" class="step-container">
-            <h2>Your Retreat Summary</h2>
-            <p style="margin-bottom: 20px;">We've drafted a preliminary itinerary for you.</p>
-
-            <div class="summary-box">
-                <div class="summary-header">
-                    <div class="summary-thumb" id="sum-thumb"></div>
-                    <div>
-                        <h3 id="sum-location" style="margin-bottom: 5px;">Location Name</h3>
-                        <p style="margin-bottom: 5px;"><strong id="sum-guests">0</strong> Guests • <strong
-                                id="sum-duration">--</strong></p>
-                        <p style="font-size: 0.85rem; color: #666;" id="sum-month">Month</p>
-                    </div>
-                </div>
-
-                <h4>Proposed Itinerary</h4>
-                <div class="itinerary-container" id="itinerary-list">
-                    <!-- JS Generated content -->
-                </div>
-            </div>
-
-            <h3>Contact Details</h3>
-            <div class="flex-row" style="margin-top: 15px;">
-                <input type="text" class="form-input" placeholder="Full Name">
-                <input type="email" class="form-input" placeholder="Email Address">
-            </div>
-            <div class="flex-row" style="margin-top: 15px;">
-                <input type="text" class="form-input" placeholder="Company Name">
-                <input type="tel" class="form-input" placeholder="Phone Number">
-            </div>
-
-            <button class="btn" style="width: 100%; margin-top: 30px;"
-                onclick="alert('Thank you! Your retreat request has been sent to our team.')">Request Quote</button>
-
-            <div class="nav-buttons">
-                <button class="btn btn-secondary" onclick="prevStep(4)">Back</button>
+            <div class="summary-thumb" id="sum-thumb"></div>
+            <div>
+                <h3 id="sum-location" style="margin-bottom: 5px;">Location Name</h3>
+                <p style="margin-bottom: 5px;"><strong id="sum-guests">0</strong> Guests • <strong
+                        id="sum-duration">--</strong></p>
+                <p style="font-size: 0.85rem; color: #666;" id="sum-month">Month</p>
             </div>
         </div>
+
+        <h4>Proposed Itinerary</h4>
+        <div class="itinerary-container" id="itinerary-list">
+            <!-- JS Generated content -->
+        </div>
+    </div>
+
+    <h3>Contact Details</h3>
+    <div class="flex-row" style="margin-top: 15px;">
+        <input type="text" class="form-input" placeholder="Full Name">
+        <input type="email" class="form-input" placeholder="Email Address">
+    </div>
+    <div class="flex-row" style="margin-top: 15px;">
+        <input type="text" class="form-input" placeholder="Company Name">
+        <input type="tel" class="form-input" placeholder="Phone Number">
+    </div>
+
+    <button class="btn" style="width: 100%; margin-top: 30px;"
+        onclick="alert('Thank you! Your retreat request has been sent to our team.')">Request Quote</button>
+
+    <div class="nav-buttons">
+        <button class="btn btn-secondary" onclick="prevStep(4)">Back</button>
+    </div>
+    </div>
 
     </div>
 
@@ -1864,6 +1909,9 @@
     </div>
 
     <!-- JavaScript Logic -->
+    <!-- Booking Handler Script -->
+    <script src="scripts/booking-handler.js"></script>
+
     <script>
         // --- VENUE DATA (Condensed) ---
         const embedVenuesDB = {
@@ -1874,13 +1922,36 @@
                 price: 'From £150 per room',
                 description: 'In the quintessentially English village of Ticehurst, discover the storybook charm of The Bell. A creative paradise blending old and new.',
                 images: [
+                    'Retreat Images/The Bell/Anything_Desk.jpg',
+                    'Retreat Images/The Bell/Bath_at_night.jpg',
+                    'Retreat Images/The Bell/Bath_running_Website.jpg',
+                    'Retreat Images/The Bell/Bath_through_window.jpg',
+                    'Retreat Images/The Bell/IMG_1982_12x8.jpg',
+                    'Retreat Images/The Bell/IMG_1983_12x18.jpg',
+                    'Retreat Images/The Bell/IMG_1999_12x18.jpg',
+                    'Retreat Images/The Bell/IMG_2003_12x8.jpg',
+                    'Retreat Images/The Bell/June_21_websize.jpg',
+                    'Retreat Images/The Bell/June_38_websize_1.jpg',
+                    'Retreat Images/The Bell/June_41_websize.jpg',
+                    'Retreat Images/The Bell/June_8_websize.jpg',
+                    'Retreat Images/The Bell/March_Interiors_HI_4_websize.jpg',
+                    'Retreat Images/The Bell/March_Interiors_LO_21_scaled.jpg',
                     'Retreat Images/The Bell/The Bell 1.webp',
                     'Retreat Images/The Bell/The Bell 2.jpg',
                     'Retreat Images/The Bell/The Bell 3 .avif',
-                    'https://www.thebellinticehurst.com/wp-content/uploads/2022/01/The-Bell-Rooms-Banner-Image-02-scaled.jpg',
-                    'https://www.thebellinticehurst.com/wp-content/uploads/2024/02/The-Bell-Events-Banner-Image-02-scaled.jpg',
-                    'https://www.thebellinticehurst.com/wp-content/uploads/2020/11/The-Bell-Benefit-of-Doubt2.jpg',
-                    'https://www.thebellinticehurst.com/wp-content/uploads/2023/08/The-Bell-The-Moon-Wild3-scaled.jpg'
+                    'Retreat Images/The Bell/The Bell 4.avif',
+                    'Retreat Images/The Bell/The_Bell_April_23_95_websize.jpg',
+                    'Retreat Images/The Bell/The_Bell_Benefit_of_Doubt2.jpg',
+                    'Retreat Images/The Bell/The_Bell_Benefit_of_Doubt_room_and_bathroom_scaled.jpg',
+                    'Retreat Images/The Bell/The_Bell_Between_The_Lines_in_the_garden_at_night_scaled.jpg',
+                    'Retreat Images/The Bell/The_Bell_Jan_23_41_websize.jpg',
+                    'Retreat Images/The Bell/The_Bell_Lodges_Pretty_Vacant_at_Night.jpg',
+                    'Retreat Images/The Bell/The_Bell_May_23_26_websize.jpg',
+                    'Retreat Images/The Bell/The_Bell_May_23_67_websize.jpg',
+                    'Retreat Images/The Bell/The_Bell_May_23_72_websize.jpg',
+                    'Retreat Images/The Bell/The_Bell_Rooms_Banner_Image_02_scaled.jpg',
+                    'Retreat Images/The Bell/The_Bell_The_Love_Nest_in_Summer2.jpg',
+                    'Retreat Images/The Bell/The_Stables_July_23_2_websize_1.jpg'
                 ],
                 facts: [
                     { icon: 'Retreat Images/Icons/icon_capacity.png', label: 'Capacity', value: '32 Guests' },
@@ -1897,16 +1968,15 @@
                 name: 'Oastbrook Estate',
                 tagline: 'Luxury Vineyard Retreat',
                 capacity: 'Up to 20 guests',
-                price: 'From £200 per unit',
+                price: 'Price on Enquiry',
                 description: 'Set in the heart of Rother Valley, a working vineyard combining rustic charm with modern luxury lodges and glamping.',
                 images: [
+                    'Retreat Images/Oastbrook/1546572_SX93820_20Exterior_1024x683.jpg',
                     'Retreat Images/Oastbrook/Oastbrook 1.avif',
                     'Retreat Images/Oastbrook/Oastbrook 2.webp',
                     'Retreat Images/Oastbrook/Oastbrook 3.webp',
-                    'https://oastbrook.com/wp-content/uploads/2023/09/1546572-SX93820-20Exterior-1024x683.jpg',
-                    'https://oastbrook.com/wp-content/uploads/2023/09/Outside-1024x856.jpg',
-                    'https://oastbrook.com/wp-content/uploads/2023/09/Hot-Tub-1024x659.jpg',
-                    'https://oastbrook.com/wp-content/uploads/2023/09/Master-Bedroom-1-1024x659.jpg'
+                    'Retreat Images/Oastbrook/Oastbrook 4.webp',
+                    'Retreat Images/Oastbrook/Outside_1024x856.jpg'
                 ],
                 facts: [
                     { icon: 'Retreat Images/Icons/icon_capacity.png', label: 'Capacity', value: '20 Guests' },
@@ -1923,16 +1993,25 @@
                 name: 'Eastwood Observatory',
                 tagline: 'Exclusive 32-Acre Estate',
                 capacity: 'Up to 24 guests',
-                price: 'From £3500 exclusive use',
+                capacity: 'Up to 24 guests',
+                price: 'From £4000 exclusive use',
                 description: 'Idyllic rural setting with unparalleled beauty. Exclusive use of the entire estate, swimming pool, and science center.',
                 images: [
+                    'Retreat Images/Eastwood/2022_06_11_Eastwood_House_Ed_Ovenden_089_580x420.jpg',
+                    'Retreat Images/Eastwood/2022_06_11_Eastwood_House_Ed_Ovenden_097.jpg',
+                    'Retreat Images/Eastwood/2022_06_11_Eastwood_House_Ed_Ovenden_115_e1656070888340.jpg',
+                    'Retreat Images/Eastwood/2022_06_11_Eastwood_House_Ed_Ovenden_117_580x420.jpg',
+                    'Retreat Images/Eastwood/2022_06_11_Eastwood_House_Ed_Ovenden_140_e1656086801286.jpg',
+                    'Retreat Images/Eastwood/2022_06_11_Eastwood_House_Ed_Ovenden_149_200x300.jpg',
+                    'Retreat Images/Eastwood/2022_06_11_Eastwood_House_Ed_Ovenden_169_e1655984624976.jpg',
+                    'Retreat Images/Eastwood/2022_06_11_Eastwood_House_Ed_Ovenden_170_e1656086748141.jpg',
+                    'Retreat Images/Eastwood/2022_06_11_Eastwood_House_Ed_Ovenden_177_e1656087343757.jpg',
                     'Retreat Images/Eastwood/Eastwood 1.webp',
                     'Retreat Images/Eastwood/Eastwood 2.webp',
+                    'Retreat Images/Eastwood/Eastwood 3.webp',
                     'Retreat Images/Eastwood/Eastwood 4.webp',
-                    'https://www.eastwoodobservatory.co.uk/wp-content/uploads/2022/06/2022-06-11-Eastwood-House-Ed-Ovenden-117-580x420.jpg',
-                    'https://www.eastwoodobservatory.co.uk/wp-content/uploads/2023/06/shooting-at-eastwood-scaled.jpg',
-                    'https://www.eastwoodobservatory.co.uk/wp-content/uploads/2022/06/2022-06-11-Eastwood-House-Ed-Ovenden-170-e1656086748141.jpg',
-                    'https://www.eastwoodobservatory.co.uk/wp-content/uploads/2022/06/2022-06-10-Eastwood-House-Ed-Ovenden-014-e1656087036743.jpg'
+                    'Retreat Images/Eastwood/climbing_at_eastwood2_scaled.jpg',
+                    'Retreat Images/Eastwood/shooting_at_eastwood_scaled.jpg'
                 ],
                 facts: [
                     { icon: 'Retreat Images/Icons/icon_capacity.png', label: 'Capacity', value: '24+ Guests' },
