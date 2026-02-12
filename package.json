@@ -5,6 +5,7 @@
   "main": "scrape-venues.js",
   "scripts": {
     "start": "npx serve dist",
+    "build": "node scripts/build.js",
     "scrape": "node scrape-venues.js",
     "refresh-gallery": "node scripts/refresh-venues.js"
   },

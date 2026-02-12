@@ -63,6 +63,8 @@
             position: relative;
             overflow: hidden;
             transition: height 0.3s ease;
+            display: block !important;
+            /* Force block to prevent flex row stacking */
         }
 
         /* 3. THE SHADOWS (3D Depth) */
@@ -140,12 +142,14 @@
         }
 
         .step-container {
-            display: none;
+            display: none !important;
             animation: fadeIn 0.5s ease;
+            width: 100%;
+            /* Ensure full width */
         }
 
         .step-container.active {
-            display: block;
+            display: block !important;
         }
 
         @keyframes fadeIn {
@@ -910,316 +914,337 @@
                 <!-- Dynamically populated by renderActivities() -->
             </div>
 
-            <div class="summary-thumb" id="sum-thumb"></div>
-            <div>
-                <h3 id="sum-location" style="margin-bottom: 5px;">Location Name</h3>
-                <p style="margin-bottom: 5px;"><strong id="sum-guests">0</strong> Guests • <strong
-                        id="sum-duration">--</strong></p>
-                <p style="font-size: 0.85rem; color: #666;" id="sum-month">Month</p>
+            <!-- STEP 4 NAVIGATION -->
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" onclick="prevStep(3)">Back</button>
+                <button class="btn" onclick="nextStep(5)">Review & Finish</button>
             </div>
         </div>
 
-        <h4>Proposed Itinerary</h4>
-        <div class="itinerary-container" id="itinerary-list">
-            <!-- JS Generated content -->
-        </div>
-    </div>
+        <!-- STEP 5: SUMMARY -->
+        <div id="step-5" class="step-container">
+            <h2>Your Retreat Summary</h2>
+            <p style="margin-bottom: 20px;">We've drafted a preliminary itinerary for you.</p>
 
-    <h3>Contact Details</h3>
-    <div class="flex-row" style="margin-top: 15px;">
-        <input type="text" class="form-input" placeholder="Full Name">
-        <input type="email" class="form-input" placeholder="Email Address">
-    </div>
-    <div class="flex-row" style="margin-top: 15px;">
-        <input type="text" class="form-input" placeholder="Company Name">
-        <input type="tel" class="form-input" placeholder="Phone Number">
-    </div>
-
-    <button class="btn" style="width: 100%; margin-top: 30px;"
-        onclick="alert('Thank you! Your retreat request has been sent to our team.')">Request Quote</button>
-
-    <div class="nav-buttons">
-        <button class="btn btn-secondary" onclick="prevStep(4)">Back</button>
-    </div>
-    </div>
-
-    </div>
-
-    <!-- MODAL STRUCTURE -->
-    <div id="activity-modal" class="modal-overlay" onclick="closeModal(event)">
-        <div class="modal-card" onclick="event.stopPropagation()">
-            <div class="modal-image-header" id="modal-img">
-                <button class="modal-close-btn" onclick="closeModal()"><i class="fa-solid fa-times"></i></button>
-            </div>
-            <div class="modal-body">
-                <h2 class="modal-title" id="modal-title">Activity Name</h2>
-                <div class="modal-meta">
-                    <span id="modal-category"><i class="fa-solid fa-tag"></i> Category</span>
-                    <span id="modal-price"><i class="fa-solid fa-sterling-sign"></i> 0</span>
+            <div class="summary-box">
+                <div class="summary-header">
+                    <div class="summary-thumb" id="sum-thumb"></div>
+                    <div>
+                        <h3 id="sum-location" style="margin-bottom: 5px;">Location Name</h3>
+                        <p style="margin-bottom: 5px;"><strong id="sum-guests">0</strong> Guests • <strong
+                                id="sum-duration">--</strong></p>
+                        <p style="font-size: 0.85rem; color: #666;" id="sum-month">Month</p>
+                    </div>
                 </div>
-                <div class="modal-description" id="modal-desc">
-                    Description goes here...
+
+                <h4>Proposed Itinerary</h4>
+                <div class="itinerary-container" id="itinerary-list">
+                    <!-- JS Generated content -->
                 </div>
-                <ul class="modal-features" id="modal-features"
-                    style="margin-left: 20px; color: #555; font-size: 0.95rem; line-height: 1.8;">
-                    <!-- Features populated by JS -->
-                </ul>
             </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" onclick="closeModal()">Close</button>
-                <button class="btn" id="modal-action-btn" onclick="toggleFromModal()">Add to Retreat</button>
+
+            <h3>Contact Details</h3>
+            <div class="flex-row" style="margin-top: 15px;">
+                <input type="text" class="form-input" id="contact-name" placeholder="Full Name">
+                <input type="email" class="form-input" id="contact-email" placeholder="Email Address">
+            </div>
+            <div class="flex-row" style="margin-top: 15px;">
+                <input type="text" class="form-input" id="contact-company" placeholder="Company Name">
+                <input type="tel" class="form-input" id="contact-phone" placeholder="Phone Number">
+            </div>
+
+            <p id="pricing-disclaimer"
+                style="text-align: center; margin-top: 20px; font-size: 0.9em; color: #666; font-style: italic;">
+                * Pricing is based upon submission of the form and may vary.
+            </p>
+
+            <!-- Booking Handler Script -->
+            <script src="scripts/booking-handler.js"></script>
+
+            <button class="btn" id="btn-finish" style="width: 100%; margin-top: 30px;"
+                onclick="if(window.submitBookingHandler) window.submitBookingHandler(); else alert('Booking submitted!')">Request
+                Quote</button>
+
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" onclick="prevStep(4)">Back</button>
             </div>
         </div>
-    </div>
 
-    <script>
-        const retreatData = {
-            location: null,
-            locationId: null, // 'bell', 'eastwood', 'oast'
-            guests: 12,
-            duration: '3 Days / 2 Nights',
-            month: 'ASAP',
-            activities: new Set()
-        };
+        <!-- MODAL STRUCTURE -->
+        <div id="activity-modal" class="modal-overlay" onclick="closeModal(event)">
+            <div class="modal-card" onclick="event.stopPropagation()">
+                <div class="modal-image-header" id="modal-img">
+                    <button class="modal-close-btn" onclick="closeModal()"><i class="fa-solid fa-times"></i></button>
+                </div>
+                <div class="modal-body">
+                    <h2 class="modal-title" id="modal-title">Activity Name</h2>
+                    <div class="modal-meta">
+                        <span id="modal-category"><i class="fa-solid fa-tag"></i> Category</span>
+                        <span id="modal-price"><i class="fa-solid fa-sterling-sign"></i> 0</span>
+                    </div>
+                    <div class="modal-description" id="modal-desc">
+                        Description goes here...
+                    </div>
+                    <ul class="modal-features" id="modal-features"
+                        style="margin-left: 20px; color: #555; font-size: 0.95rem; line-height: 1.8;">
+                        <!-- Features populated by JS -->
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+                    <button class="btn" id="modal-action-btn" onclick="toggleFromModal()">Add to Retreat</button>
+                </div>
+            </div>
+        </div>
 
-        // --- ACTIVITY DATA ---
-        const activitiesDB = [
-            // ESSENTIAL WORKSHOPS
-            {
-                id: 'yoga',
-                name: 'Yoga Session',
-                category: 'Essential',
-                priceLow: 350,
-                priceHigh: 450,
-                image: 'Activities/yoga.jpeg',
-                description: 'Professional yoga sessions designed specifically for corporate teams. Our certified yoga instructors create accessible sessions that accommodate all fitness levels, focusing on stress relief, flexibility, and mindfulness in our serene countryside setting.',
-                features: [
-                    '60-90 minute guided yoga sessions',
-                    'All yoga equipment provided',
-                    'Suitable for all abilities',
-                    'Indoor/outdoor options available'
-                ]
-            },
-            {
-                id: 'circuit',
-                name: 'Circuit Training',
-                category: 'Essential',
-                priceLow: 400,
-                priceHigh: 550,
-                image: 'Activities/Circuit_Training.jpeg',
-                description: 'High-energy group fitness sessions that build teamwork through shared physical challenges. Our circuits combine strength, cardio, and functional movements in fun, competitive formats that encourage collaboration and mutual support.',
-                features: [
-                    'Team-based exercise stations',
-                    'Competitive group challenges',
-                    'Scalable intensity levels',
-                    'Leadership development opportunities'
-                ]
-            },
-            {
-                id: 'running',
-                name: 'Cross Country Run',
-                category: 'Essential',
-                priceLow: 350,
-                priceHigh: 450,
-                image: 'Activities/Country_running.jpeg',
-                description: 'Guided running experiences through our beautiful countryside setting. Our qualified running coaches lead teams through scenic routes, teaching proper technique while building camaraderie through shared physical achievement and natural beauty.',
-                features: [
-                    'Professional running coach instruction',
-                    'Scenic countryside routes',
-                    'All fitness levels accommodated',
-                    'Technique improvement focus'
-                ]
-            },
-            {
-                id: 'breathwork',
-                name: 'Breathwork',
-                category: 'Essential',
-                priceLow: 350,
-                priceHigh: 500,
-                image: 'Activities/Breathwork.jpeg',
-                description: 'Specialised breathwork sessions led by our expert practitioners. Learn powerful breathing techniques including Wim Hof method that reduce stress, increase energy levels, and improve mental clarity for enhanced workplace performance.',
-                features: [
-                    'Wim Hof breathing techniques',
-                    'Stress reduction methods',
-                    'Energy enhancement practices',
-                    'Indoor/outdoor options available'
-                ]
-            },
-            {
-                id: 'icebath',
-                name: 'Ice Bath Therapy',
-                category: 'Essential',
-                priceLow: 450,
-                priceHigh: 650,
-                image: 'Activities/Ice_bath.jpeg',
-                description: 'Experience the transformative power of cold therapy with professional guidance. This unique wellness experience builds mental resilience, reduces stress, and creates powerful team bonding through shared challenge and overcome adversity together.',
-                features: [
-                    'Professional cold therapy guidance',
-                    'Safety protocols & supervision',
-                    'Mental resilience building',
-                    'Team bonding through shared challenge'
-                ]
-            },
-            {
-                id: 'meditation',
-                name: 'Meditation',
-                category: 'Essential',
-                priceLow: 350,
-                priceHigh: 500,
-                image: 'Activities/Meditation.jpeg',
-                description: 'Guided mindfulness sessions that teach practical stress management techniques. Our experienced practitioners lead teams through breathing exercises, meditation practices, and mindfulness techniques that can be applied in the workplace for improved focus and wellbeing.',
-                features: [
-                    'Workplace stress reduction techniques',
-                    'Guided breathing exercises',
-                    'Mindful communication practices',
-                    'Take-home wellbeing resources'
-                ]
-            },
-            {
-                id: 'pilates',
-                name: 'Pilates Class',
-                category: 'Essential',
-                priceLow: 350,
-                priceHigh: 450,
-                image: 'Activities/pilates.jpeg',
-                description: 'Professional pilates instruction focusing on core strength, posture improvement, and body alignment. Our qualified pilates instructors deliver sessions that enhance physical wellbeing while promoting mental focus and team cooperation.',
-                features: [
-                    'Core strength and stability focus',
-                    'Posture improvement techniques',
-                    'All pilates equipment provided',
-                    'Beginner to advanced modifications'
-                ]
-            },
+        <script>
+            const retreatData = {
+                location: null,
+                locationId: null, // 'bell', 'eastwood', 'oast'
+                guests: 12,
+                duration: '3 Days / 2 Nights',
+                month: 'ASAP',
+                activities: new Set()
+            };
 
-            // PREMIUM ADVENTURES
-            {
-                id: 'sheep',
-                name: 'Sheep Herding',
-                category: 'Premium',
-                priceLow: 800,
-                priceHigh: 1000,
-                image: 'Activities/sheep.png',
-                description: 'Our signature team building experience! Work alongside professional shepherds and their dogs to move sheep through the countryside. This unique activity develops leadership, communication, and strategic thinking while creating unforgettable memories.',
-                features: [
-                    'Professional shepherd instruction',
-                    'Working with trained sheepdogs',
-                    'Strategy and teamwork challenges',
-                    'Champagne celebration included'
-                ]
-            },
-            {
-                id: 'orienteering',
-                name: 'Orienteering',
-                category: 'Premium',
-                priceLow: 700,
-                priceHigh: 900,
-                image: 'Activities/orienting.jpeg',
-                description: 'Navigate our countryside using maps and teamwork skills. Groups are given coordinates and challenges to complete while finding their way to the final celebration point. Builds problem-solving, leadership, and communication skills.',
-                features: [
-                    'Professional printed maps provided',
-                    'Strategic checkpoint challenges',
-                    'Team communication exercises',
-                    'Celebration drinks at finish point'
-                ]
-            },
-            {
-                id: 'haybale',
-                name: 'Hay Bale Racing',
-                category: 'Premium',
-                priceLow: 500,
-                priceHigh: 700,
-                image: 'Activities/hayball.webp',
-                description: 'A uniquely fun countryside experience where teams compete in hay bale pushing races and challenges. This seasonal activity combines physical exercise with laughter, creating memorable team bonding moments in our authentic farm setting.',
-                features: [
-                    'Seasonal availability (spring/summer)',
-                    'Team racing competitions',
-                    'Farm-authentic experience',
-                    'Prize ceremonies and celebrations'
-                ]
-            },
-            {
-                id: 'archery',
-                name: 'Archery & Axe',
-                category: 'Premium',
-                priceLow: 600,
-                priceHigh: 800,
-                image: 'Activities/archery.webp',
-                description: 'Experience the thrill of traditional target sports with professional instruction in archery and axe throwing. These skill-based activities promote focus, patience, and friendly competition while providing unique team bonding experiences.',
-                features: [
-                    'Professional safety instruction',
-                    'All equipment and targets provided',
-                    'Individual and team competitions',
-                    'Axe throwing: 18+ adults only'
-                ]
-            },
-            {
-                id: 'frisbee',
-                name: 'Frisbee Golf',
-                category: 'Premium',
-                priceLow: 500,
-                priceHigh: 700,
-                image: 'Activities/frisbee.jpeg',
-                description: 'Combine classic British sport with modern team activities. Our frisbee golf course uses the natural terrain, while rounders tournaments create friendly competition. Both activities are designed to break down hierarchies and encourage playful interaction.',
-                features: [
-                    'Multi-terrain frisbee golf course',
-                    'Traditional rounders tournaments',
-                    'All equipment provided',
-                    'Prize ceremonies and celebrations'
-                ]
-            },
-            {
-                id: 'cocktails',
-                name: 'Cocktails/Mocktails',
-                category: 'Premium',
-                priceLow: 700,
-                priceHigh: 1000,
-                image: 'Activities/cocktail.webp',
-                description: 'Learn the art of creating delicious cocktails and health-conscious mocktails. Our mixology experts teach teams to craft beautiful drinks using fresh ingredients, herbs, and superfoods - perfect for evening entertainment.',
-                features: [
-                    'Professional mixology instruction',
-                    'Superfood and herb ingredients',
-                    'Recipe cards to take home',
-                    'Team cocktail competitions'
-                ]
-            },
-            {
-                id: 'foraging',
-                name: 'Mushroom Foraging',
-                category: 'Premium',
-                priceLow: 600,
-                priceHigh: 800,
-                image: 'Activities/mushroom.webp',
-                description: 'Explore our 30-acre grounds with expert foragers who teach teams to identify edible mushrooms, berries, and nuts. This educational adventure combines learning with team bonding while connecting corporate groups with the natural world.',
-                features: [
-                    'Expert forager guidance',
-                    'Seasonal produce identification (Sept-Nov)',
-                    'Sustainable harvesting practices',
-                    'Recipe cards and preparation tips'
-                ]
+            // --- ACTIVITY DATA ---
+            const activitiesDB = [
+                // ESSENTIAL WORKSHOPS
+                {
+                    id: 'yoga',
+                    name: 'Yoga Session',
+                    category: 'Essential',
+                    priceLow: 350,
+                    priceHigh: 450,
+                    image: 'Activities/yoga.jpeg',
+                    description: 'Professional yoga sessions designed specifically for corporate teams. Our certified yoga instructors create accessible sessions that accommodate all fitness levels, focusing on stress relief, flexibility, and mindfulness in our serene countryside setting.',
+                    features: [
+                        '60-90 minute guided yoga sessions',
+                        'All yoga equipment provided',
+                        'Suitable for all abilities',
+                        'Indoor/outdoor options available'
+                    ]
+                },
+                {
+                    id: 'circuit',
+                    name: 'Circuit Training',
+                    category: 'Essential',
+                    priceLow: 400,
+                    priceHigh: 550,
+                    image: 'Activities/Circuit_Training.jpeg',
+                    description: 'High-energy group fitness sessions that build teamwork through shared physical challenges. Our circuits combine strength, cardio, and functional movements in fun, competitive formats that encourage collaboration and mutual support.',
+                    features: [
+                        'Team-based exercise stations',
+                        'Competitive group challenges',
+                        'Scalable intensity levels',
+                        'Leadership development opportunities'
+                    ]
+                },
+                {
+                    id: 'running',
+                    name: 'Cross Country Run',
+                    category: 'Essential',
+                    priceLow: 350,
+                    priceHigh: 450,
+                    image: 'Activities/Country_running.jpeg',
+                    description: 'Guided running experiences through our beautiful countryside setting. Our qualified running coaches lead teams through scenic routes, teaching proper technique while building camaraderie through shared physical achievement and natural beauty.',
+                    features: [
+                        'Professional running coach instruction',
+                        'Scenic countryside routes',
+                        'All fitness levels accommodated',
+                        'Technique improvement focus'
+                    ]
+                },
+                {
+                    id: 'breathwork',
+                    name: 'Breathwork',
+                    category: 'Essential',
+                    priceLow: 350,
+                    priceHigh: 500,
+                    image: 'Activities/Breathwork.jpeg',
+                    description: 'Specialised breathwork sessions led by our expert practitioners. Learn powerful breathing techniques including Wim Hof method that reduce stress, increase energy levels, and improve mental clarity for enhanced workplace performance.',
+                    features: [
+                        'Wim Hof breathing techniques',
+                        'Stress reduction methods',
+                        'Energy enhancement practices',
+                        'Indoor/outdoor options available'
+                    ]
+                },
+                {
+                    id: 'icebath',
+                    name: 'Ice Bath Therapy',
+                    category: 'Essential',
+                    priceLow: 450,
+                    priceHigh: 650,
+                    image: 'Activities/Ice_bath.jpeg',
+                    description: 'Experience the transformative power of cold therapy with professional guidance. This unique wellness experience builds mental resilience, reduces stress, and creates powerful team bonding through shared challenge and overcome adversity together.',
+                    features: [
+                        'Professional cold therapy guidance',
+                        'Safety protocols & supervision',
+                        'Mental resilience building',
+                        'Team bonding through shared challenge'
+                    ]
+                },
+                {
+                    id: 'meditation',
+                    name: 'Meditation',
+                    category: 'Essential',
+                    priceLow: 350,
+                    priceHigh: 500,
+                    image: 'Activities/Meditation.jpeg',
+                    description: 'Guided mindfulness sessions that teach practical stress management techniques. Our experienced practitioners lead teams through breathing exercises, meditation practices, and mindfulness techniques that can be applied in the workplace for improved focus and wellbeing.',
+                    features: [
+                        'Workplace stress reduction techniques',
+                        'Guided breathing exercises',
+                        'Mindful communication practices',
+                        'Take-home wellbeing resources'
+                    ]
+                },
+                {
+                    id: 'pilates',
+                    name: 'Pilates Class',
+                    category: 'Essential',
+                    priceLow: 350,
+                    priceHigh: 450,
+                    image: 'Activities/pilates.jpeg',
+                    description: 'Professional pilates instruction focusing on core strength, posture improvement, and body alignment. Our qualified pilates instructors deliver sessions that enhance physical wellbeing while promoting mental focus and team cooperation.',
+                    features: [
+                        'Core strength and stability focus',
+                        'Posture improvement techniques',
+                        'All pilates equipment provided',
+                        'Beginner to advanced modifications'
+                    ]
+                },
+
+                // PREMIUM ADVENTURES
+                {
+                    id: 'sheep',
+                    name: 'Sheep Herding',
+                    category: 'Premium',
+                    priceLow: 800,
+                    priceHigh: 1000,
+                    image: 'Activities/sheep.png',
+                    description: 'Our signature team building experience! Work alongside professional shepherds and their dogs to move sheep through the countryside. This unique activity develops leadership, communication, and strategic thinking while creating unforgettable memories.',
+                    features: [
+                        'Professional shepherd instruction',
+                        'Working with trained sheepdogs',
+                        'Strategy and teamwork challenges',
+                        'Champagne celebration included'
+                    ]
+                },
+                {
+                    id: 'orienteering',
+                    name: 'Orienteering',
+                    category: 'Premium',
+                    priceLow: 700,
+                    priceHigh: 900,
+                    image: 'Activities/orienting.jpeg',
+                    description: 'Navigate our countryside using maps and teamwork skills. Groups are given coordinates and challenges to complete while finding their way to the final celebration point. Builds problem-solving, leadership, and communication skills.',
+                    features: [
+                        'Professional printed maps provided',
+                        'Strategic checkpoint challenges',
+                        'Team communication exercises',
+                        'Celebration drinks at finish point'
+                    ]
+                },
+                {
+                    id: 'haybale',
+                    name: 'Hay Bale Racing',
+                    category: 'Premium',
+                    priceLow: 500,
+                    priceHigh: 700,
+                    image: 'Activities/hayball.webp',
+                    description: 'A uniquely fun countryside experience where teams compete in hay bale pushing races and challenges. This seasonal activity combines physical exercise with laughter, creating memorable team bonding moments in our authentic farm setting.',
+                    features: [
+                        'Seasonal availability (spring/summer)',
+                        'Team racing competitions',
+                        'Farm-authentic experience',
+                        'Prize ceremonies and celebrations'
+                    ]
+                },
+                {
+                    id: 'archery',
+                    name: 'Archery & Axe',
+                    category: 'Premium',
+                    priceLow: 600,
+                    priceHigh: 800,
+                    image: 'Activities/archery.webp',
+                    description: 'Experience the thrill of traditional target sports with professional instruction in archery and axe throwing. These skill-based activities promote focus, patience, and friendly competition while providing unique team bonding experiences.',
+                    features: [
+                        'Professional safety instruction',
+                        'All equipment and targets provided',
+                        'Individual and team competitions',
+                        'Axe throwing: 18+ adults only'
+                    ]
+                },
+                {
+                    id: 'frisbee',
+                    name: 'Frisbee Golf',
+                    category: 'Premium',
+                    priceLow: 500,
+                    priceHigh: 700,
+                    image: 'Activities/frisbee.jpeg',
+                    description: 'Combine classic British sport with modern team activities. Our frisbee golf course uses the natural terrain, while rounders tournaments create friendly competition. Both activities are designed to break down hierarchies and encourage playful interaction.',
+                    features: [
+                        'Multi-terrain frisbee golf course',
+                        'Traditional rounders tournaments',
+                        'All equipment provided',
+                        'Prize ceremonies and celebrations'
+                    ]
+                },
+                {
+                    id: 'cocktails',
+                    name: 'Cocktails/Mocktails',
+                    category: 'Premium',
+                    priceLow: 700,
+                    priceHigh: 1000,
+                    image: 'Activities/cocktail.webp',
+                    description: 'Learn the art of creating delicious cocktails and health-conscious mocktails. Our mixology experts teach teams to craft beautiful drinks using fresh ingredients, herbs, and superfoods - perfect for evening entertainment.',
+                    features: [
+                        'Professional mixology instruction',
+                        'Superfood and herb ingredients',
+                        'Recipe cards to take home',
+                        'Team cocktail competitions'
+                    ]
+                },
+                {
+                    id: 'foraging',
+                    name: 'Mushroom Foraging',
+                    category: 'Premium',
+                    priceLow: 600,
+                    priceHigh: 800,
+                    image: 'Activities/mushroom.webp',
+                    description: 'Explore our 30-acre grounds with expert foragers who teach teams to identify edible mushrooms, berries, and nuts. This educational adventure combines learning with team bonding while connecting corporate groups with the natural world.',
+                    features: [
+                        'Expert forager guidance',
+                        'Seasonal produce identification (Sept-Nov)',
+                        'Sustainable harvesting practices',
+                        'Recipe cards and preparation tips'
+                    ]
+                }
+            ];
+
+            function getPrice(act) {
+                const guestCount = parseInt(retreatData.guests) || 0;
+                return guestCount > 8 ? act.priceHigh : act.priceLow;
             }
-        ];
 
-        function getPrice(act) {
-            const guestCount = parseInt(retreatData.guests) || 0;
-            return guestCount > 8 ? act.priceHigh : act.priceLow;
-        }
+            function renderActivities() {
+                const container = document.getElementById('activities-container');
+                container.innerHTML = '';
 
-        function renderActivities() {
-            const container = document.getElementById('activities-container');
-            container.innerHTML = '';
+                // Group by category for better UX? Or just flat list. 
+                // Flat list but ordered (Essentials first, then Premium) as per data array.
 
-            // Group by category for better UX? Or just flat list. 
-            // Flat list but ordered (Essentials first, then Premium) as per data array.
+                activitiesDB.forEach(act => {
+                    const currentPrice = getPrice(act);
+                    const isSelected = retreatData.activities.has(act.id);
 
-            activitiesDB.forEach(act => {
-                const currentPrice = getPrice(act);
-                const isSelected = retreatData.activities.has(act.id);
+                    const card = document.createElement('div');
+                    card.className = `activity-card ${isSelected ? 'selected' : ''}`;
+                    card.onclick = () => openModal(act.id); // CHANGED: Open modal on click
 
-                const card = document.createElement('div');
-                card.className = `activity-card ${isSelected ? 'selected' : ''}`;
-                card.onclick = () => openModal(act.id); // CHANGED: Open modal on click
-
-                card.innerHTML = `
+                    card.innerHTML = `
                     <div class="activity-img-placeholder" style="background-image: url('${act.image}');">
                         <div class="activity-overlay"><i class="fa-solid fa-check"></i></div>
                     </div>
@@ -1228,282 +1253,285 @@
                         <div style="font-size: 0.8rem; color: #666; margin-top: 4px;">£${currentPrice} <i class="fa-solid fa-circle-info" style="margin-left:5px; color:var(--color-primary);"></i></div>
                     </div>
                 `;
-                container.appendChild(card);
-            });
-        }
-
-        // --- MODAL LOGIC ---
-        let currentModalActivityId = null;
-
-        function openModal(id) {
-            currentModalActivityId = id;
-            const act = activitiesDB.find(a => a.id === id);
-            if (!act) return;
-
-            // Populate Modal
-            document.getElementById('modal-img').style.backgroundImage = `url('${act.image}')`;
-            document.getElementById('modal-title').innerText = act.name;
-            document.getElementById('modal-category').innerText = act.category;
-            document.getElementById('modal-price').innerText = "£" + getPrice(act);
-            document.getElementById('modal-desc').innerText = act.description || "";
-
-            // Populate Features
-            const featureList = document.getElementById('modal-features');
-            featureList.innerHTML = '';
-            if (act.features && act.features.length > 0) {
-                act.features.forEach(f => {
-                    const li = document.createElement('li');
-                    li.innerText = f;
-                    featureList.appendChild(li);
+                    container.appendChild(card);
                 });
             }
-            const btn = document.getElementById('modal-action-btn');
-            if (retreatData.activities.has(id)) {
-                btn.innerText = "Remove from Retreat";
-                btn.classList.add('btn-secondary');
-                btn.style.backgroundColor = 'transparent';
-                btn.style.color = 'var(--color-primary)';
-                btn.style.border = '2px solid var(--color-primary)';
-            } else {
-                btn.innerText = "Add to Retreat";
-                btn.classList.remove('btn-secondary');
-                btn.style.backgroundColor = 'var(--color-primary)';
-                btn.style.color = 'white';
-                btn.style.border = 'none';
-            }
 
-            // Show Modal
-            const overlay = document.getElementById('activity-modal');
-            overlay.style.display = 'flex';
-            // Small delay to allow display flex to apply before opacity transition
-            setTimeout(() => overlay.classList.add('active'), 10);
-            document.body.style.overflow = 'hidden'; // Prevent background scrolling
-        }
+            // --- MODAL LOGIC ---
+            let currentModalActivityId = null;
 
-        function closeModal(event) {
-            // If triggered by click on overlay (event defined), check target
-            if (event && event.target !== event.currentTarget) return;
+            function openModal(id) {
+                currentModalActivityId = id;
+                const act = activitiesDB.find(a => a.id === id);
+                if (!act) return;
 
-            const overlay = document.getElementById('activity-modal');
-            overlay.classList.remove('active');
-            setTimeout(() => {
-                overlay.style.display = 'none';
-            }, 300);
-            document.body.style.overflow = '';
-        }
+                // Populate Modal
+                document.getElementById('modal-img').style.backgroundImage = `url('${act.image}')`;
+                document.getElementById('modal-title').innerText = act.name;
+                document.getElementById('modal-category').innerText = act.category;
+                document.getElementById('modal-price').innerText = "£" + getPrice(act);
+                document.getElementById('modal-desc').innerText = act.description || "";
 
-        function toggleFromModal() {
-            if (!currentModalActivityId) return;
-            toggleActivity(currentModalActivityId);
-            closeModal();
-        }
-
-        // --- CAROUSEL LOGIC ---
-        // --- EMBED COMMUNICATION LAYER ---
-        function notifyParent(type, data = {}) {
-            if (window.parent !== window) {
-                window.parent.postMessage({ type, data }, '*');
-            }
-        }
-
-        function closeEmbeddedModal() {
-            notifyParent('CLOSE_MODAL');
-        }
-
-        // Initialize embed-specific UI
-        window.addEventListener('DOMContentLoaded', () => {
-            if (window.parent !== window) {
-                document.body.classList.add('is-embedded');
-            }
-        });
-
-        // Initialize carousels
-        const carousels = {
-            bell: 0,
-            eastwood: 0,
-            oast: 0
-        };
-
-        function initCarousels() {
-            ['bell', 'eastwood', 'oast'].forEach(id => {
-                const nav = document.getElementById('nav-' + id);
-                nav.innerHTML = '';
-                for (let i = 0; i < 4; i++) {
-                    const dot = document.createElement('div');
-                    dot.className = 'carousel-dot ' + (i === 0 ? 'active' : '');
-                    dot.onclick = (e) => { e.stopPropagation(); setSlide(id, i); };
-                    nav.appendChild(dot);
+                // Populate Features
+                const featureList = document.getElementById('modal-features');
+                featureList.innerHTML = '';
+                if (act.features && act.features.length > 0) {
+                    act.features.forEach(f => {
+                        const li = document.createElement('li');
+                        li.innerText = f;
+                        featureList.appendChild(li);
+                    });
                 }
-            });
-        }
+                const btn = document.getElementById('modal-action-btn');
+                if (retreatData.activities.has(id)) {
+                    btn.innerText = "Remove from Retreat";
+                    btn.classList.add('btn-secondary');
+                    btn.style.backgroundColor = 'transparent';
+                    btn.style.color = 'var(--color-primary)';
+                    btn.style.border = '2px solid var(--color-primary)';
+                } else {
+                    btn.innerText = "Add to Retreat";
+                    btn.classList.remove('btn-secondary');
+                    btn.style.backgroundColor = 'var(--color-primary)';
+                    btn.style.color = 'white';
+                    btn.style.border = 'none';
+                }
 
-        function moveSlide(event, id, direction) {
-            event.stopPropagation();
-            let current = carousels[id];
-            const next = (current + direction + 4) % 4;
-            setSlide(id, next);
-        }
-
-        function setSlide(id, index) {
-            carousels[id] = index;
-            const container = document.getElementById('card-' + id).querySelector('.carousel-container');
-            const slides = container.querySelectorAll('.carousel-slide');
-            const dots = container.querySelectorAll('.carousel-dot');
-
-            slides.forEach((s, i) => s.classList.toggle('active', i === index));
-            dots.forEach((d, i) => d.classList.toggle('active', i === index));
-        }
-
-        // --- FUNNEL LOGIC ---
-        function nextStep(stepNumber) {
-            if (stepNumber === 3 && !retreatData.location) {
-                return; // Button disabled anyway
+                // Show Modal
+                const overlay = document.getElementById('activity-modal');
+                overlay.style.display = 'flex';
+                // Small delay to allow display flex to apply before opacity transition
+                setTimeout(() => overlay.classList.add('active'), 10);
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
             }
 
-            document.querySelectorAll('.step-container').forEach(el => el.classList.remove('active'));
-            document.getElementById('step-' + stepNumber).classList.add('active');
+            function closeModal(event) {
+                // If triggered by click on overlay (event defined), check target
+                if (event && event.target !== event.currentTarget) return;
 
-            if (stepNumber === 4) renderActivities();
-            if (stepNumber === 5) generateItinerary();
-        }
-
-        function prevStep(stepNumber) {
-            document.querySelectorAll('.step-container').forEach(el => el.classList.remove('active'));
-            document.getElementById('step-' + stepNumber).classList.add('active');
-        }
-
-        function handleCardClick(element, locationName) {
-            // Determine ID
-            let id = 'bell';
-            if (locationName.includes('Eastwood')) id = 'eastwood';
-            if (locationName.includes('Oastbrook')) id = 'oast';
-
-            // Visual selection
-            document.querySelectorAll('.card-option').forEach(el => el.classList.remove('selected'));
-            element.classList.add('selected');
-
-            // Data update
-            retreatData.location = locationName;
-            retreatData.locationId = id;
-
-            // Enable Next
-            const btn = document.getElementById('btn-loc-next');
-            btn.removeAttribute('disabled');
-            btn.innerHTML = "Next: Details";
-        }
-
-        function updateDetails() {
-            retreatData.guests = document.getElementById('guest-count').value || 12;
-            retreatData.duration = document.getElementById('duration').value;
-            retreatData.month = document.getElementById('month').value;
-
-            // Re-render activities if we are on that step (or just always) to update prices
-            renderActivities();
-        }
-
-        function toggleActivity(id) {
-            if (retreatData.activities.has(id)) {
-                retreatData.activities.delete(id);
-            } else {
-                retreatData.activities.add(id);
+                const overlay = document.getElementById('activity-modal');
+                overlay.classList.remove('active');
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                }, 300);
+                document.body.style.overflow = '';
             }
-            renderActivities();
-        }
 
-        // --- ITINERARY GENERATOR ---
-        function generateItinerary() {
-            // Update Header
-            document.getElementById('sum-location').textContent = retreatData.location;
-            document.getElementById('sum-guests').textContent = retreatData.guests;
-            document.getElementById('sum-duration').textContent = retreatData.duration;
-            document.getElementById('sum-month').textContent = retreatData.month;
+            function toggleFromModal() {
+                if (!currentModalActivityId) return;
+                toggleActivity(currentModalActivityId);
+                closeModal();
+            }
 
-            // Set Thumbnail (Using first image of selected location)
-            const thumbUrl = document.querySelector(`#card-${retreatData.locationId} .carousel-slide.active`).style.backgroundImage;
-            document.getElementById('sum-thumb').style.backgroundImage = thumbUrl;
+            // --- CAROUSEL LOGIC ---
+            // --- EMBED COMMUNICATION LAYER ---
+            function notifyParent(type, data = {}) {
+                if (window.parent !== window) {
+                    window.parent.postMessage({ type, data }, '*');
+                }
+            }
 
-            // Generate Logic
-            const container = document.getElementById('itinerary-list');
-            container.innerHTML = '';
+            function closeEmbeddedModal() {
+                notifyParent('CLOSE_MODAL');
+            }
 
-            let days = 1;
-            if (retreatData.duration.startsWith('2')) days = 2;
-            if (retreatData.duration.startsWith('3')) days = 3;
-            if (retreatData.duration.startsWith('4')) days = 4;
-
-            // Convert Set to Array of Objects for the itinerary
-            const selectedActs = activitiesDB.filter(a => retreatData.activities.has(a.id));
-            const activitiesQueue = selectedActs.map(a => a.name);
-
-            // Calculate Cost
-            let totalActivityCost = 0;
-            selectedActs.forEach(act => {
-                totalActivityCost += getPrice(act);
+            // Initialize embed-specific UI
+            window.addEventListener('DOMContentLoaded', () => {
+                if (window.parent !== window) {
+                    document.body.classList.add('is-embedded');
+                }
+                // Double check: Reset Step 1 as active to be sure
+                document.querySelectorAll('.step-container').forEach(el => el.classList.remove('active'));
+                document.getElementById('step-1').classList.add('active');
             });
 
-            const schedule = [];
+            // Initialize carousels
+            const carousels = {
+                bell: 0,
+                eastwood: 0,
+                oast: 0
+            };
 
-            for (let i = 1; i <= days; i++) {
-                let dayPlan = `<strong>Day ${i}:</strong> `;
-                let events = [];
-
-                if (i === 1) events.push("Arrival & Welcome Lunch");
-                else events.push("Healthy Breakfast");
-
-                // Distribute activities
-                if (activitiesQueue.length > 0) events.push(activitiesQueue.shift());
-                events.push("Lunch Break");
-                if (activitiesQueue.length > 0 && i < days) events.push(activitiesQueue.shift());
-
-                if (i === days) events.push("Departure");
-                else events.push("Farm-to-Table Dinner");
-
-                schedule.push({ day: i, events: events });
+            function initCarousels() {
+                ['bell', 'eastwood', 'oast'].forEach(id => {
+                    const nav = document.getElementById('nav-' + id);
+                    nav.innerHTML = '';
+                    for (let i = 0; i < 4; i++) {
+                        const dot = document.createElement('div');
+                        dot.className = 'carousel-dot ' + (i === 0 ? 'active' : '');
+                        dot.onclick = (e) => { e.stopPropagation(); setSlide(id, i); };
+                        nav.appendChild(dot);
+                    }
+                });
             }
 
-            // Render Itinerary
-            schedule.forEach(day => {
-                const div = document.createElement('div');
-                div.className = 'day-row';
-                div.innerHTML = `
+            function moveSlide(event, id, direction) {
+                event.stopPropagation();
+                let current = carousels[id];
+                const next = (current + direction + 4) % 4;
+                setSlide(id, next);
+            }
+
+            function setSlide(id, index) {
+                carousels[id] = index;
+                const container = document.getElementById('card-' + id).querySelector('.carousel-container');
+                const slides = container.querySelectorAll('.carousel-slide');
+                const dots = container.querySelectorAll('.carousel-dot');
+
+                slides.forEach((s, i) => s.classList.toggle('active', i === index));
+                dots.forEach((d, i) => d.classList.toggle('active', i === index));
+            }
+
+            // --- FUNNEL LOGIC ---
+            function nextStep(stepNumber) {
+                if (stepNumber === 3 && !retreatData.location) {
+                    return; // Button disabled anyway
+                }
+
+                document.querySelectorAll('.step-container').forEach(el => el.classList.remove('active'));
+                document.getElementById('step-' + stepNumber).classList.add('active');
+
+                if (stepNumber === 4) renderActivities();
+                if (stepNumber === 5) generateItinerary();
+            }
+
+            function prevStep(stepNumber) {
+                document.querySelectorAll('.step-container').forEach(el => el.classList.remove('active'));
+                document.getElementById('step-' + stepNumber).classList.add('active');
+            }
+
+            function handleCardClick(element, locationName) {
+                // Determine ID
+                let id = 'bell';
+                if (locationName.includes('Eastwood')) id = 'eastwood';
+                if (locationName.includes('Oastbrook')) id = 'oast';
+
+                // Visual selection
+                document.querySelectorAll('.card-option').forEach(el => el.classList.remove('selected'));
+                element.classList.add('selected');
+
+                // Data update
+                retreatData.location = locationName;
+                retreatData.locationId = id;
+
+                // Enable Next
+                const btn = document.getElementById('btn-loc-next');
+                btn.removeAttribute('disabled');
+                btn.innerHTML = "Next: Details";
+            }
+
+            function updateDetails() {
+                retreatData.guests = document.getElementById('guest-count').value || 12;
+                retreatData.duration = document.getElementById('duration').value;
+                retreatData.month = document.getElementById('month').value;
+
+                // Re-render activities if we are on that step (or just always) to update prices
+                renderActivities();
+            }
+
+            function toggleActivity(id) {
+                if (retreatData.activities.has(id)) {
+                    retreatData.activities.delete(id);
+                } else {
+                    retreatData.activities.add(id);
+                }
+                renderActivities();
+            }
+
+            // --- ITINERARY GENERATOR ---
+            function generateItinerary() {
+                // Update Header
+                document.getElementById('sum-location').textContent = retreatData.location;
+                document.getElementById('sum-guests').textContent = retreatData.guests;
+                document.getElementById('sum-duration').textContent = retreatData.duration;
+                document.getElementById('sum-month').textContent = retreatData.month;
+
+                // Set Thumbnail (Using first image of selected location)
+                const thumbUrl = document.querySelector(`#card-${retreatData.locationId} .carousel-slide.active`).style.backgroundImage;
+                document.getElementById('sum-thumb').style.backgroundImage = thumbUrl;
+
+                // Generate Logic
+                const container = document.getElementById('itinerary-list');
+                container.innerHTML = '';
+
+                let days = 1;
+                if (retreatData.duration.startsWith('2')) days = 2;
+                if (retreatData.duration.startsWith('3')) days = 3;
+                if (retreatData.duration.startsWith('4')) days = 4;
+
+                // Convert Set to Array of Objects for the itinerary
+                const selectedActs = activitiesDB.filter(a => retreatData.activities.has(a.id));
+                const activitiesQueue = selectedActs.map(a => a.name);
+
+                // Calculate Cost
+                let totalActivityCost = 0;
+                selectedActs.forEach(act => {
+                    totalActivityCost += getPrice(act);
+                });
+
+                const schedule = [];
+
+                for (let i = 1; i <= days; i++) {
+                    let dayPlan = `<strong>Day ${i}:</strong> `;
+                    let events = [];
+
+                    if (i === 1) events.push("Arrival & Welcome Lunch");
+                    else events.push("Healthy Breakfast");
+
+                    // Distribute activities
+                    if (activitiesQueue.length > 0) events.push(activitiesQueue.shift());
+                    events.push("Lunch Break");
+                    if (activitiesQueue.length > 0 && i < days) events.push(activitiesQueue.shift());
+
+                    if (i === days) events.push("Departure");
+                    else events.push("Farm-to-Table Dinner");
+
+                    schedule.push({ day: i, events: events });
+                }
+
+                // Render Itinerary
+                schedule.forEach(day => {
+                    const div = document.createElement('div');
+                    div.className = 'day-row';
+                    div.innerHTML = `
                     <div class="day-title">Day ${day.day}</div>
                     <div class="day-content">${day.events.join(' • ')}</div>
                 `;
-                container.appendChild(div);
-            });
+                    container.appendChild(div);
+                });
 
-            // Add note if leftover activities
-            if (activitiesQueue.length > 0) {
-                const note = document.createElement('div');
-                note.style.fontSize = '0.8rem';
-                note.style.fontStyle = 'italic';
-                note.style.marginTop = '10px';
-                note.textContent = `+ Also included: ${activitiesQueue.join(', ')}`;
-                container.appendChild(note);
-            }
+                // Add note if leftover activities
+                if (activitiesQueue.length > 0) {
+                    const note = document.createElement('div');
+                    note.style.fontSize = '0.8rem';
+                    note.style.fontStyle = 'italic';
+                    note.style.marginTop = '10px';
+                    note.textContent = `+ Also included: ${activitiesQueue.join(', ')}`;
+                    container.appendChild(note);
+                }
 
-            // Cost Summary
-            const costDiv = document.createElement('div');
-            costDiv.style.marginTop = '20px';
-            costDiv.style.paddingTop = '15px';
-            costDiv.style.borderTop = '1px solid #ccc';
-            costDiv.innerHTML = `
+                // Cost Summary
+                const costDiv = document.createElement('div');
+                costDiv.style.marginTop = '20px';
+                costDiv.style.paddingTop = '15px';
+                costDiv.style.borderTop = '1px solid #ccc';
+                costDiv.innerHTML = `
                 <div style="display:flex; justify-content:space-between; align-items:center;">
                     <strong>Estimated Activity Cost:</strong>
                     <span style="font-size:1.1rem; color:var(--color-primary);">£${totalActivityCost.toLocaleString()}</span>
                 </div>
                 <div style="font-size:0.8rem; color:#666; margin-top:5px;">(Based on ${retreatData.guests} participants. Venue fees calculated separately.)</div>
             `;
-            container.appendChild(costDiv);
+                container.appendChild(costDiv);
 
-            if (retreatData.activities.size === 0) {
-                container.innerHTML = '<div style="padding:10px; font-style:italic;">No specific activities selected. We will design a relaxation focused itinerary.</div>';
+                if (retreatData.activities.size === 0) {
+                    container.innerHTML = '<div style="padding:10px; font-style:italic;">No specific activities selected. We will design a relaxation focused itinerary.</div>';
+                }
             }
-        }
 
-        // Init
-        initCarousels();
-    </script>
+            // Init
+            initCarousels();
+        </script>
 </body>
 <div id="venue-modal-container">
     <!-- Venue Modal Styles -->
