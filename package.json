@@ -5,7 +5,8 @@
   "main": "scrape-venues.js",
   "scripts": {
     "start": "npx serve dist",
-    "scrape": "node scrape-venues.js"
+    "scrape": "node scrape-venues.js",
+    "refresh-gallery": "node scripts/refresh-venues.js"
   },
   "dependencies": {
     "playwright": "^1.40.0",
