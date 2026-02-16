@@ -37,7 +37,6 @@ function loadVenueData() {
     renderAboutSection();
     renderAccommodation();
     renderCorporateFacilities();
-    renderActivities();
     renderAmenities();
     renderRecognition();
     updateBookingBar();
