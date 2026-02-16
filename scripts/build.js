@@ -13,18 +13,36 @@ if (!fs.existsSync(DIST_SCRIPTS_DIR)) {
 }
 
 // 1. Copy HTML files
-const htmlFiles = [
-    { src: 'full-retreat-booking-embed.html', dest: 'index.html' },
-    { src: 'retreat-builder.html', dest: 'retreat-builder.html' },
-    { src: 'venue-detail.html', dest: 'venue-detail.html' }
-];
+// Main entry point
+const sourceHtml = path.join(ROOT_DIR, 'full-retreat-booking-embed.html');
+const destHtml = path.join(DIST_DIR, 'index.html');
+console.log(`Copying ${sourceHtml} to ${destHtml}...`);
+fs.copyFileSync(sourceHtml, destHtml);
 
-htmlFiles.forEach(file => {
-    const source = path.join(ROOT_DIR, file.src);
-    const dest = path.join(DIST_DIR, file.dest);
-    console.log(`Copying ${source} to ${dest}...`);
-    fs.copyFileSync(source, dest);
+// Retreat Builder - Keep as standalone fallback
+const sourceBuilder = path.join(ROOT_DIR, 'retreat-builder.html');
+const destBuilder = path.join(DIST_DIR, 'retreat-builder.html');
+console.log(`Copying ${sourceBuilder} to ${destBuilder}...`);
+fs.copyFileSync(sourceBuilder, destBuilder);
+
+// Venue Detail Pages - Create Clean URLs
+const venues = ['bell', 'oastbrook', 'eastwood'];
+const sourceVenueDetail = path.join(ROOT_DIR, 'venue-detail.html');
+
+venues.forEach(venue => {
+    const venueDir = path.join(DIST_DIR, venue);
+    if (!fs.existsSync(venueDir)) {
+        console.log(`Creating directory: ${venueDir}`);
+        fs.mkdirSync(venueDir, { recursive: true });
+    }
+    const destVenueHtml = path.join(venueDir, 'index.html');
+    console.log(`Copying venue detail to ${destVenueHtml}...`);
+    fs.copyFileSync(sourceVenueDetail, destVenueHtml);
 });
+
+// Also keep venue-detail.html at root for fallback
+const destRootVenueDetail = path.join(DIST_DIR, 'venue-detail.html');
+fs.copyFileSync(sourceVenueDetail, destRootVenueDetail);
 
 // 2. Copy Root JS files
 const rootJsFiles = ['venue-data.js', 'venue-detail.js'];

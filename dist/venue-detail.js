@@ -13,12 +13,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Load venue data from URL parameter
 function loadVenueData() {
+    // Check URL parameter first
     const urlParams = new URLSearchParams(window.location.search);
-    const venueId = urlParams.get('venue');
+    let venueId = urlParams.get('venue');
+
+    // If no param, check if path contains venue ID (e.g., /bell/, /oastbrook/)
+    if (!venueId) {
+        const path = window.location.pathname.toLowerCase();
+        if (path.includes('bell')) venueId = 'bell';
+        else if (path.includes('oastbrook') || path.includes('oast')) venueId = 'oastbrook';
+        else if (path.includes('eastwood')) venueId = 'eastwood';
+    }
 
     if (!venueId || !venuesDB[venueId]) {
+        console.error('Venue not found. Redirecting to index.');
         // Redirect to retreat builder if invalid venue
-        window.location.href = 'index.html';
+        window.location.href = '../index.html'; // Go up one level if in subdir
         return;
     }
 
@@ -363,8 +373,12 @@ function requestQuote() {
     localStorage.setItem('selectedVenue', currentVenue.id);
 
     // Redirect to retreat builder with venue pre-selected
-    // In production, index.html is the entry point
-    window.location.href = `index.html?venue=${currentVenue.id}`;
+    // Check if we overlap with a clean URL path to determine relative path
+    const path = window.location.pathname.toLowerCase();
+    const isSubdir = path.includes('/bell') || path.includes('/oast') || path.includes('/eastwood');
+    const target = isSubdir ? '../index.html' : 'index.html';
+
+    window.location.href = `${target}?venue=${currentVenue.id}`;
 }
 
 function contactVenue() {
