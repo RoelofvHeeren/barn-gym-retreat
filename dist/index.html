@@ -1374,6 +1374,7 @@
 
             // Initialize embed-specific UI
             window.addEventListener('DOMContentLoaded', () => {
+                console.log('DOMContentLoaded fired'); // DEBUG
                 if (window.parent !== window) {
                     document.body.classList.add('is-embedded');
                 }
@@ -1381,6 +1382,7 @@
                 // Handle URL parameters for venue selection
                 const params = new URLSearchParams(window.location.search);
                 const venueId = params.get('venue');
+                console.log('Venue param found:', venueId); // DEBUG
 
                 if (venueId) {
                     // Hide Step 1 and select venue
@@ -1391,10 +1393,18 @@
                     const cardId = cardMap[venueId];
                     const card = document.getElementById(cardId);
                     if (card) {
+                        console.log('Selecting card:', cardId); // DEBUG
                         handleCardClick(card, nameMap[venueId]);
                         // Auto advance to Logistics step
-                        nextStep(3);
+                        console.log('Advancing to step 3'); // DEBUG
+
+                        // Force a small delay to ensure UI updates first
+                        setTimeout(() => {
+                            nextStep(3);
+                        }, 100);
+
                     } else {
+                        console.warn('Card not found for venue:', venueId); // DEBUG
                         // Fallback to Step 1 if card not found
                         document.getElementById('step-1').classList.add('active');
                     }
