@@ -10,6 +10,8 @@
     "refresh-gallery": "node scripts/refresh-venues.js"
   },
   "dependencies": {
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
     "playwright": "^1.40.0",
     "serve": "^14.2.1"
   }

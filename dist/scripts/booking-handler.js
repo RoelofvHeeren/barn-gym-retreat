@@ -6,8 +6,9 @@
 async function submitBooking(formData) {
     console.log('🚀 Submitting booking...', formData);
 
-    // TODO: Replace with actual GoHighLevel Webhook URL provided by user
-    const WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/YOUR_WEBHOOK_ID'; // Placeholder from User
+    // URL for Backend API
+    // const WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/YOUR_WEBHOOK_ID'; 
+    const API_URL = '/api/booking';
 
     try {
         // Construct the Name: Company x Venue
@@ -45,14 +46,10 @@ async function submitBooking(formData) {
             source: 'Retreat Booking Embed'
         };
 
-        // Send to Webhook (GoHighLevel)
-        // Using 'no-cors' mode is safer for some GHL configurations to avoid errors,
-        // but prevents reading response. standard POST is preferred if CORS allowed.
-        console.log('Sending payload to GHL:', payload);
+        // Send to Backend API
+        console.log('Sending payload to Backend:', payload);
 
-        /* 
-        // UNCOMMENT AND CONFIGURE WHEN WEBHOOK IS READY
-        const response = await fetch(WEBHOOK_URL, {
+        const response = await fetch(API_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -60,11 +57,11 @@ async function submitBooking(formData) {
             body: JSON.stringify(payload)
         });
 
+        const result = await response.json();
+
         if (!response.ok) {
-           // throw new Error('Webhook submission failed');
-           console.warn('Webhook might have failed or is in no-cors mode');
+            throw new Error(result.error || 'Server submission failed');
         }
-        */
 
         // Simulate success for now
         await new Promise(resolve => setTimeout(resolve, 1000));
