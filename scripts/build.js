@@ -12,22 +12,38 @@ if (!fs.existsSync(DIST_SCRIPTS_DIR)) {
     fs.mkdirSync(DIST_SCRIPTS_DIR, { recursive: true });
 }
 
-// 1. Copy HTML
-const sourceHtml = path.join(ROOT_DIR, 'full-retreat-booking-embed.html');
-const destHtml = path.join(DIST_DIR, 'index.html');
+// 1. Copy HTML files
+const htmlFiles = [
+    { src: 'full-retreat-booking-embed.html', dest: 'index.html' },
+    { src: 'retreat-builder.html', dest: 'retreat-builder.html' },
+    { src: 'venue-detail.html', dest: 'venue-detail.html' }
+];
 
-console.log(`Copying ${sourceHtml} to ${destHtml}...`);
-fs.copyFileSync(sourceHtml, destHtml);
+htmlFiles.forEach(file => {
+    const source = path.join(ROOT_DIR, file.src);
+    const dest = path.join(DIST_DIR, file.dest);
+    console.log(`Copying ${source} to ${dest}...`);
+    fs.copyFileSync(source, dest);
+});
 
-// 2. Copy Booking Handler Script
+// 2. Copy Root JS files
+const rootJsFiles = ['venue-data.js', 'venue-detail.js'];
+rootJsFiles.forEach(file => {
+    const source = path.join(ROOT_DIR, file);
+    const dest = path.join(DIST_DIR, file);
+    if (fs.existsSync(source)) {
+        console.log(`Copying ${source} to ${dest}...`);
+        fs.copyFileSync(source, dest);
+    }
+});
+
+// 3. Copy scripts/booking-handler.js
 const sourceScript = path.join(SCRIPTS_DIR, 'booking-handler.js');
 const destScript = path.join(DIST_SCRIPTS_DIR, 'booking-handler.js');
 
 if (fs.existsSync(sourceScript)) {
     console.log(`Copying ${sourceScript} to ${destScript}...`);
     fs.copyFileSync(sourceScript, destScript);
-} else {
-    console.warn(`Warning: ${sourceScript} not found!`);
 }
 
-console.log('Build sync complete!');
+console.log('Build complete!');
