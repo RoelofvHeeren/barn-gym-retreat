@@ -18,11 +18,11 @@ const venuesDB = {
             description: '7 hotel rooms, 5 garden houses, 4 lodges'
         },
         quickFacts: [
-            { icon: '<img src="dist/Retreat Images/Icons/icon_capacity.png" alt="Capacity">', label: 'Capacity', value: 'Up to 32 guests' },
-            { icon: '<img src="dist/Retreat Images/Icons/icon_accommodation.png" alt="Accommodation">', label: 'Accommodation', value: '16 unique rooms' },
-            { icon: '<img src="dist/Retreat Images/Icons/icon_meeting.png" alt="Event Space">', label: 'Event Space', value: 'Seats 90 for dinner' },
-            { icon: '<img src="dist/Retreat Images/Icons/icon_dining.png" alt="Dining">', label: 'Dining', value: '2 AA Rosettes' },
-            { icon: '<img src="dist/Retreat Images/Icons/icon_rating.png" alt="Rating">', label: 'Rating', value: '5-Star AA Inn' }
+            { icon: '<img src="Retreat Images/Icons/icon_capacity.png" alt="Capacity">', label: 'Capacity', value: 'Up to 32 guests' },
+            { icon: '<img src="Retreat Images/Icons/icon_accommodation.png" alt="Accommodation">', label: 'Accommodation', value: '16 unique rooms' },
+            { icon: '<img src="Retreat Images/Icons/icon_meeting.png" alt="Event Space">', label: 'Event Space', value: 'Seats 90 for dinner' },
+            { icon: '<img src="Retreat Images/Icons/icon_dining.png" alt="Dining">', label: 'Dining', value: '2 AA Rosettes' },
+            { icon: '<img src="Retreat Images/Icons/icon_rating.png" alt="Rating">', label: 'Rating', value: '5-Star AA Inn' }
         ],
         about: {
             description: 'In the quintessentially English village of Ticehurst in East Sussex, just an hour from London, you will discover the storybook charm of The Bell. Full of character and hidden gems, this former 16th Century Coaching Inn has been transformed into a creative paradise, visual treat and dream-like escape from reality.',
@@ -157,19 +157,19 @@ const venuesDB = {
         },
         images: {
             hero: [
-                'dist/Retreat Images/The Bell/The Bell 1.webp',
-                'dist/Retreat Images/The Bell/The Bell 2.jpg',
-                'dist/Retreat Images/The Bell/The Bell 3 .avif',
-                'dist/Retreat Images/The Bell/The Bell 4.avif'
+                'Retreat Images/The Bell/The Bell 1.webp',
+                'Retreat Images/The Bell/The Bell 2.jpg',
+                'Retreat Images/The Bell/The Bell 3 .avif',
+                'Retreat Images/The Bell/The Bell 4.avif'
             ],
             accommodation: [
-                'dist/Retreat Images/The Bell/The_Bell_Benefit_of_Doubt2.jpg',
-                'dist/Retreat Images/The Bell/Bath_running_Website.jpg',
-                'dist/Retreat Images/The Bell/March_Interiors_HI_4_websize.jpg'
+                'Retreat Images/The Bell/The_Bell_Benefit_of_Doubt2.jpg',
+                'Retreat Images/The Bell/Bath_running_Website.jpg',
+                'Retreat Images/The Bell/March_Interiors_HI_4_websize.jpg'
             ],
             facilities: [
-                'dist/Retreat Images/The Bell/The_Bell_Jan_23_41_websize.jpg',
-                'dist/Retreat Images/The Bell/The_Stables_July_23_2_websize_1.jpg'
+                'Retreat Images/The Bell/The_Bell_Jan_23_41_websize.jpg',
+                'Retreat Images/The Bell/The_Stables_July_23_2_websize_1.jpg'
             ]
         },
         pricing: {
@@ -363,16 +363,16 @@ const venuesDB = {
         },
         images: {
             hero: [
-                'dist/Retreat Images/Oastbrook/Oastbrook 1.avif',
-                'dist/Retreat Images/Oastbrook/Oastbrook 2.webp',
-                'dist/Retreat Images/Oastbrook/Oastbrook 3.webp',
-                'dist/Retreat Images/Oastbrook/Oastbrook 4.webp'
+                'Retreat Images/Oastbrook/Oastbrook 1.avif',
+                'Retreat Images/Oastbrook/Oastbrook 2.webp',
+                'Retreat Images/Oastbrook/Oastbrook 3.webp',
+                'Retreat Images/Oastbrook/Oastbrook 4.webp'
             ],
             accommodation: [
-                'dist/Retreat Images/Oastbrook/1546572_SX93820_20Exterior_1024x683.jpg'
+                'Retreat Images/Oastbrook/1546572_SX93820_20Exterior_1024x683.jpg'
             ],
             facilities: [
-                'dist/Retreat Images/Oastbrook/Outside_1024x856.jpg'
+                'Retreat Images/Oastbrook/Outside_1024x856.jpg'
             ]
         },
         pricing: {
@@ -421,11 +421,11 @@ const venuesDB = {
             description: '12 double bedrooms + 1 bunk room, all exclusive use'
         },
         quickFacts: [
-            { icon: '<img src="dist/Retreat Images/Icons/icon_capacity.png" alt="Capacity">', label: 'Capacity', value: 'Up to 24+ guests' },
-            { icon: '<img src="dist/Retreat Images/Icons/icon_accommodation.png" alt="Bedrooms">', label: 'Bedrooms', value: '13 rooms (12 double + bunk)' },
-            { icon: '<img src="dist/Retreat Images/Icons/icon_meeting.png" alt="Estate">', label: 'Estate', value: '32-acre exclusive use' },
-            { icon: '<img src="dist/Retreat Images/Icons/icon_dining.png" alt="Catering">', label: 'Catering', value: 'Personal chef available' },
-            { icon: '<img src="dist/Retreat Images/Icons/icon_rating.png" alt="Service">', label: 'Service', value: 'Boutique hotel standard' }
+            { icon: '<img src="Retreat Images/Icons/icon_capacity.png" alt="Capacity">', label: 'Capacity', value: 'Up to 24+ guests' },
+            { icon: '<img src="Retreat Images/Icons/icon_accommodation.png" alt="Bedrooms">', label: 'Bedrooms', value: '13 rooms (12 double + bunk)' },
+            { icon: '<img src="Retreat Images/Icons/icon_meeting.png" alt="Estate">', label: 'Estate', value: '32-acre exclusive use' },
+            { icon: '<img src="Retreat Images/Icons/icon_dining.png" alt="Catering">', label: 'Catering', value: 'Personal chef available' },
+            { icon: '<img src="Retreat Images/Icons/icon_rating.png" alt="Service">', label: 'Service', value: 'Boutique hotel standard' }
         ],
         about: {
             description: 'Eastwood Observatory is the ideal venue for corporate retreats. The idyllic rural setting and unparalleled beauty provide exceptional escapism from the outside world. All bookings are for exclusive use, meaning groups are free to use the 32-acre estate as suits them best.',
@@ -566,18 +566,18 @@ const venuesDB = {
         },
         images: {
             hero: [
-                'dist/Retreat Images/Eastwood/Eastwood 1.webp',
-                'dist/Retreat Images/Eastwood/Eastwood 2.webp',
-                'dist/Retreat Images/Eastwood/Eastwood 3.webp',
-                'dist/Retreat Images/Eastwood/Eastwood 4.webp'
+                'Retreat Images/Eastwood/Eastwood 1.webp',
+                'Retreat Images/Eastwood/Eastwood 2.webp',
+                'Retreat Images/Eastwood/Eastwood 3.webp',
+                'Retreat Images/Eastwood/Eastwood 4.webp'
             ],
             accommodation: [
-                'dist/Retreat Images/Eastwood/2022_06_11_Eastwood_House_Ed_Ovenden_170_e1656086748141.jpg',
-                'dist/Retreat Images/Eastwood/2022_06_11_Eastwood_House_Ed_Ovenden_140_e1656086801286.jpg'
+                'Retreat Images/Eastwood/2022_06_11_Eastwood_House_Ed_Ovenden_170_e1656086748141.jpg',
+                'Retreat Images/Eastwood/2022_06_11_Eastwood_House_Ed_Ovenden_140_e1656086801286.jpg'
             ],
             facilities: [
-                'dist/Retreat Images/Eastwood/climbing_at_eastwood2_scaled.jpg',
-                'dist/Retreat Images/Eastwood/shooting_at_eastwood_scaled.jpg'
+                'Retreat Images/Eastwood/climbing_at_eastwood2_scaled.jpg',
+                'Retreat Images/Eastwood/shooting_at_eastwood_scaled.jpg'
             ]
         },
         pricing: {

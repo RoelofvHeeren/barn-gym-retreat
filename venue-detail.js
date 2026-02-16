@@ -18,7 +18,7 @@ function loadVenueData() {
 
     if (!venueId || !venuesDB[venueId]) {
         // Redirect to retreat builder if invalid venue
-        window.location.href = 'retreat-builder.html';
+        window.location.href = 'index.html';
         return;
     }
 
@@ -363,7 +363,8 @@ function requestQuote() {
     localStorage.setItem('selectedVenue', currentVenue.id);
 
     // Redirect to retreat builder with venue pre-selected
-    window.location.href = `retreat-builder.html?venue=${currentVenue.id}`;
+    // In production, index.html is the entry point
+    window.location.href = `index.html?venue=${currentVenue.id}`;
 }
 
 function contactVenue() {

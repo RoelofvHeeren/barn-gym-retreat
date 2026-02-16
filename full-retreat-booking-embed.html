@@ -773,13 +773,13 @@
                     <div class="carousel-container" onmouseover="pauseCarousel('bell')"
                         onmouseout="resumeCarousel('bell')">
                         <div class="carousel-slide active"
-                            style="background-image: url('dist/Retreat Images/The Bell/The Bell 1.webp');"></div>
+                            style="background-image: url('Retreat Images/The Bell/The Bell 1.webp');"></div>
                         <div class="carousel-slide"
-                            style="background-image: url('dist/Retreat Images/The Bell/The Bell 2.jpg');"></div>
+                            style="background-image: url('Retreat Images/The Bell/The Bell 2.jpg');"></div>
                         <div class="carousel-slide"
-                            style="background-image: url('dist/Retreat Images/The Bell/The Bell 3 .avif');"></div>
+                            style="background-image: url('Retreat Images/The Bell/The Bell 3 .avif');"></div>
                         <div class="carousel-slide"
-                            style="background-image: url('dist/Retreat Images/The Bell/The Bell 4.avif');"></div>
+                            style="background-image: url('Retreat Images/The Bell/The Bell 4.avif');"></div>
 
                         <button class="carousel-arrow carousel-prev" onclick="moveSlide(event, 'bell', -1)"><i
                                 class="fa-solid fa-chevron-left"></i></button>
@@ -805,13 +805,13 @@
                     <div class="carousel-container" onmouseover="pauseCarousel('eastwood')"
                         onmouseout="resumeCarousel('eastwood')">
                         <div class="carousel-slide active"
-                            style="background-image: url('dist/Retreat Images/Eastwood/Eastwood 1.webp');"></div>
+                            style="background-image: url('Retreat Images/Eastwood/Eastwood 1.webp');"></div>
                         <div class="carousel-slide"
-                            style="background-image: url('dist/Retreat Images/Eastwood/Eastwood 2.webp');"></div>
+                            style="background-image: url('Retreat Images/Eastwood/Eastwood 2.webp');"></div>
                         <div class="carousel-slide"
-                            style="background-image: url('dist/Retreat Images/Eastwood/Eastwood 3.webp');"></div>
+                            style="background-image: url('Retreat Images/Eastwood/Eastwood 3.webp');"></div>
                         <div class="carousel-slide"
-                            style="background-image: url('dist/Retreat Images/Eastwood/Eastwood 4.webp');"></div>
+                            style="background-image: url('Retreat Images/Eastwood/Eastwood 4.webp');"></div>
 
                         <button class="carousel-arrow carousel-prev" onclick="moveSlide(event, 'eastwood', -1)"><i
                                 class="fa-solid fa-chevron-left"></i></button>
@@ -836,13 +836,13 @@
                     <div class="carousel-container" onmouseover="pauseCarousel('oast')"
                         onmouseout="resumeCarousel('oast')">
                         <div class="carousel-slide active"
-                            style="background-image: url('dist/Retreat Images/Oastbrook/Oastbrook 1.avif');"></div>
+                            style="background-image: url('Retreat Images/Oastbrook/Oastbrook 1.avif');"></div>
                         <div class="carousel-slide"
-                            style="background-image: url('dist/Retreat Images/Oastbrook/Oastbrook 2.webp');"></div>
+                            style="background-image: url('Retreat Images/Oastbrook/Oastbrook 2.webp');"></div>
                         <div class="carousel-slide"
-                            style="background-image: url('dist/Retreat Images/Oastbrook/Oastbrook 3.webp');"></div>
+                            style="background-image: url('Retreat Images/Oastbrook/Oastbrook 3.webp');"></div>
                         <div class="carousel-slide"
-                            style="background-image: url('dist/Retreat Images/Oastbrook/Oastbrook 4.webp');"></div>
+                            style="background-image: url('Retreat Images/Oastbrook/Oastbrook 4.webp');"></div>
 
                         <button class="carousel-arrow carousel-prev" onclick="moveSlide(event, 'oast', -1)"><i
                                 class="fa-solid fa-chevron-left"></i></button>
@@ -1344,9 +1344,32 @@
                 if (window.parent !== window) {
                     document.body.classList.add('is-embedded');
                 }
-                // Double check: Reset Step 1 as active to be sure
-                document.querySelectorAll('.step-container').forEach(el => el.classList.remove('active'));
-                document.getElementById('step-1').classList.add('active');
+                
+                // Handle URL parameters for venue selection
+                const params = new URLSearchParams(window.location.search);
+                const venueId = params.get('venue');
+                
+                if (venueId) {
+                    // Hide Step 1 and select venue
+                    document.querySelectorAll('.step-container').forEach(el => el.classList.remove('active'));
+                    const cardMap = { 'bell': 'card-bell', 'oastbrook': 'card-oast', 'eastwood': 'card-eastwood' };
+                    const nameMap = { 'bell': 'The Bell in Ticehurst', 'oastbrook': 'Oastbrook Vineyards', 'eastwood': 'Eastwood Observatory' };
+
+                    const cardId = cardMap[venueId];
+                    const card = document.getElementById(cardId);
+                    if (card) {
+                        handleCardClick(card, nameMap[venueId]);
+                        // Auto advance to Logistics step
+                        nextStep(3);
+                    } else {
+                        // Fallback to Step 1 if card not found
+                        document.getElementById('step-1').classList.add('active');
+                    }
+                } else {
+                    // Default behavior: Show Step 1
+                    document.querySelectorAll('.step-container').forEach(el => el.classList.remove('active'));
+                    document.getElementById('step-1').classList.add('active');
+                }
             });
 
             // Initialize carousels
