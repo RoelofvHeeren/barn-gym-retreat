@@ -7,23 +7,51 @@ async function submitBooking(formData) {
     console.log('🚀 Submitting booking...', formData);
 
     // TODO: Replace with actual GoHighLevel Webhook URL provided by user
-    const WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/YOUR_WEBHOOK_ID'; // Placeholder
+    const WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/YOUR_WEBHOOK_ID'; // Placeholder from User
 
     try {
-        // Prepare the payload
+        // Construct the Name: Company x Venue
+        const companyName = formData.companyName || 'Unknown Company';
+        const venueName = formData.venue || 'No Venue';
+        const opportunityName = `${companyName} x ${venueName}`;
+
+        // Estimate value (rough logic based on duration/guests/venue)
+        // This is a placeholder logic, user might want more specific calcs
+        const guestCount = parseInt(formData.guestCount) || 0;
+        const duration = parseInt(formData.duration) || 0;
+        let baseRate = 2000; // default
+        if (venueName.toLowerCase().includes('bell')) baseRate = 3000;
+        if (venueName.toLowerCase().includes('eastwood')) baseRate = 3500;
+        if (venueName.toLowerCase().includes('oast')) baseRate = 4000;
+
+        const ESTIMATED_VALUE = baseRate * duration; // Very rough estimate
+
+        // Prepare the payload matching GHL Webhook expectations
+        // We structure it to pass custom fields easily if mapped in GHL
+        // or as raw JSON for a workflow to parse.
         const payload = {
             ...formData,
+            opportunity_name: opportunityName,
+            opportunity_value: ESTIMATED_VALUE,
+            tags: ['corporate_retreat'],
+            customData: {
+                corporate_venue: venueName,
+                number_of_guests: formData.guestCount,
+                duration: formData.duration,
+                proposed_itinerary: formData.itinerary, // Assuming this comes from main form
+                estimated_activity_cost: ESTIMATED_VALUE
+            },
             submittedAt: new Date().toISOString(),
             source: 'Retreat Booking Embed'
         };
 
         // Send to Webhook (GoHighLevel)
-        // Note: usage of 'no-cors' might be needed depending on GHL settings, 
-        // but 'cors' is better if supported to read response.
-        // For now, we assume standard POST.
+        // Using 'no-cors' mode is safer for some GHL configurations to avoid errors,
+        // but prevents reading response. standard POST is preferred if CORS allowed.
+        console.log('Sending payload to GHL:', payload);
 
         /* 
-        // UNCOMMENT WHEN WEBHOOK IS READY
+        // UNCOMMENT AND CONFIGURE WHEN WEBHOOK IS READY
         const response = await fetch(WEBHOOK_URL, {
             method: 'POST',
             headers: {
@@ -33,7 +61,8 @@ async function submitBooking(formData) {
         });
 
         if (!response.ok) {
-            throw new Error('Webhook submission failed');
+           // throw new Error('Webhook submission failed');
+           console.warn('Webhook might have failed or is in no-cors mode');
         }
         */
 
@@ -63,12 +92,27 @@ function collectBookingData() {
     const selectedActivities = Array.from(document.querySelectorAll('.activity-card.selected .activity-content span'))
         .map(el => el.innerText);
 
+    // Contact Details
+    const name = document.getElementById('contact-name')?.value || '';
+    const email = document.getElementById('contact-email')?.value || '';
+    const companyName = document.getElementById('contact-company')?.value || '';
+    const phone = document.getElementById('contact-phone')?.value || '';
+
+    // Itinerary - naive grab of text
+    const itineraryList = document.getElementById('itinerary-list');
+    const itinerary = itineraryList ? itineraryList.innerText : '';
+
     return {
         venue,
         guestCount,
         duration,
         month,
-        activities: selectedActivities
+        activities: selectedActivities,
+        name,
+        email,
+        companyName,
+        phone,
+        itinerary
     };
 }
 

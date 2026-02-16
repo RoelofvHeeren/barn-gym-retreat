@@ -639,50 +639,15 @@
             z-index: 1000;
             background: rgba(255, 255, 255, 0.9);
             border: none;
-            border-radius: 50%;
             width: 40px;
             height: 40px;
-            font-size: 24px;
-            color: #333;
+            border-radius: 50%;
             cursor: pointer;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             align-items: center;
             justify-content: center;
-        }
-
-        /* Sticky Footer Navigation */
-        .sticky-footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: white;
-            padding: 15px 20px;
-            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            transform: translateY(100%);
-            transition: transform 0.3s ease;
-        }
-
-        .sticky-footer.visible {
-            transform: translateY(0);
-        }
-
-        .sticky-footer .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        /* Adjust main container to prevent footer overlap */
-        .main-container {
-            padding-bottom: 80px;
+            font-size: 20px;
+            color: #333;
         }
 
         body.is-embedded #embed-close-btn {
@@ -1443,76 +1408,21 @@
             }
 
             // --- FUNNEL LOGIC ---
-            // --- FUNNEL LOGIC ---
-            let currentStepIndex = 1;
-            const totalSteps = 5;
-
-            function updateStickyFooter(stepNumber) {
-                const footer = document.getElementById('stickyFooter');
-                const prevBtn = document.getElementById('footer-prev');
-                const nextBtn = document.getElementById('footer-next');
-                const progress = document.getElementById('footer-progress');
-
-                // Show footer
-                footer.classList.add('visible');
-
-                // Update Progress Text
-                progress.innerText = `Step ${stepNumber - 1} of ${totalSteps - 1}`; // Adjust since step 1 is selection
-
-                // Prev Button visibility
-                if (stepNumber <= 2) { // Step 1 is hidden/skipped usually, Step 2 is venue selection
-                    prevBtn.style.visibility = 'hidden';
-                } else {
-                    prevBtn.style.visibility = 'visible';
-                }
-
-                // Next Button Text/State
-                nextBtn.disabled = false; // Default enabled, logic per step might disable
-
-                if (stepNumber === 2) { // Venue Selection
-                    nextBtn.innerText = "Next: Logistics";
-                    if (!retreatData.location) nextBtn.disabled = true;
-                } else if (stepNumber === 3) { // Logistics
-                    nextBtn.innerText = "Next: Activities";
-                } else if (stepNumber === 4) { // Activities
-                    nextBtn.innerText = "Next: Itinerary";
-                } else if (stepNumber === 5) { // Itinerary (Finish)
-                    nextBtn.innerText = "Request Proposal";
-                }
-            }
-
-            function handleFooterNav(direction) {
-                if (direction === 1) {
-                    // Next
-                    nextStep(currentStepIndex + 1);
-                } else {
-                    // Prev
-                    prevStep(currentStepIndex - 1);
-                }
-            }
-
             function nextStep(stepNumber) {
                 if (stepNumber === 3 && !retreatData.location) {
                     return; // Button disabled anyway
                 }
-
-                currentStepIndex = stepNumber;
 
                 document.querySelectorAll('.step-container').forEach(el => el.classList.remove('active'));
                 document.getElementById('step-' + stepNumber).classList.add('active');
 
                 if (stepNumber === 4) renderActivities();
                 if (stepNumber === 5) generateItinerary();
-
-                updateStickyFooter(stepNumber);
             }
 
             function prevStep(stepNumber) {
-                currentStepIndex = stepNumber;
                 document.querySelectorAll('.step-container').forEach(el => el.classList.remove('active'));
                 document.getElementById('step-' + stepNumber).classList.add('active');
-
-                updateStickyFooter(stepNumber);
             }
 
             function handleCardClick(element, locationName) {
@@ -1529,16 +1439,10 @@
                 retreatData.location = locationName;
                 retreatData.locationId = id;
 
-                // Enable Next and update text
+                // Enable Next
                 const btn = document.getElementById('btn-loc-next');
-                if (btn) {
-                    btn.removeAttribute('disabled');
-                    btn.innerHTML = "Next: Retreat Details";
-                }
-
-                // Show sticky footer if hidden
-                const footer = document.querySelector('.sticky-footer');
-                if (footer) footer.classList.add('visible');
+                btn.removeAttribute('disabled');
+                btn.innerHTML = "Next: Details";
             }
 
             function updateDetails() {
