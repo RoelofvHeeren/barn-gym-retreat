@@ -93,7 +93,7 @@ function renderHeroSection() {
             From £${currentVenue.pricing.from.toLocaleString()}
             <span>${currentVenue.pricing.unit}</span>
         </p>
-        <button class="hero-cta" onclick="requestQuote()">Request Quote</button>
+        <button class="hero-cta" onclick="requestQuote()">Select Venue</button>
     `;
 }
 
@@ -396,14 +396,15 @@ function requestQuote() {
     window.location.href = `${target}?venue=${currentVenue.id}`;
 }
 
-function contactVenue() {
-    // Create mailto link with venue details
-    const subject = encodeURIComponent(`Inquiry about ${currentVenue.name}`);
-    const body = encodeURIComponent(`Hello,\n\nI'm interested in booking ${currentVenue.name} for a corporate retreat.\n\nPlease provide more information about availability and pricing.\n\nThank you!`);
 
-    if (currentVenue.contact.email) {
-        window.location.href = `mailto:${currentVenue.contact.email}?subject=${subject}&body=${body}`;
-    } else {
-        alert(`Please call ${currentVenue.contact.phone} to inquire about this venue.`);
-    }
+function contactVenue() {
+    // Deprecated - Removed per user request
+    console.log('Contact venue feature removed');
+}
+
+function goBackToBuilder() {
+    const path = window.location.pathname.toLowerCase();
+    const isSubdir = path.includes('/bell') || path.includes('/oast') || path.includes('/eastwood');
+    const target = isSubdir ? '../index.html' : 'index.html';
+    window.location.href = target;
 }
