@@ -34,11 +34,16 @@ function loadVenueData() {
 
     currentVenue = venuesDB[venueId];
 
-    // Collect all images for lightbox
+    // Determine image path prefix
+    const path = window.location.pathname.toLowerCase();
+    const isSubdir = path.includes('/bell') || path.includes('/oast') || path.includes('/eastwood');
+    const imgPrefix = isSubdir ? '../' : '';
+
+    // Collect all images for lightbox with prefix
     allImages = [
-        ...currentVenue.images.hero,
-        ...currentVenue.images.accommodation,
-        ...currentVenue.images.facilities
+        ...currentVenue.images.hero.map(img => imgPrefix + img),
+        ...currentVenue.images.accommodation.map(img => imgPrefix + img),
+        ...currentVenue.images.facilities.map(img => imgPrefix + img)
     ];
 
     // Render all sections
@@ -62,9 +67,14 @@ function renderHeroSection() {
     const infoCard = document.getElementById('heroInfoCard');
 
     // Create slides
+    // Determine image path prefix based on location (subdir vs root)
+    const path = window.location.pathname.toLowerCase();
+    const isSubdir = path.includes('/bell') || path.includes('/oast') || path.includes('/eastwood');
+    const imgPrefix = isSubdir ? '../' : '';
+
     carousel.innerHTML = currentVenue.images.hero.map((img, index) => `
         <div class="hero-slide ${index === 0 ? 'active' : ''}">
-            <img src="${img}" alt="${currentVenue.name}" onerror="this.src='https://via.placeholder.com/1200x800?text=Image+Not+Available'">
+            <img src="${imgPrefix}${img}" alt="${currentVenue.name}" onerror="this.src='https://via.placeholder.com/1200x800?text=Image+Not+Available'">
         </div>
     `).join('');
 
@@ -123,9 +133,14 @@ setInterval(() => {
 function renderQuickFacts() {
     const grid = document.getElementById('quickFactsGrid');
 
+    // Determine image path prefix
+    const path = window.location.pathname.toLowerCase();
+    const isSubdir = path.includes('/bell') || path.includes('/oast') || path.includes('/eastwood');
+    const imgPrefix = isSubdir ? '../' : '';
+
     grid.innerHTML = currentVenue.quickFacts.map(fact => `
         <div class="quick-fact">
-            <div class="quick-fact-icon">${fact.icon}</div>
+            <div class="quick-fact-icon">${fact.icon.replace('src="', 'src="' + imgPrefix)}</div>
             <div class="quick-fact-label">${fact.label}</div>
             <div class="quick-fact-value">${fact.value}</div>
         </div>

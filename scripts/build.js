@@ -37,7 +37,18 @@ venues.forEach(venue => {
     }
     const destVenueHtml = path.join(venueDir, 'index.html');
     console.log(`Copying venue detail to ${destVenueHtml}...`);
-    fs.copyFileSync(sourceVenueDetail, destVenueHtml);
+
+    // Read source HTML
+    let venueHtml = fs.readFileSync(sourceVenueDetail, 'utf8');
+
+    // Fix relative paths for subdirectories (prepend ../)
+    // Fix CSS
+    venueHtml = venueHtml.replace('href="retreat-builder.css"', 'href="../retreat-builder.css"');
+    // Fix JS
+    venueHtml = venueHtml.replace('src="venue-data.js"', 'src="../venue-data.js"');
+    venueHtml = venueHtml.replace('src="venue-detail.js"', 'src="../venue-detail.js"');
+
+    fs.writeFileSync(destVenueHtml, venueHtml);
 });
 
 // Also keep venue-detail.html at root for fallback
