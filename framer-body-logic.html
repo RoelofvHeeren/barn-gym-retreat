@@ -1,0 +1,49 @@
+<!-- Hidden Modal structure -->
+<div id="retreat-modal" class="retreat-embed-modal">
+    <div class="retreat-modal-content">
+        <iframe id="retreat-iframe" src="https://barn-gym-retreat-production.up.railway.app/" frameborder="0"></iframe>
+    </div>
+</div>
+
+<script>
+    // Global functions to open/close
+    window.openRetreatBooking = function () {
+        const modal = document.getElementById('retreat-modal');
+        if (modal) {
+            // CRITICAL FIX: Move to body to break out of Framer's stacking contexts/transforms
+            if (modal.parentNode !== document.body) {
+                document.body.appendChild(modal);
+            }
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Lock background scroll
+        }
+    };
+
+    window.closeRetreatBooking = function () {
+        const modal = document.getElementById('retreat-modal');
+        if (modal) {
+            modal.classList.remove('active');
+            document.body.style.overflow = ''; // Unlock background scroll
+        }
+    };
+
+    // Listen for messages from the booking system (e.g. Close button inside iframe)
+    window.addEventListener('message', function (event) {
+        if (event.data.type === 'CLOSE_MODAL') {
+            window.closeRetreatBooking();
+        }
+        if (event.data.type === 'BOOKING_FINISHED') {
+            console.log('Inquiry Received:', event.data.data);
+            // Optional: Close modal after booking?
+            // window.closeRetreatBooking();
+        }
+    });
+
+    // Close on backdrop click
+    const modal = document.getElementById('retreat-modal');
+    if (modal) {
+        modal.addEventListener('click', function (e) {
+            if (e.target.id === 'retreat-modal') window.closeRetreatBooking();
+        });
+    }
+</script>
