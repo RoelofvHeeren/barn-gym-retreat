@@ -88,4 +88,28 @@ scriptFiles.forEach(file => {
     }
 });
 
+// 4. Copy Retreat Images (Recursive)
+const copyRecursiveSync = (src, dest) => {
+    const exists = fs.existsSync(src);
+    const stats = exists && fs.statSync(src);
+    const isDirectory = exists && stats.isDirectory();
+    if (isDirectory) {
+        if (!fs.existsSync(dest)) {
+            fs.mkdirSync(dest);
+        }
+        fs.readdirSync(src).forEach(childItemName => {
+            copyRecursiveSync(path.join(src, childItemName), path.join(dest, childItemName));
+        });
+    } else {
+        fs.copyFileSync(src, dest);
+    }
+};
+
+const sourceImages = path.join(ROOT_DIR, 'Retreat Images');
+const destImages = path.join(DIST_DIR, 'Retreat Images');
+if (fs.existsSync(sourceImages)) {
+    console.log(`Copying Retreat Images to ${destImages}...`);
+    copyRecursiveSync(sourceImages, destImages);
+}
+
 console.log('Build complete!');
