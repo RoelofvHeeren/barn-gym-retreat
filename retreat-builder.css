@@ -298,6 +298,21 @@ h4 {
     .footer-content .btn {
         width: 100%;
     }
+
+    /* Mobile Optimizations */
+    .barn-glass-card {
+        padding-top: 25px !important;
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+        /* Keep padding-bottom as defined inline for sticky footers */
+    }
+
+    .carousel-arrow {
+        opacity: 1 !important;
+        /* Always show arrows on mobile */
+        width: 36px;
+        height: 36px;
+    }
 }
 
 /* MODAL FIX EXTENSION */
@@ -392,6 +407,16 @@ h4 {
     padding: 24px;
     margin-bottom: 30px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* MODAL FOOTER */
+.modal-footer {
+    padding: 30px;
+    background: #f9f9f9;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
 }
 
 /* ACTIVITY CARD STYLES */
