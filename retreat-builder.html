@@ -851,10 +851,11 @@
     </div>
 
     <!-- MODAL STRUCTURE -->
-    <div id="activity-modal" class="modal-overlay" onclick="closeModal(event)">
+    <div id="activity-modal" class="modal-overlay" onclick="closeActivityModal(event)">
         <div class="modal-card" onclick="event.stopPropagation()">
             <div class="modal-image-header" id="modal-img">
-                <button class="modal-close-btn" onclick="closeModal()"><i class="fa-solid fa-times"></i></button>
+                <button class="modal-close-btn" onclick="closeActivityModal()" type="button"><i
+                        class="fa-solid fa-times"></i></button>
             </div>
             <div class="modal-body">
                 <h2 class="modal-title" id="modal-title">Activity Name</h2>
@@ -871,8 +872,9 @@
                 </ul>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" onclick="closeModal()">Close</button>
-                <button class="btn" id="modal-action-btn" onclick="toggleFromModal()">Add to Retreat</button>
+                <button class="btn btn-secondary" onclick="closeActivityModal()" type="button">Close</button>
+                <button class="btn" id="modal-action-btn" onclick="toggleFromModal()" type="button">Add to
+                    Retreat</button>
             </div>
         </div>
     </div>
@@ -1185,8 +1187,8 @@
             document.body.style.overflow = 'hidden'; // Prevent background scrolling
         }
 
-        function closeModal(event) {
-            // If triggered by click on overlay (event defined), check target
+        function closeActivityModal(event) {
+            // Renamed to avoid conflicts and explicit naming
             if (event && event.target !== event.currentTarget) return;
 
             const overlay = document.getElementById('activity-modal');
@@ -1198,9 +1200,24 @@
         }
 
         function toggleFromModal() {
-            if (!currentModalActivityId) return;
-            toggleActivity(currentModalActivityId);
-            closeModal();
+            try {
+                if (!currentModalActivityId) {
+                    console.error("No current modal activity ID");
+                    return;
+                }
+                toggleActivity(currentModalActivityId);
+
+                // Force close without event check
+                const overlay = document.getElementById('activity-modal');
+                overlay.classList.remove('active');
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                }, 300);
+                document.body.style.overflow = '';
+            } catch (err) {
+                console.error("Error in toggleFromModal:", err);
+                alert("Sorry, an error occurred: " + err.message);
+            }
         }
 
         // --- CAROUSEL LOGIC ---
