@@ -55,9 +55,9 @@ venues.forEach(venue => {
 const destRootVenueDetail = path.join(DIST_DIR, 'venue-detail.html');
 fs.copyFileSync(sourceVenueDetail, destRootVenueDetail);
 
-// 2. Copy Root JS files
-const rootJsFiles = ['venue-data.js', 'venue-detail.js'];
-rootJsFiles.forEach(file => {
+// 2. Copy Root JS/CSS files
+const rootFiles = ['venue-data.js', 'venue-detail.js', 'retreat-builder.css'];
+rootFiles.forEach(file => {
     const source = path.join(ROOT_DIR, file);
     const dest = path.join(DIST_DIR, file);
     if (fs.existsSync(source)) {
@@ -66,13 +66,15 @@ rootJsFiles.forEach(file => {
     }
 });
 
-// 3. Copy scripts/booking-handler.js
-const sourceScript = path.join(SCRIPTS_DIR, 'booking-handler.js');
-const destScript = path.join(DIST_SCRIPTS_DIR, 'booking-handler.js');
-
-if (fs.existsSync(sourceScript)) {
-    console.log(`Copying ${sourceScript} to ${destScript}...`);
-    fs.copyFileSync(sourceScript, destScript);
-}
+// 3. Copy scripts
+const scriptFiles = ['booking-handler.js', 'booking-state.js'];
+scriptFiles.forEach(file => {
+    const source = path.join(SCRIPTS_DIR, file);
+    const dest = path.join(DIST_SCRIPTS_DIR, file);
+    if (fs.existsSync(source)) {
+        console.log(`Copying ${source} to ${dest}...`);
+        fs.copyFileSync(source, dest);
+    }
+});
 
 console.log('Build complete!');
