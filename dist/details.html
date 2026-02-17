@@ -26,6 +26,23 @@
             background-size: cover;
             font-family: 'Raleway', sans-serif;
         }
+
+        .barn-glass-card {
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-bottom: 120px !important;
+            /* Space for sticky footer */
+        }
+
+        .form-group {
+            margin-bottom: 35px;
+        }
+
+        .step-hero {
+            margin-bottom: 30px;
+        }
     </style>
 </head>
 
@@ -47,13 +64,13 @@
             <div class="form-group">
                 <label class="form-label">Number of Guests</label>
                 <input type="number" id="guest-count" min="5" max="50" value="12" class="form-input"
-                    placeholder="e.g. 12">
+                    placeholder="e.g. 12" style="font-size:1.2rem; padding: 15px;">
             </div>
 
             <div class="flex-row">
                 <div class="flex-col form-group">
                     <label class="form-label">Duration</label>
-                    <select id="duration" class="form-input">
+                    <select id="duration" class="form-input" style="font-size:1.1rem; padding: 15px;">
                         <option>2 Days / 1 Night</option>
                         <option selected>3 Days / 2 Nights</option>
                         <option>4 Days / 3 Nights</option>
@@ -62,7 +79,7 @@
                 </div>
                 <div class="flex-col form-group">
                     <label class="form-label">Preferred Month</label>
-                    <select id="month" class="form-input">
+                    <select id="month" class="form-input" style="font-size:1.1rem; padding: 15px;">
                         <option>ASAP</option>
                         <option>January</option>
                         <option>February</option>
