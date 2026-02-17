@@ -58,6 +58,7 @@ venues.forEach(venue => {
     // Fix JS
     venueHtml = venueHtml.replace('src="venue-data.js"', 'src="../venue-data.js"');
     venueHtml = venueHtml.replace('src="venue-detail.js"', 'src="../venue-detail.js"');
+    venueHtml = venueHtml.replace('src="scripts/booking-state.js"', 'src="../scripts/booking-state.js"');
 
     fs.writeFileSync(destVenueHtml, venueHtml);
 });
@@ -110,6 +111,14 @@ const destImages = path.join(DIST_DIR, 'Retreat Images');
 if (fs.existsSync(sourceImages)) {
     console.log(`Copying Retreat Images to ${destImages}...`);
     copyRecursiveSync(sourceImages, destImages);
+}
+
+// 5. Copy Activities Folder (for direct access if needed)
+const sourceAct = path.join(ROOT_DIR, 'Activities');
+const destAct = path.join(DIST_DIR, 'Activities');
+if (fs.existsSync(sourceAct)) {
+    console.log(`Copying Activities folder to ${destAct}...`);
+    copyRecursiveSync(sourceAct, destAct);
 }
 
 console.log('Build complete!');

@@ -384,16 +384,20 @@ function setupKeyboardNavigation() {
 
 // Action Functions
 function requestQuote() {
-    // Store venue selection in localStorage
-    localStorage.setItem('selectedVenue', currentVenue.id);
+    // Save to the shared booking state
+    if (typeof saveBookingState === 'function') {
+        saveBookingState({
+            location: currentVenue.name,
+            locationId: currentVenue.id
+        });
+    }
 
-    // Redirect to retreat builder with venue pre-selected
-    // Check if we overlap with a clean URL path to determine relative path
+    // Redirect to the next step in the MPA flow (details.html)
     const path = window.location.pathname.toLowerCase();
     const isSubdir = path.includes('/bell') || path.includes('/oast') || path.includes('/eastwood');
-    const target = isSubdir ? '../index.html' : 'index.html';
+    const target = isSubdir ? '../details' : '/details';
 
-    window.location.href = `${target}?venue=${currentVenue.id}`;
+    window.location.href = target;
 }
 
 
@@ -405,6 +409,6 @@ function contactVenue() {
 function goBackToBuilder() {
     const path = window.location.pathname.toLowerCase();
     const isSubdir = path.includes('/bell') || path.includes('/oast') || path.includes('/eastwood');
-    const target = isSubdir ? '../index.html' : 'index.html';
+    const target = isSubdir ? '../venue' : '/venue';
     window.location.href = target;
 }
