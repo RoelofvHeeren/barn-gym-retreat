@@ -12,27 +12,20 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 // API Endpoint for Booking
 app.post('/api/booking', async (req, res) => {
-    const apiKey = process.env.GHL_API_KEY;
+    const apiKey = (process.env.GHL_API_KEY || '').trim();
+    const locationId = (process.env.GHL_LOCATION_ID || 'VYZcxHGdxD0Dj1cj1ZU4').trim();
 
     if (!apiKey) {
         console.error('❌ GHL_API_KEY is missing in environment variables');
         return res.status(500).json({ success: false, error: 'Server configuration error' });
     }
 
+    console.log(`🔑 Using GHL API Key: ${apiKey.substring(0, 4)}...${apiKey.slice(-4)}`);
+    console.log(`HMAC: Using Location ID: ${locationId}`);
+
     try {
         const formData = req.body;
         console.log('📩 Received booking request for:', formData.companyName);
-
-        // GHL API Call (Contacts/Opportunities)
-        // Note: The specific endpoint depends on what the user wants to do (Create Contact, Opportunity, etc.)
-        // This is a generic "Contact" creation or "Opportunity" creation example.
-        // Assuming V2 API for GHL or V1? usually V2 is standard now but requires OAuth.
-        // If the user provided a "Location API Key" (begins with pit-), it might be V1 or V2 Location Key.
-        // Let's assume V1 for simplicity with "Authorization: Bearer <key>" or header "Authorization: Bearer <key>" 
-        // effectively interacting with the GHL API.
-
-        // HOWEVER, "pit-" keys are often "Location API Keys" for V2.
-        // Let's try the standard contacts endpoint.
 
         const ghlResponse = await fetch('https://services.leadconnectorhq.com/contacts/', {
             method: 'POST',
@@ -42,19 +35,19 @@ app.post('/api/booking', async (req, res) => {
                 'Version': '2021-07-28'
             },
             body: JSON.stringify({
-                locationId: process.env.GHL_LOCATION_ID || 'VYZcxHGdxD0Dj1cj1ZU4',
+                locationId: locationId,
                 name: formData.contactName,
                 email: formData.contactEmail,
                 phone: formData.contactPhone,
                 companyName: formData.companyName,
                 tags: ['retreat-inquiry'],
                 customFields: [
-                    { key: 'corporate_venue', value: formData.venueName }, // Mapped from venueName
-                    { key: 'number_of_guests', value: formData.guestCount }, // Mapped from guestCount
-                    { key: 'retreat_duration', value: formData.duration },
-                    { key: 'preferred_month', value: formData.month },
-                    { key: 'retreat_itinerary', value: formData.itineraryText },
-                    { key: 'estimated_value', value: formData.opportunityValue }
+                    { key: 'drAttb54oE9hYTKTz5sl', value: formData.venueName }, // Retreat Venue
+                    { key: 'Y4U3UcWXvy15n7xQiRR1', value: formData.guestCount }, // Number of Guests
+                    { key: 'qGZC8Mu4EKPt7uv1TrKC', value: formData.duration }, // Retreat Duration
+                    { key: 'NpnWGV4VIYF44wzNmB4F', value: formData.month }, // Preferred Month
+                    { key: 'RZp139wBFsAaJ6ftQ6Tz', value: formData.itineraryText }, // Retreat Itinerary
+                    { key: 'QXRLWvPeNZKgUAFYbaP8', value: formData.opportunityValue } // Estimated Value
                 ]
             })
         });
@@ -62,7 +55,9 @@ app.post('/api/booking', async (req, res) => {
         const data = await ghlResponse.json();
 
         if (!ghlResponse.ok) {
-            throw new Error(data.message || 'GHL API Error');
+            console.error('❌ GHL API Error Status:', ghlResponse.status);
+            console.error('❌ GHL API Error Response:', JSON.stringify(data, null, 2));
+            throw new Error(data.message || data.error || 'GHL API Error');
         }
 
         console.log('✅ GHL API Success:', data);
