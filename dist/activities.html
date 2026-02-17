@@ -53,7 +53,7 @@
         </div>
 
         <!-- ACTIVITY GRID -->
-        <div class="activity-grid" id="activity-grid">
+        <div id="activities-container" class="activity-grid">
             <!-- Rendered by JS -->
         </div>
 
@@ -65,58 +65,210 @@
                 <button class="btn" onclick="saveAndNext()">Next: Summary</button>
             </div>
         </div>
+
+        <!-- ACTIVITY DETAILS MODAL -->
+        <div class="modal-overlay" id="activity-modal">
+            <div class="modal-card">
+                <div class="modal-image-header" id="modal-img">
+                    <button class="modal-close-btn" onclick="closeModal()">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h3 class="modal-title" id="modal-title">Activity Name</h3>
+                    <div class="modal-meta">
+                        <span id="modal-category">Category</span>
+                        <span id="modal-price">£500</span>
+                    </div>
+                    <div class="modal-description" id="modal-desc">
+                        Description goes here...
+                    </div>
+                    <div style="background: #f5f5f5; padding: 15px; border-radius: 12px; margin-bottom: 20px;">
+                        <h4 style="font-size: 1rem; margin-bottom: 10px;">What's Included:</h4>
+                        <ul id="modal-features" style="padding-left: 20px; font-size: 0.9rem; color: #555;">
+                            <li>Feature 1</li>
+                            <li>Feature 2</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn" id="modal-action-btn" onclick="toggleFromModal()">Add to Retreat</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
-        const activities = [
-            { id: 'yoga', name: 'Morning Yoga', img: 'Retreat Images/Activities/Yoga.jpg' },
-            { id: 'boxing', name: 'Boxing Workshop', img: 'Retreat Images/Activities/boxing.jpg' },
-            { id: 'hike', name: 'Guided Nature Hike', img: 'Retreat Images/Activities/Hiking.jpg' },
-            { id: 'nutrition', name: 'Nutrition Talk', img: 'Retreat Images/Activities/Nutrition.jpg' },
-            { id: 'breathwork', name: 'Breathwork', img: 'Retreat Images/Activities/Breathwork.jpg' },
-            { id: 'icebath', name: 'Ice Bath Therapy', img: 'Retreat Images/Activities/Ice Bath.jpg' },
-            { id: 'soundbath', name: 'Sound Bath', img: 'Retreat Images/Activities/Sound Bath.jpg' },
-            { id: 'pilates', name: 'Pilates', img: 'Retreat Images/Activities/Pilates.jpg' }
+        const activitiesDB = [
+            // ESSENTIALS
+            {
+                id: 'yoga',
+                name: 'Morning Yoga',
+                category: 'Essential',
+                priceLow: 300,
+                priceHigh: 450,
+                image: 'Retreat Images/Activities/Yoga.jpg',
+                description: 'Start your day with a grounding yoga session suitable for all levels. Our experienced instructors will guide the team through a flow designed to awaken the body and focus the mind.',
+                features: ['Professional instructor', 'Mats and props provided', 'Suitable for all levels', 'Morning 60-min session']
+            },
+            {
+                id: 'hike',
+                name: 'Guided Nature Hike',
+                category: 'Essential',
+                priceLow: 250,
+                priceHigh: 350,
+                image: 'Retreat Images/Activities/Hiking.jpg', // Verify ext
+                description: 'Explore the stunning local countryside with our expert guides. This walk is designed to facilitate conversation and connection while enjoying fresh air and movement.',
+                features: ['Local guide', 'Planned scenic route', 'Refreshments included', '2-hour duration']
+            },
+            {
+                id: 'nutrition',
+                name: 'Nutrition Talk',
+                category: 'Essential',
+                priceLow: 300,
+                priceHigh: 450,
+                image: 'Retreat Images/Activities/Nutrition.jpg',
+                description: 'A 90-minute workshop on fueling for performance and longevity. Learn practical tips for better energy, focus, and health both in and out of the workplace.',
+                features: ['Expert nutritionist', 'Interactive Q&A', 'Take-home resources', 'Healthy snack demo']
+            },
+            {
+                id: 'breathwork',
+                name: 'Breathwork',
+                category: 'Essential',
+                priceLow: 400,
+                priceHigh: 550,
+                image: 'Retreat Images/Activities/Breathwork.jpg',
+                description: 'Learn powerful breathing techniques to manage stress and regulate the nervous system. This session provides practical tools for high-pressure environments.',
+                features: ['Certified practitioner', 'Stress-reduction tools', 'Guided session', 'Privacy & comfort']
+            },
+            {
+                id: 'icebath',
+                name: 'Ice Bath Therapy',
+                category: 'Essential',
+                priceLow: 500,
+                priceHigh: 700,
+                image: 'Retreat Images/Activities/Ice Bath.jpg',
+                description: 'Challenge your limits with guided cold water therapy. A powerful team bonding experience that builds resilience and mental fortitude.',
+                features: ['Safety briefing', 'Guided coaching', 'Warm-up protocol', 'Post-dip warm drinks']
+            },
+            {
+                id: 'soundbath',
+                name: 'Sound Bath',
+                category: 'Essential',
+                priceLow: 400,
+                priceHigh: 600,
+                image: 'Retreat Images/Activities/Sound Bath.jpg',
+                description: 'A deeply restorative session using gongs and bowls to promote relaxation and mental clarity. Perfect for decompressing after intense strategy sessions.',
+                features: ['Sound therapist', 'Comfortable setup', 'Deep relaxation', 'Evening session']
+            },
+            {
+                id: 'pilates',
+                name: 'Pilates Class',
+                category: 'Essential',
+                priceLow: 350,
+                priceHigh: 450,
+                image: 'Retreat Images/Activities/Pilates.jpg',
+                description: 'Focus on core strength and posture with a professional pilates instructor. Improves physical wellbeing and concentration.',
+                features: ['Core focus', 'All equipment provided', 'Posture correction', '60-minute class']
+            },
+            // ADDED PREMIUM
+            {
+                id: 'archery',
+                name: 'Archery & Axe',
+                category: 'Premium',
+                priceLow: 600,
+                priceHigh: 800,
+                image: 'Retreat Images/Activities/archery.webp', // Verify path
+                description: 'Target sports that promote focus and friendly competition.',
+                features: ['Safety instruction', 'Equipment provided', 'Team competition']
+            }
         ];
 
         // Load State
         const state = getBookingState();
         let selectedActivities = new Set(state.activities || []);
+        let currentModalId = null;
 
-        const grid = document.getElementById('activity-grid');
+        function renderActivities() {
+            const container = document.getElementById('activities-container');
+            container.innerHTML = '';
 
-        activities.forEach(act => {
-            const div = document.createElement('div');
-            div.className = 'activity-card';
-            if (selectedActivities.has(act.name)) div.classList.add('selected');
+            activitiesDB.forEach(act => {
+                const isSelected = selectedActivities.has(act.name); // Using Name as ID for simplicity/legacy
+                const card = document.createElement('div');
+                card.className = `activity-card ${isSelected ? 'selected' : ''}`;
+                card.onclick = () => openModal(act.id);
 
-            div.onclick = () => toggleActivity(div, act.name);
+                card.innerHTML = `
+                <div class="activity-img-placeholder" style="background-image: url('${act.image}');">
+                    <div class="activity-overlay"><i class="fa-solid fa-check"></i></div>
+                </div>
+                <div class="activity-content">
+                    <span>${act.name}</span>
+                    <div style="font-size: 0.8rem; color: #666; margin-top: 4px;">Learn More <i class="fa-solid fa-circle-info" style="margin-left:5px; color:var(--color-primary);"></i></div>
+                </div>
+            `;
+                container.appendChild(card);
+            });
+        }
 
-            div.innerHTML = `
-            <div class="activity-img-placeholder" style="background-image: url('${act.img}');">
-                <div class="activity-overlay"><i class="fa-solid fa-check"></i></div>
-            </div>
-            <div class="activity-content">
-                <span>${act.name}</span>
-            </div>
-        `;
-            grid.appendChild(div);
-        });
+        // Modal Logic
+        function openModal(id) {
+            currentModalId = id;
+            const act = activitiesDB.find(a => a.id === id);
+            if (!act) return;
 
-        function toggleActivity(el, name) {
-            if (selectedActivities.has(name)) {
-                selectedActivities.delete(name);
-                el.classList.remove('selected');
+            document.getElementById('modal-img').style.backgroundImage = `url('${act.image}')`;
+            document.getElementById('modal-title').innerText = act.name;
+            document.getElementById('modal-category').innerText = act.category;
+            document.getElementById('modal-price').innerText = `£${act.priceLow} - £${act.priceHigh}`; // Simplified
+            document.getElementById('modal-desc').innerText = act.description;
+
+            const list = document.getElementById('modal-features');
+            list.innerHTML = act.features.map(f => `<li>${f}</li>`).join('');
+
+            updateModalButton();
+            document.getElementById('activity-modal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('activity-modal').classList.remove('active');
+        }
+
+        function updateModalButton() {
+            const act = activitiesDB.find(a => a.id === currentModalId);
+            const btn = document.getElementById('modal-action-btn');
+            if (selectedActivities.has(act.name)) {
+                btn.innerText = "Remove from Retreat";
+                btn.classList.add('btn-secondary');
+                btn.style.backgroundColor = 'transparent';
+                btn.style.color = 'var(--color-primary)';
             } else {
-                selectedActivities.add(name);
-                el.classList.add('selected');
+                btn.innerText = "Add to Retreat";
+                btn.classList.remove('btn-secondary');
+                btn.style.backgroundColor = 'var(--color-primary)';
+                btn.style.color = 'white';
             }
+        }
+
+        function toggleFromModal() {
+            const act = activitiesDB.find(a => a.id === currentModalId);
+            if (selectedActivities.has(act.name)) {
+                selectedActivities.delete(act.name);
+            } else {
+                selectedActivities.add(act.name);
+            }
+            updateModalButton();
+            renderActivities(); // Re-render grid to show selection
         }
 
         function saveAndNext() {
             saveBookingState({ activities: Array.from(selectedActivities) });
             window.location.href = '/summary';
         }
+
+        // Init
+        renderActivities();
     </script>
 
 </body>

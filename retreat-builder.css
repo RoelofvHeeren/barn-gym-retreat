@@ -65,14 +65,17 @@ body {
 }
 
 /* General UI Elements */
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
     font-family: var(--font-heading);
     color: var(--color-primary);
 }
 
 .logo-container {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 .logo-container img {
@@ -204,7 +207,7 @@ h1, h2, h3, h4 {
 /* STICKY FOOTER */
 .sticky-footer {
     position: fixed;
-    bottom: -100px; 
+    bottom: -100px;
     left: 0;
     width: 100%;
     background: rgba(255, 255, 255, 0.95);
@@ -274,8 +277,21 @@ h1, h2, h3, h4 {
 
 /* RESPONSIVE */
 @media (max-width: 600px) {
-    .step-hero h1 { font-size: 2rem; }
-    .flex-row { flex-direction: column; gap: 15px; }
-    .footer-content { flex-direction: column-reverse; gap: 10px; }
-    .footer-content .btn { width: 100%; }
+    .step-hero h1 {
+        font-size: 2rem;
+    }
+
+    .flex-row {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .footer-content {
+        flex-direction: column-reverse;
+        gap: 10px;
+    }
+
+    .footer-content .btn {
+        width: 100%;
+    }
 }

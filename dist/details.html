@@ -46,11 +46,8 @@
         <div style="padding: 0 20px;">
             <div class="form-group">
                 <label class="form-label">Number of Guests</label>
-                <input type="range" id="guest-count" min="5" max="30" value="12" class="form-input" style="padding: 0;"
-                    oninput="updateGuestLabel(this.value)">
-                <p id="guest-label"
-                    style="text-align: right; font-weight: bold; color: var(--color-primary); margin-top: 5px;">12
-                    Guests</p>
+                <input type="number" id="guest-count" min="5" max="50" value="12" class="form-input"
+                    placeholder="e.g. 12">
             </div>
 
             <div class="flex-row">
@@ -67,11 +64,18 @@
                     <label class="form-label">Preferred Month</label>
                     <select id="month" class="form-input">
                         <option>ASAP</option>
-                        <option>June 2025</option>
-                        <option>July 2025</option>
-                        <option>August 2025</option>
-                        <option>September 2025</option>
-                        <option>Later in 2025</option>
+                        <option>January</option>
+                        <option>February</option>
+                        <option>March</option>
+                        <option>April</option>
+                        <option>May</option>
+                        <option>June</option>
+                        <option>July</option>
+                        <option>August</option>
+                        <option>September</option>
+                        <option>October</option>
+                        <option>November</option>
+                        <option>December</option>
                     </select>
                 </div>
             </div>
@@ -100,13 +104,8 @@
 
         // Pre-fill inputs
         document.getElementById('guest-count').value = state.guestCount || 12;
-        document.getElementById('guest-label').innerText = `${state.guestCount || 12} Guests`;
         document.getElementById('duration').value = state.duration || '3 Days / 2 Nights';
         document.getElementById('month').value = state.month || 'ASAP';
-
-        function updateGuestLabel(val) {
-            document.getElementById('guest-label').innerText = val + ' Guests';
-        }
 
         function saveAndNext() {
             saveBookingState({

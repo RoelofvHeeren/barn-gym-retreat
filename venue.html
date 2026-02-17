@@ -38,9 +38,9 @@
         </div>
 
         <!-- HEADER -->
-        <div class="step-hero">
-            <h1>Select Your Sanctuary</h1>
-            <p>Choose the perfect backdrop for your team's retreat.</p>
+        <div class="step-hero" style="padding: 10px 20px 20px;">
+            <h1>Select Your Venue</h1>
+            <p style="margin-bottom: 10px;">Choose the perfect backdrop for your team's retreat.</p>
         </div>
 
         <!-- CARDS -->
@@ -58,7 +58,9 @@
                     <p>Quirky charm & cozy lodges.</p>
                     <div style="margin-top: 10px;">
                         <a href="bell/" class="btn btn-secondary" onclick="event.stopPropagation()">Learn More</a>
-                        <button class="btn" style="margin-top:0;">Select Venue</button>
+                        <button class="btn" style="margin-top:0;"
+                            onclick="event.stopPropagation(); selectVenue('The Bell in Ticehurst', 'bell')">Select
+                            Venue</button>
                     </div>
                 </div>
             </div>
@@ -75,7 +77,9 @@
                     <p>Luxury vineyard retreat.</p>
                     <div style="margin-top: 10px;">
                         <a href="oastbrook/" class="btn btn-secondary" onclick="event.stopPropagation()">Learn More</a>
-                        <button class="btn" style="margin-top:0;">Select Venue</button>
+                        <button class="btn" style="margin-top:0;"
+                            onclick="event.stopPropagation(); selectVenue('Oastbrook Vineyards', 'oastbrook')">Select
+                            Venue</button>
                     </div>
                 </div>
             </div>
@@ -92,7 +96,9 @@
                     <p>Exclusive science & luxury.</p>
                     <div style="margin-top: 10px;">
                         <a href="eastwood/" class="btn btn-secondary" onclick="event.stopPropagation()">Learn More</a>
-                        <button class="btn" style="margin-top:0;">Select Venue</button>
+                        <button class="btn" style="margin-top:0;"
+                            onclick="event.stopPropagation(); selectVenue('Eastwood Observatory', 'eastwood')">Select
+                            Venue</button>
                     </div>
                 </div>
             </div>
