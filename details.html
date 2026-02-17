@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retreat Details - Barn Gym Retreats</title>
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&family=Raleway:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="retreat-builder.css">
+    <script src="scripts/booking-state.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: url('background-C1rXCpYp.png') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Raleway', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="barn-glass-card barn-shadow-depth">
+        <div class="logo-container">
+            <img src="logo-D2Lb8pNx.png" alt="Barn Gym Logo">
+        </div>
+
+        <!-- HEADER -->
+        <div class="step-hero" style="padding-bottom: 10px;">
+            <h2 id="venue-title">Your Retreat at...</h2>
+            <p>Let's get the logistics sorted.</p>
+        </div>
+
+        <!-- FORM -->
+        <div style="padding: 0 20px;">
+            <div class="form-group">
+                <label class="form-label">Number of Guests</label>
+                <input type="range" id="guest-count" min="5" max="30" value="12" class="form-input" style="padding: 0;"
+                    oninput="updateGuestLabel(this.value)">
+                <p id="guest-label"
+                    style="text-align: right; font-weight: bold; color: var(--color-primary); margin-top: 5px;">12
+                    Guests</p>
+            </div>
+
+            <div class="flex-row">
+                <div class="flex-col form-group">
+                    <label class="form-label">Duration</label>
+                    <select id="duration" class="form-input">
+                        <option>2 Days / 1 Night</option>
+                        <option selected>3 Days / 2 Nights</option>
+                        <option>4 Days / 3 Nights</option>
+                        <option>5+ Days</option>
+                    </select>
+                </div>
+                <div class="flex-col form-group">
+                    <label class="form-label">Preferred Month</label>
+                    <select id="month" class="form-input">
+                        <option>ASAP</option>
+                        <option>June 2025</option>
+                        <option>July 2025</option>
+                        <option>August 2025</option>
+                        <option>September 2025</option>
+                        <option>Later in 2025</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sticky Footer (Step 2 of 4) -->
+        <div class="sticky-footer visible">
+            <div class="footer-content">
+                <a href="/venue" class="btn btn-secondary">Back</a>
+                <span id="footer-progress">Step 2 of 4</span>
+                <button class="btn" onclick="saveAndNext()">Next: Activities</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 1. Load State on Init
+        const state = getBookingState();
+
+        if (state.location) {
+            document.getElementById('venue-title').innerText = `Your Retreat at ${state.location}`;
+        } else {
+            // Redirect if no venue selected
+            window.location.href = '/venue';
+        }
+
+        // Pre-fill inputs
+        document.getElementById('guest-count').value = state.guestCount || 12;
+        document.getElementById('guest-label').innerText = `${state.guestCount || 12} Guests`;
+        document.getElementById('duration').value = state.duration || '3 Days / 2 Nights';
+        document.getElementById('month').value = state.month || 'ASAP';
+
+        function updateGuestLabel(val) {
+            document.getElementById('guest-label').innerText = val + ' Guests';
+        }
+
+        function saveAndNext() {
+            saveBookingState({
+                guestCount: document.getElementById('guest-count').value,
+                duration: document.getElementById('duration').value,
+                month: document.getElementById('month').value
+            });
+            window.location.href = '/activities';
+        }
+    </script>
+
+</body>
+
+</html>

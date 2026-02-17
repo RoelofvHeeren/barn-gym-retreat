@@ -73,11 +73,36 @@ app.post('/api/booking', async (req, res) => {
     }
 });
 
-// Fallback to index.html for SPA-like routing (if needed) or just serving static
-app.get('*', (req, res) => {
+// Serve simplified HTML files for clean routes
+app.get('/venue', (req, res) => {
+    res.sendFile(path.join(__dirname, 'venue.html'));
+});
+
+app.get('/details', (req, res) => {
+    res.sendFile(path.join(__dirname, 'details.html'));
+});
+
+app.get('/activities', (req, res) => {
+    res.sendFile(path.join(__dirname, 'activities.html'));
+});
+
+app.get('/summary', (req, res) => {
+    res.sendFile(path.join(__dirname, 'summary.html'));
+});
+
+app.get('/thank-you', (req, res) => {
+    res.sendFile(path.join(__dirname, 'thank-you.html'));
+});
+
+// Redirect root to /venue for now (or keep index.html as landing)
+app.get('/', (req, res) => {
+    // res.redirect('/venue'); 
+    // Keeping existing behavior for root, but maybe user wants /venue to be the start?
+    // User said: "we click on start building, then it should take us to the venue page"
+    // So index.html (landing) -> /venue
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
 app.listen(PORT, () => {
-    console.log(`🚀 Server running on port ${PORT}`);
+    console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
