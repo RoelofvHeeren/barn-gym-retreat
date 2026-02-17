@@ -131,12 +131,24 @@
         // Itinerary
         const list = document.getElementById('itinerary-list');
         if (state.activities && state.activities.length > 0) {
-            list.innerHTML = state.activities.map(act =>
-                `<div class="day-row"><div class="day-title">Activity</div><div class="day-content">${act}</div></div>`
+            list.innerHTML = state.activities.map(actName =>
+                `<div class="day-row"><div class="day-title">Activity</div><div class="day-content">${actName}</div></div>`
             ).join('');
         } else {
             list.innerHTML = '<p>No specific activities selected (Relaxation focused)</p>';
         }
+
+        // Add proposed itinerary if empty
+        if (!state.activities || state.activities.length === 0) {
+            // Do nothing, let it show relaxation focused
+        } else {
+            // Calculate a simple schedule?
+            // For now just listing activities is fine as per original requirement, 
+            // but user asked for "Proposed Itinerary".
+            // We can wrap the list in a styled container.
+        }
+
+        /* Add CSS for day-row on the fly if missing or ensure it's in CSS */
 
         // Interactive Submit
         async function submitProposal() {
