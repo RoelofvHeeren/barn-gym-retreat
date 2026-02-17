@@ -42,18 +42,18 @@ app.post('/api/booking', async (req, res) => {
                 'Version': '2021-07-28'
             },
             body: JSON.stringify({
-                name: formData.name,
-                email: formData.email,
-                phone: formData.phone,
+                name: formData.contactName,
+                email: formData.contactEmail,
+                phone: formData.contactPhone,
                 companyName: formData.companyName,
-                tags: formData.tags,
+                tags: ['retreat-inquiry'],
                 customFields: [
-                    // We need to map friendly names to IDs if using Custom Fields in GHL.
-                    // For now, we'll pass what we can or rely on the user to provide mappings.
-                    // Or we just send the standard fields.
-                    { key: 'corporate_venue', value: formData.customData.corporate_venue },
-                    { key: 'number_of_guests', value: formData.customData.number_of_guests },
-                    // ... other fields need their specific GHL Field IDs usually.
+                    { key: 'corporate_venue', value: formData.venueName }, // Mapped from venueName
+                    { key: 'number_of_guests', value: formData.guestCount }, // Mapped from guestCount
+                    { key: 'retreat_duration', value: formData.duration },
+                    { key: 'preferred_month', value: formData.month },
+                    { key: 'retreat_itinerary', value: formData.itineraryText },
+                    { key: 'estimated_value', value: formData.opportunityValue }
                 ]
             })
         });

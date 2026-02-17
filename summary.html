@@ -213,6 +213,34 @@
             btn.innerText = 'Sending...';
             btn.disabled = true;
 
+            // Calculate Opportunity Value (Low End)
+            let opportunityValue = 0;
+            const priceText = document.getElementById('est-price').innerText;
+            const match = priceText.match(/£([\d,]+)/);
+            if (match) {
+                opportunityValue = parseInt(match[1].replace(/,/g, ''), 10);
+            }
+
+            // Generate Plain Text Itinerary
+            let itineraryText = '';
+            const selected = state.activities || [];
+            if (selected.length > 0) {
+                 const day1 = [];
+                 const day2 = [];
+                 const day3 = [];
+                 selected.forEach((act, index) => {
+                     if (index === 0) day1.push(act);
+                     else if (index === selected.length - 1 && selected.length > 2) day3.push(act);
+                     else day2.push(act);
+                 });
+
+                 itineraryText += "Day 1: Arrival, " + day1.join(', ') + ", Dinner\n";
+                 itineraryText += "Day 2: Breakfast, " + day2.join(', ') + ", Lunch, Dinner\n";
+                 itineraryText += "Day 3: Breakfast, " + day3.join(', ') + ", Departure";
+            } else {
+                itineraryText = "Relaxation & Strategy Itinerary (No specific activities selected)";
+            }
+
             // Prepare Payload
             const payload = {
                 companyName: document.getElementById('contact-company').value || 'N/A',
@@ -223,7 +251,9 @@
                 activities: state.activities,
                 contactName: name,
                 contactEmail: email,
-                contactPhone: document.getElementById('contact-phone').value
+                contactPhone: document.getElementById('contact-phone').value,
+                opportunityValue: opportunityValue,
+                itineraryText: itineraryText
             };
 
             try {
