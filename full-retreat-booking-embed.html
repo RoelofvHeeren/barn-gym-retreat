@@ -1338,64 +1338,64 @@
             }
 
             // Initialize embed-specific UI
-            function checkAndApplyVenueSelection() {
+            function initDeepLink() {
                 const params = new URLSearchParams(window.location.search);
                 const venueId = params.get('venue');
-                console.log('Checking venue param:', venueId); // DEBUG
+                console.log('Deep Link Init - Venue:', venueId);
+
+                // Default behavior: Hide all steps first
+                document.querySelectorAll('.step-container').forEach(el => el.classList.remove('active'));
 
                 if (venueId) {
-                    const cardMap = { 'bell': 'card-bell', 'oastbrook': 'card-oast', 'eastwood': 'card-eastwood' };
-                    const nameMap = { 'bell': 'The Bell in Ticehurst', 'oastbrook': 'Oastbrook Vineyards', 'eastwood': 'Eastwood Observatory' };
+                    const nameMap = {
+                        'bell': 'The Bell in Ticehurst',
+                        'oastbrook': 'Oastbrook Vineyards',
+                        'eastwood': 'Eastwood Observatory'
+                    };
+                    const cardMap = {
+                        'bell': 'card-bell',
+                        'oastbrook': 'card-oast',
+                        'eastwood': 'card-eastwood'
+                    };
 
-                    const cardId = cardMap[venueId];
-                    const card = document.getElementById(cardId);
+                    const locationName = nameMap[venueId];
+                    if (locationName) {
+                        // 1. Set State Directly
+                        retreatData.location = locationName;
+                        retreatData.locationId = venueId;
 
-                    if (card) {
-                        console.log('Venue found, selecting and advancing...');
-                        handleCardClick(card, nameMap[venueId]);
+                        // 2. Visuals for Step 2 (in case they go back)
+                        const cardId = cardMap[venueId];
+                        const card = document.getElementById(cardId);
+                        if (card) {
+                            document.querySelectorAll('.card-option').forEach(el => el.classList.remove('selected'));
+                            card.classList.add('selected');
+                        }
 
-                        // Force update UI then advance
-                        setTimeout(() => {
-                            nextStep(3);
-                            // Double check and force if needed
-                            if (!document.getElementById('step-3').classList.contains('active')) {
-                                console.log('Forcing Step 3 active');
-                                document.querySelectorAll('.step-container').forEach(el => el.classList.remove('active'));
-                                document.getElementById('step-3').classList.add('active');
-                                updateStickyFooter(3);
-                            }
-                        }, 100);
-                        return true; // Success
+                        // 3. Jump to Step 3
+                        console.log('Jumping straight to Step 3');
+                        document.getElementById('step-3').classList.add('active');
+
+                        // 4. Update Footer
+                        // Ensure footer exists before updating
+                        setTimeout(() => updateStickyFooter(3), 0);
+                    } else {
+                        // Invalid venue param, fallback to Step 1
+                        console.warn('Invalid venue param, falling back to Step 1');
+                        document.getElementById('step-1').classList.add('active');
                     }
+                } else {
+                    // No venue param, show Step 1
+                    document.getElementById('step-1').classList.add('active');
                 }
-                return false;
             }
 
             window.addEventListener('DOMContentLoaded', () => {
-                console.log('DOMContentLoaded fired');
                 if (window.parent !== window) {
                     document.body.classList.add('is-embedded');
                 }
 
-                // Try immediately
-                if (!checkAndApplyVenueSelection()) {
-                    // Default behavior if no venue: Show Step 1
-                    // But only if we aren't already on another step (persist state?)
-                    // For now, default to 1 is fine if check failed.
-                    if (!new URLSearchParams(window.location.search).get('venue')) {
-                        document.querySelectorAll('.step-container').forEach(el => el.classList.remove('active'));
-                        document.getElementById('step-1').classList.add('active');
-                    }
-                }
-
-                // Retry a few times in case of race conditions
-                let attempts = 0;
-                const interval = setInterval(() => {
-                    attempts++;
-                    if (checkAndApplyVenueSelection() || attempts > 5) {
-                        clearInterval(interval);
-                    }
-                }, 500);
+                initDeepLink();
             });
 
             // Initialize carousels
