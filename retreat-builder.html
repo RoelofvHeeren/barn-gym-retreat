@@ -452,8 +452,18 @@
 
         .day-row {
             margin-bottom: 15px;
-            padding-left: 15px;
-            border-left: 2px solid var(--color-primary);
+            padding-left: 0;
+            border-left: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .day-row:last-child {
+            border-bottom: none;
         }
 
         .day-title {
@@ -481,7 +491,8 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(5px);
-            z-index: 1000;
+            z-index: 200000;
+            /* Increased to be above barn-glass-card */
             opacity: 0;
             transition: opacity 0.3s ease;
             justify-content: center;
@@ -505,6 +516,7 @@
             display: flex;
             flex-direction: column;
             max-height: 90vh;
+            /* Ensure it fits on mobile screens */
         }
 
         .modal-overlay.active .modal-card {
@@ -516,6 +528,8 @@
             background-size: cover;
             background-position: center;
             position: relative;
+            flex-shrink: 0;
+            /* Prevent shrinking */
         }
 
         .modal-close-btn {
@@ -524,8 +538,10 @@
             right: 15px;
             background: rgba(255, 255, 255, 0.8);
             border: none;
-            width: 36px;
-            height: 36px;
+            width: 44px;
+            /* Larger touch target */
+            height: 44px;
+            /* Larger touch target */
             border-radius: 50%;
             cursor: pointer;
             display: flex;
@@ -534,6 +550,7 @@
             font-size: 1.2rem;
             color: var(--color-text-dark);
             transition: background 0.2s;
+            z-index: 10;
         }
 
         .modal-close-btn:hover {
@@ -570,7 +587,8 @@
         }
 
         .modal-footer {
-            padding: 20px 30px;
+            padding: 30px;
+            /* Increased padding */
             background: #f9f9f9;
             border-top: 1px solid #eee;
             display: flex;
@@ -885,11 +903,11 @@
             },
             {
                 id: 'circuit',
-                name: 'Circuit Training',
+                name: 'Team Circuit Training',
                 category: 'Essential',
                 priceLow: 400,
                 priceHigh: 550,
-                image: 'Activities/Circuit Training.jpeg',
+                image: 'Activities/Circuit_Training.jpeg',
                 description: 'High-energy group fitness sessions that build teamwork through shared physical challenges. Our circuits combine strength, cardio, and functional movements in fun, competitive formats that encourage collaboration and mutual support.',
                 features: [
                     'Team-based exercise stations',
