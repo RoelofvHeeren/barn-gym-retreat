@@ -30,19 +30,65 @@
         /* Local specific styles for grid */
         .activity-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 15px;
-            max-height: 50vh;
-            overflow-y: auto;
-            padding: 5px;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 10px 0;
+            margin-bottom: 40px;
         }
 
         .barn-glass-card {
-            min-height: 60vh;
+            min-height: 80vh;
             display: flex;
             flex-direction: column;
+            padding-bottom: 150px !important;
+        }
+
+        /* Direct selection circle styles */
+        .activity-card {
+            position: relative;
+        }
+
+        .activity-select-trigger {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 35px;
+            height: 35px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
             justify-content: center;
-            padding-bottom: 120px !important;
+            z-index: 10;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .activity-card.selected .activity-select-trigger {
+            background: var(--color-primary);
+            color: white;
+            border-color: white;
+        }
+
+        .activity-select-trigger:hover {
+            transform: scale(1.1);
+            background: white;
+        }
+
+        .activity-card.selected .activity-select-trigger:hover {
+            background: var(--color-primary-dark);
+        }
+
+        .activity-select-trigger i {
+            font-size: 1.1rem;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .activity-card.selected .activity-select-trigger i {
+            opacity: 1;
         }
     </style>
 </head>
@@ -55,9 +101,10 @@
         </div>
 
         <!-- HEADER -->
-        <div class="step-hero" style="padding-bottom: 10px;">
-            <h2>Curate Your Experience</h2>
-            <p>Select activities to build your itinerary.</p>
+        <div class="step-hero" style="padding-bottom: 20px;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 10px;">Curate Your Experience</h2>
+            <p style="font-size: 1.2rem;">Select activities to build your itinerary. Click icons to select instantly, or
+                click the card to learn more.</p>
         </div>
 
         <!-- ACTIVITY GRID -->
@@ -69,7 +116,10 @@
         <div class="sticky-footer visible">
             <div class="footer-content">
                 <a href="/details" class="btn btn-secondary">Back</a>
-                <span id="footer-progress">Step 3 of 4</span>
+                <div style="text-align: center;">
+                    <span id="footer-progress" style="display: block; font-weight: 600;">Step 3 of 4</span>
+                    <span id="selected-count" style="font-size: 0.85rem; color: #666;">0 activities selected</span>
+                </div>
                 <button class="btn" onclick="saveAndNext()">Next: Summary</button>
             </div>
         </div>
@@ -108,87 +158,145 @@
 
     <script>
         const activitiesDB = [
-            // ESSENTIALS
             {
                 id: 'yoga',
                 name: 'Morning Yoga',
-                category: 'Essential',
+                category: 'Wellness',
                 priceLow: 300,
                 priceHigh: 450,
                 image: 'Activities/yoga.jpeg',
-                description: 'Start your day with a grounding yoga session suitable for all levels. Our experienced instructors will guide the team through a flow designed to awaken the body and focus the mind.',
-                features: ['Professional instructor', 'Mats and props provided', 'Suitable for all levels', 'Morning 60-min session']
+                description: 'Energize your team with a refreshing morning yoga session. Perfect for all skill levels, focusing on flexibility and mental clarity.',
+                features: ['Professional instructor', 'Mats provided', '60-min session']
             },
             {
                 id: 'hike',
-                name: 'Guided Nature Hike',
-                category: 'Essential',
+                name: 'Nature Hike',
+                category: 'Adventure',
                 priceLow: 250,
                 priceHigh: 350,
-                image: 'Activities/Country_running.jpeg', // Using country running as proxy for hike if specific hike missing, or check Hiking.jpg
-                description: 'Explore the stunning local countryside with our expert guides. This walk is designed to facilitate conversation and connection while enjoying fresh air and movement.',
-                features: ['Local guide', 'Planned scenic route', 'Refreshments included', '2-hour duration']
+                image: 'Activities/Country_running.jpeg',
+                description: 'Explore local trails with a guided nature hike through the stunning countryside.',
+                features: ['Local guide', 'Scenic routes', 'Snacks included']
             },
             {
-                id: 'nutrition',
-                name: 'Nutrition Talk',
-                category: 'Essential',
-                priceLow: 300,
-                priceHigh: 450,
-                image: 'Activities/hayball.webp', // Using existing themed image
-                description: 'A 90-minute workshop on fueling for performance and longevity. Learn practical tips for better energy, focus, and health both in and out of the workplace.',
-                features: ['Expert nutritionist', 'Interactive Q&A', 'Take-home resources', 'Healthy snack demo']
+                id: 'hayball',
+                name: 'Hayball Racing',
+                category: 'Team Building',
+                priceLow: 400,
+                priceHigh: 600,
+                image: 'Activities/hayball.webp',
+                description: 'A signature Barn Gym team challenge. High energy, competitive, and guaranteed laughs.',
+                features: ['Team event', 'Safety briefing', 'Trophy for winners']
             },
             {
                 id: 'breathwork',
                 name: 'Breathwork',
-                category: 'Essential',
+                category: 'Wellness',
                 priceLow: 400,
                 priceHigh: 550,
                 image: 'Activities/Breathwork.jpeg',
-                description: 'Learn powerful breathing techniques to manage stress and regulate the nervous system. This session provides practical tools for high-pressure environments.',
-                features: ['Certified practitioner', 'Stress-reduction tools', 'Guided session', 'Privacy & comfort']
+                description: 'Master your nervous system with guided breathing techniques for focus and stress relief.',
+                features: ['Expert coaching', 'Practical tools', 'Relaxation setup']
             },
             {
                 id: 'icebath',
                 name: 'Ice Bath Therapy',
-                category: 'Essential',
+                category: 'Wellness',
                 priceLow: 500,
                 priceHigh: 700,
                 image: 'Activities/Ice_bath.jpeg',
-                description: 'Challenge your limits with guided cold water therapy. A powerful team bonding experience that builds resilience and mental fortitude.',
-                features: ['Safety briefing', 'Guided coaching', 'Warm-up protocol', 'Post-dip warm drinks']
+                description: 'Build resilience and mental fortitude with guided cold-water immersion.',
+                features: ['Coached session', 'Safety protocols', 'Post-dip hot drinks']
             },
             {
-                id: 'soundbath',
-                name: 'Sound Bath',
-                category: 'Essential',
-                priceLow: 400,
-                priceHigh: 600,
+                id: 'meditation',
+                name: 'Meditation',
+                category: 'Wellness',
+                priceLow: 350,
+                priceHigh: 500,
                 image: 'Activities/Meditation.jpeg',
-                description: 'A deeply restorative session using gongs and bowls to promote relaxation and mental clarity. Perfect for decompressing after intense strategy sessions.',
-                features: ['Sound therapist', 'Comfortable setup', 'Deep relaxation', 'Evening session']
+                description: 'Find inner calm and reset the mind with guided mindfulness and meditation.',
+                features: ['Quiet setting', 'Guided mindfulness', 'Post-session reflection']
             },
             {
                 id: 'pilates',
                 name: 'Pilates Class',
-                category: 'Essential',
+                category: 'Fitness',
                 priceLow: 350,
                 priceHigh: 450,
                 image: 'Activities/pilates.jpeg',
-                description: 'Focus on core strength and posture with a professional pilates instructor. Improves physical wellbeing and concentration.',
-                features: ['Core focus', 'All equipment provided', 'Posture correction', '60-minute class']
+                description: 'Strengthen the core and improve posture with a professional-led pilates session.',
+                features: ['Core focus', 'Equipment provided', 'All levels']
             },
-            // ADDED PREMIUM
             {
                 id: 'archery',
                 name: 'Archery & Axe',
-                category: 'Premium',
+                category: 'Adventure',
                 priceLow: 600,
+                priceHigh: 850,
+                image: 'Activities/archery.webp',
+                description: 'Channel your focus with traditional archery and axe throwing competitions.',
+                features: ['Safety instructors', 'High-quality gear', 'Scoring system']
+            },
+            {
+                id: 'circuit',
+                name: 'Circuit Training',
+                category: 'Fitness',
+                priceLow: 400,
+                priceHigh: 600,
+                image: 'Activities/Circuit_training.jpeg',
+                description: 'High-intensity team circuit training designed to push your limits together.',
+                features: ['Motivating coach', 'Outdoor setup', 'Team relays']
+            },
+            {
+                id: 'cocktail',
+                name: 'Cocktail Workshop',
+                category: 'Social',
+                priceLow: 500,
                 priceHigh: 800,
-                image: 'Activities/archery.webp', // Verify path
-                description: 'Target sports that promote focus and friendly competition.',
-                features: ['Safety instruction', 'Equipment provided', 'Team competition']
+                image: 'Activities/cocktail.webp',
+                description: 'Learn the art of mixology from top bartenders in a fun, social environment.',
+                features: ['Premium ingredients', 'Drink tastings', 'Take-home recipes']
+            },
+            {
+                id: 'frisbee',
+                name: 'Ultimate Frisbee',
+                category: 'Social',
+                priceLow: 200,
+                priceHigh: 300,
+                image: 'Activities/frisbee.jpeg',
+                description: 'Fast-paced, low-impact fun that encourages communication and movement.',
+                features: ['Outdoor field', 'Game coordinator', 'Hydration station']
+            },
+            {
+                id: 'mushroom',
+                name: 'Mushroom Foraging',
+                category: 'Experience',
+                priceLow: 450,
+                priceHigh: 650,
+                image: 'Activities/mushroom.webp',
+                description: 'Discover the hidden gems of the forest with an expert mycologist.',
+                features: ['Expert guide', 'Identification kit', 'Seasonal focus']
+            },
+            {
+                id: 'orienting',
+                name: 'Orienteering',
+                category: 'Team Building',
+                priceLow: 300,
+                priceHigh: 500,
+                image: 'Activities/orienting.jpeg',
+                description: 'Navigate complex terrains as a team using only maps and compasses.',
+                features: ['Course maps', 'Team challenges', 'Expert debrief']
+            },
+            {
+                id: 'sheep',
+                name: 'Sheep Herding',
+                category: 'Experience',
+                priceLow: 700,
+                priceHigh: 1000,
+                image: 'Activities/sheep.png',
+                description: 'The ultimate communication test. Work with sheepdogs to herd a flock through obstacles.',
+                features: ['Working dogs', 'Farming expert', 'Memorable bonding']
             }
         ];
 
@@ -202,22 +310,37 @@
             container.innerHTML = '';
 
             activitiesDB.forEach(act => {
-                const isSelected = selectedActivities.has(act.name); // Using Name as ID for simplicity/legacy
+                const isSelected = selectedActivities.has(act.name);
                 const card = document.createElement('div');
                 card.className = `activity-card ${isSelected ? 'selected' : ''}`;
                 card.onclick = () => openModal(act.id);
 
                 card.innerHTML = `
-                <div class="activity-img-placeholder" style="background-image: url('${act.image}');">
-                    <div class="activity-overlay"><i class="fa-solid fa-check"></i></div>
+                <div class="activity-select-trigger" onclick="toggleSelection(event, '${act.name}')">
+                    <i class="fa-solid fa-check"></i>
                 </div>
+                <div class="activity-img-placeholder" style="background-image: url('${act.image}');"></div>
                 <div class="activity-content">
-                    <span>${act.name}</span>
-                    <div style="font-size: 0.8rem; color: #666; margin-top: 4px;">Learn More <i class="fa-solid fa-circle-info" style="margin-left:5px; color:var(--color-primary);"></i></div>
+                    <span style="font-size: 1.1rem; display: block; margin-bottom: 5px;">${act.name}</span>
+                    <div style="font-size: 0.85rem; color: #666; display: flex; align-items: center; justify-content: center; gap: 5px;">
+                        Learn More <i class="fa-solid fa-circle-info" style="color:var(--color-primary);"></i>
+                    </div>
                 </div>
             `;
                 container.appendChild(card);
             });
+
+            document.getElementById('selected-count').innerText = `${selectedActivities.size} activities selected`;
+        }
+
+        function toggleSelection(event, name) {
+            if (event) event.stopPropagation();
+            if (selectedActivities.has(name)) {
+                selectedActivities.delete(name);
+            } else {
+                selectedActivities.add(name);
+            }
+            renderActivities();
         }
 
         // Modal Logic
@@ -229,7 +352,7 @@
             document.getElementById('modal-img').style.backgroundImage = `url('${act.image}')`;
             document.getElementById('modal-title').innerText = act.name;
             document.getElementById('modal-category').innerText = act.category;
-            document.getElementById('modal-price').innerText = `£${act.priceLow} - £${act.priceHigh}`; // Simplified
+            document.getElementById('modal-price').innerText = `£${act.priceLow} - £${act.priceHigh}`;
             document.getElementById('modal-desc').innerText = act.description;
 
             const list = document.getElementById('modal-features');
@@ -249,13 +372,9 @@
             if (selectedActivities.has(act.name)) {
                 btn.innerText = "Remove from Retreat";
                 btn.classList.add('btn-secondary');
-                btn.style.backgroundColor = 'transparent';
-                btn.style.color = 'var(--color-primary)';
             } else {
                 btn.innerText = "Add to Retreat";
                 btn.classList.remove('btn-secondary');
-                btn.style.backgroundColor = 'var(--color-primary)';
-                btn.style.color = 'white';
             }
         }
 
@@ -266,8 +385,8 @@
             } else {
                 selectedActivities.add(act.name);
             }
-            updateModalButton();
-            renderActivities(); // Re-render grid to show selection
+            closeModal();
+            renderActivities();
         }
 
         function saveAndNext() {
@@ -278,6 +397,10 @@
         // Init
         renderActivities();
     </script>
+
+</body>
+
+</html>
 
 </body>
 
