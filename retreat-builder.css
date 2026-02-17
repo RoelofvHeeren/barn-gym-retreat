@@ -304,7 +304,8 @@ h4 {
         padding-top: 25px !important;
         padding-left: 20px !important;
         padding-right: 20px !important;
-        /* Keep padding-bottom as defined inline for sticky footers */
+        padding-bottom: 220px !important;
+        /* Increased for taller mobile sticky footer */
     }
 
     .carousel-arrow {
