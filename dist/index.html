@@ -1338,36 +1338,64 @@
             }
 
             // Initialize embed-specific UI
-            window.addEventListener('DOMContentLoaded', () => {
-                if (window.parent !== window) {
-                    document.body.classList.add('is-embedded');
-                }
-
-                // Handle URL parameters for venue selection
+            function checkAndApplyVenueSelection() {
                 const params = new URLSearchParams(window.location.search);
                 const venueId = params.get('venue');
+                console.log('Checking venue param:', venueId); // DEBUG
 
                 if (venueId) {
-                    // Hide Step 1 and select venue
-                    document.querySelectorAll('.step-container').forEach(el => el.classList.remove('active'));
                     const cardMap = { 'bell': 'card-bell', 'oastbrook': 'card-oast', 'eastwood': 'card-eastwood' };
                     const nameMap = { 'bell': 'The Bell in Ticehurst', 'oastbrook': 'Oastbrook Vineyards', 'eastwood': 'Eastwood Observatory' };
 
                     const cardId = cardMap[venueId];
                     const card = document.getElementById(cardId);
+
                     if (card) {
+                        console.log('Venue found, selecting and advancing...');
                         handleCardClick(card, nameMap[venueId]);
-                        // Auto advance to Logistics step
-                        nextStep(3);
-                    } else {
-                        // Fallback to Step 1 if card not found
+
+                        // Force update UI then advance
+                        setTimeout(() => {
+                            nextStep(3);
+                            // Double check and force if needed
+                            if (!document.getElementById('step-3').classList.contains('active')) {
+                                console.log('Forcing Step 3 active');
+                                document.querySelectorAll('.step-container').forEach(el => el.classList.remove('active'));
+                                document.getElementById('step-3').classList.add('active');
+                                updateStickyFooter(3);
+                            }
+                        }, 100);
+                        return true; // Success
+                    }
+                }
+                return false;
+            }
+
+            window.addEventListener('DOMContentLoaded', () => {
+                console.log('DOMContentLoaded fired');
+                if (window.parent !== window) {
+                    document.body.classList.add('is-embedded');
+                }
+
+                // Try immediately
+                if (!checkAndApplyVenueSelection()) {
+                    // Default behavior if no venue: Show Step 1
+                    // But only if we aren't already on another step (persist state?)
+                    // For now, default to 1 is fine if check failed.
+                    if (!new URLSearchParams(window.location.search).get('venue')) {
+                        document.querySelectorAll('.step-container').forEach(el => el.classList.remove('active'));
                         document.getElementById('step-1').classList.add('active');
                     }
-                } else {
-                    // Default behavior: Show Step 1
-                    document.querySelectorAll('.step-container').forEach(el => el.classList.remove('active'));
-                    document.getElementById('step-1').classList.add('active');
                 }
+
+                // Retry a few times in case of race conditions
+                let attempts = 0;
+                const interval = setInterval(() => {
+                    attempts++;
+                    if (checkAndApplyVenueSelection() || attempts > 5) {
+                        clearInterval(interval);
+                    }
+                }, 500);
             });
 
             // Initialize carousels
