@@ -42,6 +42,7 @@ app.post('/api/booking', async (req, res) => {
                 'Version': '2021-07-28'
             },
             body: JSON.stringify({
+                locationId: process.env.GHL_LOCATION_ID || 'VYZcxHGdxD0Dj1cj1ZU4',
                 name: formData.contactName,
                 email: formData.contactEmail,
                 phone: formData.contactPhone,

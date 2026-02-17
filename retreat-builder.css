@@ -511,20 +511,29 @@ h4 {
 .day-row {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
-    gap: 20px;
-    padding: 15px 0;
     border-bottom: 1px solid #eee;
+    flex-wrap: wrap;
+    align-items: baseline;
+    /* Allow wrapping */
 }
 
 .day-title {
-    font-weight: 600;
+    flex: 0 0 150px;
+    /* Fixed width 150px, no grow, no shrink */
+    font-weight: 700;
     color: var(--color-primary);
-    min-width: 150px;
-    flex-shrink: 0;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 5px;
+    padding-right: 15px;
+    word-wrap: break-word;
 }
 
 .day-content {
+    flex: 2 1 200px;
+    /* Take up twice as much space, min 200px */
+    font-size: 0.9rem;
     color: #444;
-    flex: 1;
+    line-height: 1.5;
 }
