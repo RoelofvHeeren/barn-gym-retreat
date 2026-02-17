@@ -202,17 +202,17 @@ export default function RetreatBookingSystem(props) {
                 .venue-modal-overlay {
                     display: none;
                     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-                    background: rgba(0,0,0,0.8); z-index: 1000;
+                    background: rgba(0,0,0,0.8); z-index: 9999999;
                 }
                 .venue-modal-overlay.active { display: flex; justify-content: center; align-items: center; }
-                .venue-modal-content { background: white; padding: 20px; border-radius: 12px; max-width: 800px; width: 90%; }
+                .venue-modal-content { background: white; padding: 20px; border-radius: 12px; max-width: 800px; width: 90%; position: relative; z-index: 10000000; }
              `}</style>
 
             <div className="barn-glass-card">
                 {/* STEP 1 */}
                 <div id="step-1" className="step-container active">
-                    <h1>Design Your Retreat</h1>
-                    <button onClick={() => window.nextStep(2)}>Start</button>
+                    <h1>Design Your Custom<br />Corporate Retreats</h1>
+                    <button onClick={() => window.nextStep(2)}>Start Building</button>
                 </div>
 
                 {/* STEP 2 */}

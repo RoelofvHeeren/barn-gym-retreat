@@ -519,7 +519,7 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(5px);
-            z-index: 100001;
+            z-index: 9999999;
             opacity: 0;
             transition: opacity 0.3s ease;
             justify-content: center;
@@ -672,6 +672,8 @@
             .barn-glass-card {
                 padding: 20px;
                 border-radius: 16px;
+                margin-bottom: 100px;
+                /* Prevent sticky footer overlap */
             }
 
             .activity-grid {
@@ -754,7 +756,7 @@
         <!-- STEP 1: HERO -->
         <div id="step-1" class="step-container active">
             <div class="step-hero">
-                <h1>Design Your Custom<br>Corporate Retreat</h1>
+                <h1>Design Your Custom<br>Corporate Retreats</h1>
                 <p>Build a bespoke experience that aligns your team, restores energy, and drives performance. Explore
                     our venues and curate your itinerary.</p>
                 <a href="/venue" class="btn">Start Building</a>
