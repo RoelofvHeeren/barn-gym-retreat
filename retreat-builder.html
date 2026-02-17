@@ -491,12 +491,15 @@
             right: 0 !important;
             bottom: 0 !important;
             width: 100vw;
+            height: 100vh;
+            /* Fallback */
             height: 100dvh;
             /* Use dynamic viewport height for mobile */
             background: rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(5px);
-            z-index: 2147483647;
-            /* Max z-index */
+            -webkit-backdrop-filter: blur(5px);
+            z-index: 9999999;
+            /* High but safe */
             opacity: 0;
             transition: opacity 0.3s ease;
             justify-content: center;
@@ -629,6 +632,17 @@
 
             .carousel-arrow {
                 opacity: 1 !important;
+            }
+
+            /* Stack itinerary rows on mobile */
+            .day-row {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .day-title,
+            .day-content {
+                width: 100%;
             }
         }
     </style>
@@ -1164,7 +1178,9 @@
 
                 const card = document.createElement('div');
                 card.className = `activity-card ${isSelected ? 'selected' : ''}`;
-                card.onclick = () => openModal(act.id); // CHANGED: Open modal on click
+                card.style.cursor = 'pointer';
+                card.setAttribute('onclick', `openModal('${act.id}')`);
+                // Removed direct property assignment to try attribute method for reliability
 
                 card.innerHTML = `
                     <div class="activity-img-placeholder" style="background-image: url('${act.image}');">
