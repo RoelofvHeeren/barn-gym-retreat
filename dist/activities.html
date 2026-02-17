@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Activities - Barn Gym Retreats</title>
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&family=Raleway:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="retreat-builder.css">
+    <script src="scripts/booking-state.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: url('background-C1rXCpYp.png') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Raleway', sans-serif;
+        }
+
+        /* Local specific styles for grid */
+        .activity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            max-height: 50vh;
+            overflow-y: auto;
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="barn-glass-card barn-shadow-depth">
+        <div class="logo-container">
+            <img src="logo-D2Lb8pNx.png" alt="Barn Gym Logo">
+        </div>
+
+        <!-- HEADER -->
+        <div class="step-hero" style="padding-bottom: 10px;">
+            <h2>Curate Your Experience</h2>
+            <p>Select activities to build your itinerary.</p>
+        </div>
+
+        <!-- ACTIVITY GRID -->
+        <div class="activity-grid" id="activity-grid">
+            <!-- Rendered by JS -->
+        </div>
+
+        <!-- Sticky Footer (Step 3 of 4) -->
+        <div class="sticky-footer visible">
+            <div class="footer-content">
+                <a href="/details" class="btn btn-secondary">Back</a>
+                <span id="footer-progress">Step 3 of 4</span>
+                <button class="btn" onclick="saveAndNext()">Next: Summary</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const activities = [
+            { id: 'yoga', name: 'Morning Yoga', img: 'Retreat Images/Activities/Yoga.jpg' },
+            { id: 'boxing', name: 'Boxing Workshop', img: 'Retreat Images/Activities/boxing.jpg' },
+            { id: 'hike', name: 'Guided Nature Hike', img: 'Retreat Images/Activities/Hiking.jpg' },
+            { id: 'nutrition', name: 'Nutrition Talk', img: 'Retreat Images/Activities/Nutrition.jpg' },
+            { id: 'breathwork', name: 'Breathwork', img: 'Retreat Images/Activities/Breathwork.jpg' },
+            { id: 'icebath', name: 'Ice Bath Therapy', img: 'Retreat Images/Activities/Ice Bath.jpg' },
+            { id: 'soundbath', name: 'Sound Bath', img: 'Retreat Images/Activities/Sound Bath.jpg' },
+            { id: 'pilates', name: 'Pilates', img: 'Retreat Images/Activities/Pilates.jpg' }
+        ];
+
+        // Load State
+        const state = getBookingState();
+        let selectedActivities = new Set(state.activities || []);
+
+        const grid = document.getElementById('activity-grid');
+
+        activities.forEach(act => {
+            const div = document.createElement('div');
+            div.className = 'activity-card';
+            if (selectedActivities.has(act.name)) div.classList.add('selected');
+
+            div.onclick = () => toggleActivity(div, act.name);
+
+            div.innerHTML = `
+            <div class="activity-img-placeholder" style="background-image: url('${act.img}');">
+                <div class="activity-overlay"><i class="fa-solid fa-check"></i></div>
+            </div>
+            <div class="activity-content">
+                <span>${act.name}</span>
+            </div>
+        `;
+            grid.appendChild(div);
+        });
+
+        function toggleActivity(el, name) {
+            if (selectedActivities.has(name)) {
+                selectedActivities.delete(name);
+                el.classList.remove('selected');
+            } else {
+                selectedActivities.add(name);
+                el.classList.add('selected');
+            }
+        }
+
+        function saveAndNext() {
+            saveBookingState({ activities: Array.from(selectedActivities) });
+            window.location.href = '/summary';
+        }
+    </script>
+
+</body>
+
+</html>

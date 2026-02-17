@@ -4,7 +4,7 @@
   "description": "Barn Gym Retreat Booking System",
   "main": "scrape-venues.js",
   "scripts": {
-    "start": "npx serve dist",
+    "start": "node server.js",
     "build": "node scripts/build.js",
     "scrape": "node scrape-venues.js",
     "refresh-gallery": "node scripts/refresh-venues.js"

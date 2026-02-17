@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retreat Summary - Barn Gym Retreats</title>
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&family=Raleway:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="retreat-builder.css">
+    <script src="scripts/booking-state.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: url('background-C1rXCpYp.png') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Raleway', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="barn-glass-card barn-shadow-depth">
+        <div class="logo-container">
+            <img src="logo-D2Lb8pNx.png" alt="Barn Gym Logo">
+        </div>
+
+        <div class="step-hero" style="padding-bottom: 10px;">
+            <h2>Your Itinerary</h2>
+            <p>Review your custom retreat package.</p>
+        </div>
+
+        <!-- SUMMARY SECTION -->
+        <div class="summary-box">
+            <div class="summary-header">
+                <div id="summary-thumb" class="summary-thumb" style="background-color: #ddd;"></div>
+                <div>
+                    <h3 id="summary-venue">Venue Name</h3>
+                    <p id="summary-details">12 Guests • 3 Days / 2 Nights</p>
+                </div>
+            </div>
+
+            <div class="itinerary-container" id="itinerary-list">
+                <!-- Dynamic activities list -->
+            </div>
+
+            <div style="margin-top: 20px; font-weight: bold; color: var(--color-primary); font-size: 1.1rem;">
+                Estimated Total: <span id="est-price">£5,000 - £7,000</span>
+            </div>
+        </div>
+
+        <!-- CONTACT FORM -->
+        <div style="margin-top: 30px;">
+            <h3>Final Details</h3>
+            <p style="margin-bottom: 15px; font-size: 0.9rem;">We'll send this proposal to your inbox.</p>
+
+            <div class="flex-row">
+                <div class="flex-col form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" id="contact-name" class="form-input" placeholder="Jane Doe">
+                </div>
+                <div class="flex-col form-group">
+                    <label class="form-label">Company</label>
+                    <input type="text" id="contact-company" class="form-input" placeholder="Acme Inc.">
+                </div>
+            </div>
+            <div class="flex-row">
+                <div class="flex-col form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" id="contact-email" class="form-input" placeholder="jane@acme.com">
+                </div>
+                <div class="flex-col form-group">
+                    <label class="form-label">Phone</label>
+                    <input type="tel" id="contact-phone" class="form-input" placeholder="+44 7700 900000">
+                </div>
+            </div>
+        </div>
+
+        <!-- Sticky Footer (Step 4 of 4) -->
+        <div class="sticky-footer visible">
+            <div class="footer-content">
+                <a href="/activities" class="btn btn-secondary">Back</a>
+                <span id="footer-progress">Step 4 of 4</span>
+                <button id="btn-submit" class="btn" onclick="submitProposal()">Request Proposal</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const state = getBookingState();
+
+        // Render Summary
+        document.getElementById('summary-venue').innerText = state.location || 'No Venue Selected';
+        document.getElementById('summary-details').innerText = `${state.guestCount} Guests • ${state.duration} • ${state.month}`;
+
+        // Thumb image
+        if (state.locationId) {
+            // Simple map for thumb
+            const imgMap = {
+                'bell': 'Retreat Images/The Bell/The Bell 1.webp',
+                'oastbrook': 'Retreat Images/Oastbrook/Oastbrook 1.avif',
+                'eastwood': 'Retreat Images/Eastwood/Eastwood 1.webp'
+            };
+            const url = imgMap[state.locationId];
+            if (url) document.getElementById('summary-thumb').style.backgroundImage = `url('${url}')`;
+        }
+
+        // Itinerary
+        const list = document.getElementById('itinerary-list');
+        if (state.activities && state.activities.length > 0) {
+            list.innerHTML = state.activities.map(act =>
+                `<div class="day-row"><div class="day-title">Activity</div><div class="day-content">${act}</div></div>`
+            ).join('');
+        } else {
+            list.innerHTML = '<p>No specific activities selected (Relaxation focused)</p>';
+        }
+
+        // Interactive Submit
+        async function submitProposal() {
+            const btn = document.getElementById('btn-submit');
+            const name = document.getElementById('contact-name').value;
+            const email = document.getElementById('contact-email').value;
+
+            if (!name || !email) {
+                alert('Please enter your name and email.');
+                return;
+            }
+
+            btn.innerText = 'Sending...';
+            btn.disabled = true;
+
+            // Prepare Payload
+            const payload = {
+                companyName: document.getElementById('contact-company').value || 'N/A',
+                venueName: state.location,
+                guestCount: state.guestCount,
+                duration: state.duration,
+                month: state.month,
+                activities: state.activities,
+                contactName: name,
+                contactEmail: email,
+                contactPhone: document.getElementById('contact-phone').value
+            };
+
+            try {
+                const response = await fetch('/api/booking', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (response.ok) {
+                    // Success
+                    clearBookingState(); // Optional: clear state after success
+                    window.location.href = '/thank-you';
+                } else {
+                    throw new Error('API Error');
+                }
+            } catch (e) {
+                console.error(e);
+                alert('Something went wrong. Please try again.');
+                btn.innerText = 'Request Proposal';
+                btn.disabled = false;
+            }
+        }
+    </script>
+
+</body>
+
+</html>

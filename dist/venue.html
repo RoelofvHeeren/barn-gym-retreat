@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select a Venue - Barn Gym Retreats</title>
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&family=Raleway:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="retreat-builder.css"> <!-- EXTRACTED CSS -->
+    <script src="scripts/booking-state.js"></script>
+    <style>
+        /* Minimal overrides */
+        body {
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: url('background-C1rXCpYp.png') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Raleway', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="barn-glass-card barn-shadow-depth">
+        <div class="logo-container">
+            <img src="logo-D2Lb8pNx.png" alt="Barn Gym Logo">
+        </div>
+
+        <!-- HEADER -->
+        <div class="step-hero">
+            <h1>Select Your Sanctuary</h1>
+            <p>Choose the perfect backdrop for your team's retreat.</p>
+        </div>
+
+        <!-- CARDS -->
+        <div class="grid-cards">
+
+            <!-- Bell -->
+            <div class="card-option barn-shadow-depth" id="card-bell"
+                onclick="selectVenue('The Bell in Ticehurst', 'bell')">
+                <div class="carousel-container">
+                    <div class="carousel-slide active"
+                        style="background-image: url('Retreat Images/The Bell/The Bell 1.webp');"></div>
+                </div>
+                <div class="card-content">
+                    <h3>The Bell Inn</h3>
+                    <p>Quirky charm & cozy lodges.</p>
+                    <div style="margin-top: 10px;">
+                        <a href="bell/" class="btn btn-secondary" onclick="event.stopPropagation()">Learn More</a>
+                        <button class="btn" style="margin-top:0;">Select Venue</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Oastbrook -->
+            <div class="card-option barn-shadow-depth" id="card-oast"
+                onclick="selectVenue('Oastbrook Vineyards', 'oastbrook')">
+                <div class="carousel-container">
+                    <div class="carousel-slide active"
+                        style="background-image: url('Retreat Images/Oastbrook/Oastbrook 1.avif');"></div>
+                </div>
+                <div class="card-content">
+                    <h3>Oastbrook Vineyards</h3>
+                    <p>Luxury vineyard retreat.</p>
+                    <div style="margin-top: 10px;">
+                        <a href="oastbrook/" class="btn btn-secondary" onclick="event.stopPropagation()">Learn More</a>
+                        <button class="btn" style="margin-top:0;">Select Venue</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Eastwood -->
+            <div class="card-option barn-shadow-depth" id="card-eastwood"
+                onclick="selectVenue('Eastwood Observatory', 'eastwood')">
+                <div class="carousel-container">
+                    <div class="carousel-slide active"
+                        style="background-image: url('Retreat Images/Eastwood/Eastwood 1.webp');"></div>
+                </div>
+                <div class="card-content">
+                    <h3>Eastwood Observatory</h3>
+                    <p>Exclusive science & luxury.</p>
+                    <div style="margin-top: 10px;">
+                        <a href="eastwood/" class="btn btn-secondary" onclick="event.stopPropagation()">Learn More</a>
+                        <button class="btn" style="margin-top:0;">Select Venue</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Sticky Footer (Step 1 of 4) -->
+        <div class="sticky-footer visible">
+            <div class="footer-content">
+                <button class="btn btn-secondary" style="visibility:hidden">Back</button>
+                <span id="footer-progress">Step 1 of 4</span>
+                <button class="btn" disabled>Select a Venue</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function selectVenue(name, id) {
+            saveBookingState({ location: name, locationId: id });
+            window.location.href = '/details';
+        }
+    </script>
+
+</body>
+
+</html>

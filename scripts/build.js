@@ -19,6 +19,17 @@ const destHtml = path.join(DIST_DIR, 'index.html');
 console.log(`Copying ${sourceHtml} to ${destHtml}...`);
 fs.copyFileSync(sourceHtml, destHtml);
 
+// Copy new MPA pages
+const mpaPages = ['venue.html', 'details.html', 'activities.html', 'summary.html', 'thank-you.html'];
+mpaPages.forEach(page => {
+    const src = path.join(ROOT_DIR, page);
+    const dest = path.join(DIST_DIR, page);
+    if (fs.existsSync(src)) {
+        console.log(`Copying ${src} to ${dest}...`);
+        fs.copyFileSync(src, dest);
+    }
+});
+
 // Retreat Builder - Keep as standalone fallback
 const sourceBuilder = path.join(ROOT_DIR, 'retreat-builder.html');
 const destBuilder = path.join(DIST_DIR, 'retreat-builder.html');
