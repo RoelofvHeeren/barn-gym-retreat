@@ -43,11 +43,17 @@
             color: var(--color-text-dark);
             background: url('background-C1rXCpYp.png') no-repeat center center fixed;
             background-size: cover;
-            min-height: 100vh;
+            height: 100dvh;
+            /* Force viewport height */
+            overflow-y: auto;
+            /* Scroll internally */
+            -webkit-overflow-scrolling: touch;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
+            box-sizing: border-box;
+            /* Include padding in height */
         }
 
         /* 2. THE BACKGROUND (Glass Effect) */
@@ -662,6 +668,11 @@
 
             .step-hero p {
                 font-size: 1rem;
+            }
+
+            .step-container {
+                padding-bottom: 150px;
+                /* Prevent cutoff by fixed/overlay elements */
             }
 
             .flex-row {
@@ -1379,8 +1390,7 @@
                         document.getElementById('step-3').classList.add('active');
 
                         // 4. Update Footer
-                        // Ensure footer exists before updating
-                        setTimeout(() => updateStickyFooter(3), 0);
+                        // updateStickyFooter(3);
                     } else {
                         // Invalid venue param, fallback to Step 1
                         console.warn('Invalid venue param, falling back to Step 1');
