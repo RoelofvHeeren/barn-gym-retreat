@@ -767,8 +767,13 @@
         .grid-cards {
             gap: 30px;
             /* Increase gap between cards */
-            margin-bottom: 40px;
-            /* Space before nav buttons */
+            margin-bottom: 60px !important;
+            /* Force Space before nav buttons */
+        }
+
+        .nav-buttons {
+            margin-top: 40px !important;
+            /* Force Space from top */
         }
 
         .card-option {
@@ -799,7 +804,8 @@
         <!-- STEP 2: LOCATION -->
         <div id="step-2" class="step-container">
             <h2>Select Your Venue</h2>
-            <p style="margin-bottom: 20px;">Browse our locations. Swipe images to explore.</p>
+            <p style="margin-bottom: 20px;">Browse our locations. <span
+                    style="opacity: 0.5; font-size: 0.8em;">(v5)</span></p>
 
             <div class="grid-cards">
                 <!-- Location 1: The Bell -->
