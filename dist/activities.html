@@ -124,34 +124,36 @@
             </div>
         </div>
 
-        <!-- ACTIVITY DETAILS MODAL -->
-        <div class="modal-overlay" id="activity-modal">
-            <div class="modal-card">
-                <div class="modal-image-header" id="modal-img">
-                    <button class="modal-close-btn" onclick="closeModal()">
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
+
+    </div>
+
+    <!-- ACTIVITY DETAILS MODAL (Moved to Root) -->
+    <div class="modal-overlay" id="activity-modal">
+        <div class="modal-card">
+            <div class="modal-image-header" id="modal-img">
+                <button class="modal-close-btn" onclick="closeModal()">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h3 class="modal-title" id="modal-title">Activity Name</h3>
+                <div class="modal-meta">
+                    <span id="modal-category">Category</span>
+                    <span id="modal-price">£500</span>
                 </div>
-                <div class="modal-body">
-                    <h3 class="modal-title" id="modal-title">Activity Name</h3>
-                    <div class="modal-meta">
-                        <span id="modal-category">Category</span>
-                        <span id="modal-price">£500</span>
-                    </div>
-                    <div class="modal-description" id="modal-desc">
-                        Description goes here...
-                    </div>
-                    <div style="background: #f5f5f5; padding: 15px; border-radius: 12px; margin-bottom: 20px;">
-                        <h4 style="font-size: 1rem; margin-bottom: 10px;">What's Included:</h4>
-                        <ul id="modal-features" style="padding-left: 20px; font-size: 0.9rem; color: #555;">
-                            <li>Feature 1</li>
-                            <li>Feature 2</li>
-                        </ul>
-                    </div>
+                <div class="modal-description" id="modal-desc">
+                    Description goes here...
                 </div>
-                <div class="modal-footer">
-                    <button class="btn" id="modal-action-btn" onclick="toggleFromModal()">Add to Retreat</button>
+                <div style="background: #f5f5f5; padding: 15px; border-radius: 12px; margin-bottom: 20px;">
+                    <h4 style="font-size: 1rem; margin-bottom: 10px;">What's Included:</h4>
+                    <ul id="modal-features" style="padding-left: 20px; font-size: 0.9rem; color: #555;">
+                        <li>Feature 1</li>
+                        <li>Feature 2</li>
+                    </ul>
                 </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" id="modal-action-btn" onclick="toggleFromModal()">Add to Retreat</button>
             </div>
         </div>
     </div>
