@@ -52,8 +52,7 @@ app.post('/api/booking', async (req, res) => {
                 email: formData.contactEmail,
                 phone: formData.contactPhone,
                 companyName: formData.companyName,
-                tags: ['retreat-inquiry'],
-                customFields: customFields
+                tags: ['retreat-inquiry']
             })
         });
 
@@ -86,7 +85,8 @@ app.post('/api/booking', async (req, res) => {
                     pipelineStageId: stageId,
                     status: 'open',
                     contactId: contactId,
-                    monetaryValue: monetaryValue
+                    monetaryValue: monetaryValue,
+                    customFields: customFields // Moved from Contact to Opportunity
                 };
 
                 console.log('💼 Creating Opportunity in GHL:', JSON.stringify(opportunityPayload, null, 2));

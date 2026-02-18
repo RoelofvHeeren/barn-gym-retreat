@@ -111,6 +111,12 @@
 
     <script>
         const state = getBookingState();
+        
+        // Safeguard: Redirect if no venue selected (prevents "My Company x null")
+        if (!state.location) {
+            console.warn('No venue in state, redirecting to start');
+            window.location.href = '/venue';
+        }
 
         // Render Summary
         document.getElementById('summary-venue').innerText = state.location || 'No Venue Selected';
