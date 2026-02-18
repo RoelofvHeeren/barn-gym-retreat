@@ -145,6 +145,11 @@ app.get('/thank-you', (req, res) => {
     res.sendFile(path.join(__dirname, 'thank-you.html'));
 });
 
+// Serve the embed file explicitly
+app.get('/full-retreat-booking-embed.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'full-retreat-booking-embed.html'));
+});
+
 // Redirect root to /venue for now (or keep index.html as landing)
 app.get('/', (req, res) => {
     // res.redirect('/venue'); 
