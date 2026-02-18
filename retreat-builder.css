@@ -321,8 +321,8 @@ h4 {
         padding-top: 25px !important;
         padding-left: 20px !important;
         padding-right: 20px !important;
-        padding-bottom: 250px !important;
-        /* Increased to clear sticky footer */
+        padding-bottom: 40px !important;
+        /* Standard padding, footer is now below */
     }
 
     .card-actions {
@@ -332,6 +332,29 @@ h4 {
 
     .card-actions .btn {
         width: 100%;
+    }
+
+    /* Make Footer Static on Mobile */
+    .sticky-footer {
+        position: relative !important;
+        bottom: auto !important;
+        transform: none !important;
+        box-shadow: none !important;
+        padding: 20px !important;
+        margin-top: 20px;
+        background: transparent !important;
+        /* Optional: blend with body or keep white */
+        border-top: none !important;
+    }
+
+    .sticky-footer.visible {
+        bottom: auto !important;
+    }
+
+    /* Ensure white background for better contrast if transparent above looks bad */
+    .sticky-footer {
+        background: rgba(255, 255, 255, 0.9) !important;
+        border-radius: 12px;
     }
 
     .carousel-arrow {

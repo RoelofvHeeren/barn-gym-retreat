@@ -12,7 +12,7 @@
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&family=Raleway:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="retreat-builder.css"> <!-- EXTRACTED CSS -->
+    <link rel="stylesheet" href="retreat-builder.css?v=2"> <!-- EXTRACTED CSS -->
     <script src="scripts/booking-state.js"></script>
     <style>
         /* Minimal overrides */
@@ -23,8 +23,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: url('background-C1rXCpYp.png') no-repeat center center fixed;
-            background-size: cover;
+            justify-content: center;
+            background: white;
+            /* Force white background */
+            /* background: url('background-C1rXCpYp.png') no-repeat center center fixed; REMOVED */
+            /* background-size: cover; REMOVED */
             font-family: 'Raleway', sans-serif;
         }
 
@@ -62,9 +65,9 @@
                 <div class="card-content">
                     <h3>The Bell Inn</h3>
                     <p>Quirky charm & cozy lodges.</p>
-                    <div style="margin-top: 10px;">
+                    <div class="card-actions">
                         <a href="bell/" class="btn btn-secondary" onclick="event.stopPropagation()">Learn More</a>
-                        <button class="btn" style="margin-top:0;"
+                        <button class="btn"
                             onclick="event.stopPropagation(); selectVenue('The Bell in Ticehurst', 'bell')">Select
                             Venue</button>
                     </div>
@@ -81,9 +84,9 @@
                 <div class="card-content">
                     <h3>Oastbrook Vineyards</h3>
                     <p>Luxury vineyard retreat.</p>
-                    <div style="margin-top: 10px;">
+                    <div class="card-actions">
                         <a href="oastbrook/" class="btn btn-secondary" onclick="event.stopPropagation()">Learn More</a>
-                        <button class="btn" style="margin-top:0;"
+                        <button class="btn"
                             onclick="event.stopPropagation(); selectVenue('Oastbrook Vineyards', 'oastbrook')">Select
                             Venue</button>
                     </div>
@@ -100,9 +103,9 @@
                 <div class="card-content">
                     <h3>Eastwood Observatory</h3>
                     <p>Exclusive science & luxury.</p>
-                    <div style="margin-top: 10px;">
+                    <div class="card-actions">
                         <a href="eastwood/" class="btn btn-secondary" onclick="event.stopPropagation()">Learn More</a>
-                        <button class="btn" style="margin-top:0;"
+                        <button class="btn"
                             onclick="event.stopPropagation(); selectVenue('Eastwood Observatory', 'eastwood')">Select
                             Venue</button>
                     </div>

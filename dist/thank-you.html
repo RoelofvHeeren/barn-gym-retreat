@@ -11,7 +11,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&family=Raleway:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="retreat-builder.css">
+    <link rel="stylesheet" href="retreat-builder.css?v=2">
     <style>
         body {
             margin: 0;
@@ -38,8 +38,18 @@
         <p style="font-size: 1.2rem; margin: 20px 0;">We've received your proposal request.<br>Our team will be in touch
             shortly with a custom itinerary.</p>
 
-        <a href="/" class="btn">Back to Home</a>
+        <div class="actions" style="margin-top: 20px;">
+            <a href="/" class="btn" style="margin-right: 10px;">Back to Home</a>
+            <button class="btn btn-secondary" onclick="closePopup()">Close</button>
+        </div>
     </div>
+
+    <script>
+        function closePopup() {
+            // Send message to parent window to close the iframe/modal
+            window.parent.postMessage('close-modal', '*');
+        }
+    </script>
 
 </body>
 

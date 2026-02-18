@@ -60,74 +60,43 @@ function loadVenueData() {
     document.title = `${currentVenue.name} - Barn Gym Retreat Booking`;
 }
 
-// Render Hero Section
+// Render Hero Section (Bento Grid)
 function renderHeroSection() {
-    const carousel = document.getElementById('heroCarousel');
-    const dots = document.getElementById('carouselDots');
+    const grid = document.getElementById('heroGrid');
     const infoCard = document.getElementById('heroInfoCard');
 
-    // Create slides
     // Determine image path prefix based on location (subdir vs root)
     const path = window.location.pathname.toLowerCase();
     const isSubdir = path.includes('/bell') || path.includes('/oast') || path.includes('/eastwood');
     const imgPrefix = isSubdir ? '../' : '';
 
-    carousel.innerHTML = currentVenue.images.hero.map((img, index) => `
-        <div class="hero-slide ${index === 0 ? 'active' : ''}">
-            <img src="${imgPrefix}${img}" alt="${currentVenue.name}" onerror="this.src='https://via.placeholder.com/1200x800?text=Image+Not+Available'">
+    // Get first 5 images for the bento grid
+    const heroImages = currentVenue.images.hero.slice(0, 5);
+
+    grid.innerHTML = heroImages.map((img, index) => `
+        <div class="bento-item" onclick="openLightbox(${index})">
+            <img src="${imgPrefix}${img}" alt="${currentVenue.name} - Image ${index + 1}" onerror="this.src='https://via.placeholder.com/800x600?text=Image+Not+Available'">
+            <div class="bento-overlay"></div>
         </div>
     `).join('');
 
-    // Create dots
-    dots.innerHTML = currentVenue.images.hero.map((_, index) => `
-        <button class="carousel-dot ${index === 0 ? 'active' : ''}" onclick="goToSlide(${index})"></button>
-    `).join('');
+    // Fill remaining slots if < 5 images (optional, but good for grid stability)
+    // For now, grid CSS handles it, but empty slots might be blank. 
 
     // Create info card
     infoCard.innerHTML = `
         <h1>${currentVenue.name}</h1>
-        <p class="tagline">${currentVenue.tagline}</p>
-        <p class="location">📍 ${currentVenue.location.city} • ${currentVenue.location.distanceFromLondon} from London</p>
+        <p class="location">📍 ${currentVenue.location.city} • ${currentVenue.location.distanceFromLondon}</p>
         <p class="capacity">${currentVenue.capacity.description}</p>
         <p class="pricing">
             From £${currentVenue.pricing.from.toLocaleString()}
             <span>${currentVenue.pricing.unit}</span>
         </p>
-        <button class="hero-cta" onclick="requestQuote()">Select Venue</button>
     `;
 }
 
-// Carousel Navigation
-function changeSlide(direction) {
-    const slides = document.querySelectorAll('.hero-slide');
-    const dots = document.querySelectorAll('.carousel-dot');
+// Carousel functions removed
 
-    slides[currentSlide].classList.remove('active');
-    dots[currentSlide].classList.remove('active');
-
-    currentSlide = (currentSlide + direction + slides.length) % slides.length;
-
-    slides[currentSlide].classList.add('active');
-    dots[currentSlide].classList.add('active');
-}
-
-function goToSlide(index) {
-    const slides = document.querySelectorAll('.hero-slide');
-    const dots = document.querySelectorAll('.carousel-dot');
-
-    slides[currentSlide].classList.remove('active');
-    dots[currentSlide].classList.remove('active');
-
-    currentSlide = index;
-
-    slides[currentSlide].classList.add('active');
-    dots[currentSlide].classList.add('active');
-}
-
-// Auto-advance carousel
-setInterval(() => {
-    changeSlide(1);
-}, 5000);
 
 // Render Quick Facts
 function renderQuickFacts() {

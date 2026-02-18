@@ -61,10 +61,47 @@
             max-width: 900px;
             width: 100%;
             position: relative;
-            overflow: hidden;
+            /* overflow: hidden; REMOVED to allow card shadows and dropdowns to show */
             transition: height 0.3s ease;
-            z-index: 100000;
+            z-index: 1000;
+            /* Lowered from 100000 to be sensible */
         }
+
+        /* Nav Buttons Spacing */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+            /* Increased from 30px */
+            padding-top: 20px;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        /* MODAL STYLES */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            /* Standard fixed */
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            z-index: 9999999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            margin: 0;
+            overscroll-behavior: contain;
+            /* Prevent scroll chaining */
+        }
+
 
         /* 3. THE SHADOWS (3D Depth) */
         .barn-shadow-depth {
@@ -452,8 +489,18 @@
 
         .day-row {
             margin-bottom: 15px;
-            padding-left: 15px;
-            border-left: 2px solid var(--color-primary);
+            padding-left: 0;
+            border-left: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .day-row:last-child {
+            border-bottom: none;
         }
 
         .day-title {
@@ -474,18 +521,28 @@
         /* MODAL STYLES */
         .modal-overlay {
             display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            position: fixed !important;
+            /* Force fixed to viewport */
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            width: 100vw;
+            height: 100vh;
+            /* Fallback */
+            height: 100dvh;
+            /* Use dynamic viewport height for mobile */
             background: rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(5px);
-            z-index: 1000;
+            -webkit-backdrop-filter: blur(5px);
+            z-index: 9999999;
+            /* High but safe */
             opacity: 0;
             transition: opacity 0.3s ease;
             justify-content: center;
             align-items: center;
+            padding: 20px;
+            /* Ensure some spacing on edges */
         }
 
         .modal-overlay.active {
@@ -495,8 +552,8 @@
 
         .modal-card {
             background: rgba(255, 255, 255, 0.95);
-            width: 90%;
-            max-width: 600px;
+            width: 100%;
+            max-width: 500px;
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
@@ -504,7 +561,10 @@
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             flex-direction: column;
-            max-height: 90vh;
+            max-height: 85dvh;
+            /* Limit height to viewport */
+            margin: auto;
+            /* Help with flex centering */
         }
 
         .modal-overlay.active .modal-card {
@@ -516,6 +576,8 @@
             background-size: cover;
             background-position: center;
             position: relative;
+            flex-shrink: 0;
+            /* Prevent shrinking */
         }
 
         .modal-close-btn {
@@ -524,8 +586,10 @@
             right: 15px;
             background: rgba(255, 255, 255, 0.8);
             border: none;
-            width: 36px;
-            height: 36px;
+            width: 44px;
+            /* Larger touch target */
+            height: 44px;
+            /* Larger touch target */
             border-radius: 50%;
             cursor: pointer;
             display: flex;
@@ -534,6 +598,7 @@
             font-size: 1.2rem;
             color: var(--color-text-dark);
             transition: background 0.2s;
+            z-index: 10;
         }
 
         .modal-close-btn:hover {
@@ -570,7 +635,8 @@
         }
 
         .modal-footer {
-            padding: 20px 30px;
+            padding: 30px;
+            /* Increased padding */
             background: #f9f9f9;
             border-top: 1px solid #eee;
             display: flex;
@@ -591,6 +657,8 @@
 
             .barn-glass-card {
                 padding: 25px;
+                margin-bottom: 100px;
+                /* Prevent sticky footer overlap */
             }
 
             .activity-grid {
@@ -600,11 +668,54 @@
             .carousel-container {
                 height: 180px;
             }
+
+            .carousel-arrow {
+                opacity: 1 !important;
+            }
+
+            /* Stack itinerary rows on mobile */
+            .day-row {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .day-title,
+            .day-content {
+                width: 100%;
+            }
         }
     </style>
 </head>
 
 <body>
+    <!-- MODAL STRUCTURE -->
+    <div id="activity-modal" class="modal-overlay" onclick="closeActivityModal(event)">
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <div class="modal-image-header" id="modal-img">
+                <button class="modal-close-btn" onclick="closeActivityModal()" type="button"><i
+                        class="fa-solid fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <h2 class="modal-title" id="modal-title">Activity Name</h2>
+                <div class="modal-meta">
+                    <span id="modal-category"><i class="fa-solid fa-tag"></i> Category</span>
+                    <span id="modal-price"><i class="fa-solid fa-sterling-sign"></i> 0</span>
+                </div>
+                <div class="modal-description" id="modal-desc">
+                    Description goes here...
+                </div>
+                <ul class="modal-features" id="modal-features"
+                    style="margin-left: 20px; color: #555; font-size: 0.95rem; line-height: 1.8;">
+                    <!-- Features populated by JS -->
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeActivityModal()" type="button">Close</button>
+                <button class="btn" id="modal-action-btn" onclick="toggleFromModal(event)"
+                    ontouchstart="toggleFromModal(event)" type="button">Add to Retreat</button>
+            </div>
+        </div>
+    </div>
 
     <div class="barn-glass-card barn-shadow-depth">
         <div class="logo-container">
@@ -614,7 +725,7 @@
         <!-- STEP 1: HERO -->
         <div id="step-1" class="step-container active">
             <div class="step-hero">
-                <h1>Design Your Custom<br>Corporate Retreat</h1>
+                <h1>Design Your Custom<br>Corporate Retreats</h1>
                 <p>Build a bespoke experience that aligns your team, restores energy, and drives performance. Explore
                     our venues and curate your itinerary.</p>
                 <button class="btn" onclick="nextStep(2)">Start Building</button>
@@ -829,10 +940,11 @@
     </div>
 
     <!-- MODAL STRUCTURE -->
-    <div id="activity-modal" class="modal-overlay" onclick="closeModal(event)">
+    <div id="activity-modal" class="modal-overlay" onclick="closeActivityModal(event)">
         <div class="modal-card" onclick="event.stopPropagation()">
             <div class="modal-image-header" id="modal-img">
-                <button class="modal-close-btn" onclick="closeModal()"><i class="fa-solid fa-times"></i></button>
+                <button class="modal-close-btn" onclick="closeActivityModal()" type="button"><i
+                        class="fa-solid fa-times"></i></button>
             </div>
             <div class="modal-body">
                 <h2 class="modal-title" id="modal-title">Activity Name</h2>
@@ -849,8 +961,10 @@
                 </ul>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" onclick="closeModal()">Close</button>
-                <button class="btn" id="modal-action-btn" onclick="toggleFromModal()">Add to Retreat</button>
+                <button class="btn btn-secondary" onclick="closeActivityModal()" type="button">Close</button>
+                <button class="btn" id="modal-action-btn" onclick="toggleFromModal(event)"
+                    ontouchstart="toggleFromModal(event)" type="button">Add to
+                    Retreat</button>
             </div>
         </div>
     </div>
@@ -864,6 +978,9 @@
             month: 'ASAP',
             activities: new Set()
         };
+
+        // ... (rest of the script)
+
 
         // --- ACTIVITY DATA ---
         const activitiesDB = [
@@ -885,11 +1002,11 @@
             },
             {
                 id: 'circuit',
-                name: 'Circuit Training',
+                name: 'Team Circuit Training',
                 category: 'Essential',
                 priceLow: 400,
                 priceHigh: 550,
-                image: 'Activities/Circuit Training.jpeg',
+                image: 'Activities/Circuit_Training.jpeg',
                 description: 'High-energy group fitness sessions that build teamwork through shared physical challenges. Our circuits combine strength, cardio, and functional movements in fun, competitive formats that encourage collaboration and mutual support.',
                 features: [
                     'Team-based exercise stations',
@@ -1100,7 +1217,9 @@
 
                 const card = document.createElement('div');
                 card.className = `activity-card ${isSelected ? 'selected' : ''}`;
-                card.onclick = () => openModal(act.id); // CHANGED: Open modal on click
+                card.style.cursor = 'pointer';
+                card.setAttribute('onclick', `openModal('${act.id}')`);
+                // Removed direct property assignment to try attribute method for reliability
 
                 card.innerHTML = `
                     <div class="activity-img-placeholder" style="background-image: url('${act.image}');">
@@ -1119,9 +1238,13 @@
         let currentModalActivityId = null;
 
         function openModal(id) {
+            console.log("Opening modal for activity ID:", id);
             currentModalActivityId = id;
             const act = activitiesDB.find(a => a.id === id);
-            if (!act) return;
+            if (!act) {
+                console.error("Activity not found in DB for ID:", id);
+                return;
+            }
 
             // Populate Modal
             document.getElementById('modal-img').style.backgroundImage = `url('${act.image}')`;
@@ -1141,6 +1264,8 @@
                 });
             }
             const btn = document.getElementById('modal-action-btn');
+            // Remove old listeners to be safe (though innerHTML wasn't replaced on parent, attributes were)
+            // Re-setting text/style
             if (retreatData.activities.has(id)) {
                 btn.innerText = "Remove from Retreat";
                 btn.classList.add('btn-secondary');
@@ -1163,8 +1288,8 @@
             document.body.style.overflow = 'hidden'; // Prevent background scrolling
         }
 
-        function closeModal(event) {
-            // If triggered by click on overlay (event defined), check target
+        function closeActivityModal(event) {
+            // Renamed to avoid conflicts and explicit naming
             if (event && event.target !== event.currentTarget) return;
 
             const overlay = document.getElementById('activity-modal');
@@ -1175,10 +1300,33 @@
             document.body.style.overflow = '';
         }
 
-        function toggleFromModal() {
-            if (!currentModalActivityId) return;
-            toggleActivity(currentModalActivityId);
-            closeModal();
+        function toggleFromModal(e) {
+            // Prevent default if called via event
+            if (e) e.preventDefault();
+
+            console.log("toggleFromModal called. CurrentID:", currentModalActivityId);
+
+            try {
+                if (!currentModalActivityId) {
+                    console.error("No current modal activity ID found!");
+                    alert("Error: No activity selected. Please close and try again.");
+                    return;
+                }
+
+                toggleActivity(currentModalActivityId);
+                console.log("Activity toggled successfully");
+
+                // Force close without event check
+                const overlay = document.getElementById('activity-modal');
+                overlay.classList.remove('active');
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                }, 300);
+                document.body.style.overflow = '';
+            } catch (err) {
+                console.error("Error in toggleFromModal:", err);
+                alert("Sorry, an error occurred: " + err.message);
+            }
         }
 
         // --- CAROUSEL LOGIC ---

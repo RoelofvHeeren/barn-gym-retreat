@@ -43,11 +43,17 @@
             color: var(--color-text-dark);
             background: url('background-C1rXCpYp.png') no-repeat center center fixed;
             background-size: cover;
-            min-height: 100vh;
+            height: 100dvh;
+            /* Force viewport height */
+            overflow-y: auto;
+            /* Scroll internally */
+            -webkit-overflow-scrolling: touch;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
+            box-sizing: border-box;
+            /* Include padding in height */
         }
 
         /* 2. THE BACKGROUND (Glass Effect) */
@@ -519,7 +525,7 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(5px);
-            z-index: 100001;
+            z-index: 9999999;
             opacity: 0;
             transition: opacity 0.3s ease;
             justify-content: center;
@@ -543,6 +549,8 @@
             display: flex;
             flex-direction: column;
             max-height: 90vh;
+            margin: auto;
+            /* Fallback centering */
         }
 
         .modal-overlay.active .modal-card {
@@ -664,14 +672,26 @@
                 font-size: 1rem;
             }
 
+            .step-container {
+                padding-bottom: 150px;
+                /* Prevent cutoff by fixed/overlay elements */
+            }
+
             .flex-row {
                 flex-direction: column;
                 gap: 15px;
             }
 
+            body {
+                padding: 10px;
+                /* Reduce padding on mobile */
+            }
+
             .barn-glass-card {
                 padding: 20px;
                 border-radius: 16px;
+                margin-bottom: 100px;
+                /* Prevent sticky footer overlap */
             }
 
             .activity-grid {
@@ -691,8 +711,10 @@
             /* Modal Mobile Improvements */
             .modal-card {
                 width: 95%;
-                max-height: 95vh;
+                max-height: 85vh;
+                /* Less height to avoid obscurement */
                 border-radius: 16px;
+                margin: auto;
             }
 
             .modal-image-header {
@@ -730,14 +752,32 @@
             }
 
             .nav-buttons {
-                flex-direction: column-reverse;
-                /* Stack buttons, Next on top */
-                gap: 10px;
+                flex-direction: row !important;
+                /* Force side by side */
+                gap: 15px;
             }
 
             .nav-buttons .btn {
                 margin: 0;
+                flex: 1;
+                /* Equal width */
             }
+        }
+
+        .grid-cards {
+            gap: 30px;
+            /* Increase gap between cards */
+            margin-bottom: 60px !important;
+            /* Force Space before nav buttons */
+        }
+
+        .nav-buttons {
+            margin-top: 40px !important;
+            /* Force Space from top */
+        }
+
+        .card-option {
+            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -754,7 +794,7 @@
         <!-- STEP 1: HERO -->
         <div id="step-1" class="step-container active">
             <div class="step-hero">
-                <h1>Design Your Custom<br>Corporate Retreat</h1>
+                <h1>Design Your Custom<br>Corporate Retreats</h1>
                 <p>Build a bespoke experience that aligns your team, restores energy, and drives performance. Explore
                     our venues and curate your itinerary.</p>
                 <a href="/venue" class="btn">Start Building</a>
@@ -764,7 +804,8 @@
         <!-- STEP 2: LOCATION -->
         <div id="step-2" class="step-container">
             <h2>Select Your Venue</h2>
-            <p style="margin-bottom: 20px;">Browse our locations. Swipe images to explore.</p>
+            <p style="margin-bottom: 20px;">Browse our locations. <span
+                    style="opacity: 0.5; font-size: 0.8em;">(v5)</span></p>
 
             <div class="grid-cards">
                 <!-- Location 1: The Bell -->
@@ -972,32 +1013,7 @@
             </div>
         </div>
 
-        <!-- MODAL STRUCTURE -->
-        <div id="activity-modal" class="modal-overlay" onclick="closeModal(event)">
-            <div class="modal-card" onclick="event.stopPropagation()">
-                <div class="modal-image-header" id="modal-img">
-                    <button class="modal-close-btn" onclick="closeModal()"><i class="fa-solid fa-times"></i></button>
-                </div>
-                <div class="modal-body">
-                    <h2 class="modal-title" id="modal-title">Activity Name</h2>
-                    <div class="modal-meta">
-                        <span id="modal-category"><i class="fa-solid fa-tag"></i> Category</span>
-                        <span id="modal-price"><i class="fa-solid fa-sterling-sign"></i> 0</span>
-                    </div>
-                    <div class="modal-description" id="modal-desc">
-                        Description goes here...
-                    </div>
-                    <ul class="modal-features" id="modal-features"
-                        style="margin-left: 20px; color: #555; font-size: 0.95rem; line-height: 1.8;">
-                        <!-- Features populated by JS -->
-                    </ul>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" onclick="closeModal()">Close</button>
-                    <button class="btn" id="modal-action-btn" onclick="toggleFromModal()">Add to Retreat</button>
-                </div>
-            </div>
-        </div>
+
 
         <script>
             const retreatData = {
@@ -1377,8 +1393,7 @@
                         document.getElementById('step-3').classList.add('active');
 
                         // 4. Update Footer
-                        // Ensure footer exists before updating
-                        setTimeout(() => updateStickyFooter(3), 0);
+                        // updateStickyFooter(3);
                     } else {
                         // Invalid venue param, fallback to Step 1
                         console.warn('Invalid venue param, falling back to Step 1');
@@ -1585,11 +1600,33 @@
             // Init
             initCarousels();
         </script>
-</body>
 
-<!-- JavaScript Logic -->
-<!-- Booking Handler Script -->
-<script src="scripts/booking-handler.js"></script>
+        <!-- MODAL STRUCTURE (Moved to Body End) -->
+        <div id="activity-modal" class="modal-overlay" onclick="closeModal(event)">
+            <div class="modal-card" onclick="event.stopPropagation()">
+                <div class="modal-image-header" id="modal-img">
+                    <button class="modal-close-btn" onclick="closeModal()"><i class="fa-solid fa-times"></i></button>
+                </div>
+                <div class="modal-body">
+                    <h2 class="modal-title" id="modal-title">Activity Name</h2>
+                    <div class="modal-meta">
+                        <span id="modal-category"><i class="fa-solid fa-tag"></i> Category</span>
+                        <span id="modal-price"><i class="fa-solid fa-sterling-sign"></i> 0</span>
+                    </div>
+                    <div class="modal-description" id="modal-desc">
+                        Description goes here...
+                    </div>
+                    <ul class="modal-features" id="modal-features"
+                        style="margin-left: 20px; color: #555; font-size: 0.95rem; line-height: 1.8;">
+                        <!-- Features populated by JS -->
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+                    <button class="btn" id="modal-action-btn" onclick="toggleFromModal()">Add to Retreat</button>
+                </div>
+            </div>
+        </div>
 
 </body>
 

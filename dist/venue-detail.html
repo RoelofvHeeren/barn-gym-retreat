@@ -5,10 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Venue Details - Barn Gym Retreat Booking</title>
-    <link rel="stylesheet" href="retreat-builder.css">
+    <link rel="stylesheet" href="retreat-builder.css?v=2">
     <style>
         /* Venue Detail Specific Styles */
         body {
+            background: white;
+            /* Force white background */
             margin: 0;
             padding: 0;
         }
@@ -19,187 +21,112 @@
             padding: 0;
         }
 
-        /* Hero Section */
+        /* Hero Section (Bento Grid) */
         .venue-hero {
             position: relative;
             width: 100%;
-            height: 70vh;
+            height: 60vh;
             min-height: 500px;
-            overflow: hidden;
             background: #1a1a1a;
+            display: flex;
         }
 
-        .hero-carousel {
+        .bento-grid {
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 8px;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        .bento-item {
             position: relative;
-            width: 100%;
-            height: 100%;
+            overflow: hidden;
+            border-radius: 8px;
+            cursor: pointer;
         }
 
-        .hero-slide {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 0.6s ease-in-out;
+        .bento-item:first-child {
+            grid-row: span 2;
         }
 
-        .hero-slide.active {
-            opacity: 1;
-        }
-
-        .hero-slide img {
+        .bento-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.3s ease;
         }
 
-        .carousel-nav {
+        .bento-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .bento-overlay {
             position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.9);
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            color: #333;
-            transition: all 0.3s ease;
-            z-index: 10;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.1);
+            transition: background 0.3s ease;
         }
 
-        .carousel-nav:hover {
-            background: white;
-            transform: translateY(-50%) scale(1.1);
-        }
-
-        .carousel-nav.prev {
-            left: 20px;
-        }
-
-        .carousel-nav.next {
-            right: 20px;
-        }
-
-        .carousel-dots {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 10px;
-            z-index: 10;
-        }
-
-        .carousel-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.5);
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .carousel-dot.active {
-            background: white;
-            transform: scale(1.3);
+        .bento-item:hover .bento-overlay {
+            background: rgba(0, 0, 0, 0);
         }
 
         .hero-info-card {
             position: absolute;
             top: 50%;
-            right: 40px;
-            transform: translateY(-50%);
+            left: 50%;
+            transform: translate(-50%, -50%);
+            /* Centered */
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            padding: 30px;
+            padding: 40px;
             border-radius: 16px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            max-width: 400px;
+            max-width: 500px;
             z-index: 10;
+            text-align: center;
         }
 
         .hero-info-card h1 {
-            margin: 0 0 10px 0;
-            font-size: 28px;
-            color: #1a1a1a;
-        }
-
-        .hero-info-card .tagline {
-            color: #666;
-            font-size: 16px;
-            margin-bottom: 20px;
+            margin-bottom: 5px;
         }
 
         .hero-info-card .location {
-            color: #888;
-            font-size: 14px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .hero-info-card .capacity {
-            font-size: 18px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 15px;
-        }
-
-        .hero-info-card .pricing {
-            font-size: 24px;
-            font-weight: 700;
-            color: #2d5016;
-            margin-bottom: 20px;
-        }
-
-        .hero-info-card .pricing span {
-            font-size: 14px;
-            font-weight: 400;
-            color: #666;
-        }
-
-        .hero-cta {
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, #2d5016 0%, #3d6b1f 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .hero-cta:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(45, 80, 22, 0.3);
+            justify-content: center;
         }
 
         .view-gallery-btn {
             position: absolute;
-            bottom: 30px;
-            right: 30px;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 12px 24px;
-            border: none;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            padding: 10px 20px;
             border-radius: 8px;
-            cursor: pointer;
             font-weight: 600;
-            transition: all 0.3s ease;
-            z-index: 10;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 20;
         }
 
-        .view-gallery-btn:hover {
-            background: white;
-            transform: translateY(-2px);
+        /* Responsive */
+        @media (max-width: 768px) {
+            .bento-grid {
+                display: block;
+                /* Fallback to single image */
+            }
+
+            .bento-item {
+                height: 100%;
+                display: none;
+            }
+
+            .bento-item:first-child {
+                display: block;
+                height: 100%;
+            }
         }
 
         /* Quick Facts Bar */
@@ -606,7 +533,7 @@
             right: 0;
             bottom: 0;
             background: rgba(0, 0, 0, 0.95);
-            z-index: 1000;
+            z-index: 9999999;
             align-items: center;
             justify-content: center;
         }
@@ -734,6 +661,11 @@
             .sticky-booking-bar {
                 padding: 15px 20px;
             }
+
+            body {
+                padding-bottom: 100px;
+                /* Prevent sticky bar overlap */
+            }
         }
     </style>
 </head>
@@ -744,14 +676,11 @@
     </button>
 
     <div class="venue-detail-container">
-        <!-- Hero Section -->
+        <!-- Hero Section (Bento Grid) -->
         <section class="venue-hero">
-            <div class="hero-carousel" id="heroCarousel">
-                <!-- Slides will be inserted here -->
+            <div class="bento-grid" id="heroGrid">
+                <!-- Javascript will populate this -->
             </div>
-            <button class="carousel-nav prev" onclick="changeSlide(-1)">‹</button>
-            <button class="carousel-nav next" onclick="changeSlide(1)">›</button>
-            <div class="carousel-dots" id="carouselDots"></div>
 
             <div class="hero-info-card" id="heroInfoCard">
                 <!-- Info card content will be inserted here -->
