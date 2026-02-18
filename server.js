@@ -65,7 +65,57 @@ app.post('/api/booking', async (req, res) => {
             throw new Error(data.message || data.error || 'GHL API Error');
         }
 
-        console.log('✅ GHL API Success:', data);
+        console.log('✅ GHL Contact Created:', data);
+
+        // ---------------------------------------------------------
+        // Create Opportunity in GHL
+        // ---------------------------------------------------------
+        try {
+            const contactId = data.contact?.id || data.id; // Adjust based on actual GHL response structure
+            if (contactId) {
+                const pipelineId = '9iysVOLCI7MkI8fvhpzO'; // Corporate Retreats Pipeline
+                const stageId = '2c9461d3-3e66-4401-bd9a-9b7fee58a74e'; // New Lead Stage
+
+                // Ensure monetary value is a number
+                const monetaryValue = parseFloat(formData.opportunityValue) || 0;
+
+                const opportunityPayload = {
+                    pipelineId: pipelineId,
+                    locationId: locationId,
+                    name: formData.opportunity_name || `${formData.companyName} x ${formData.venueName}`,
+                    pipelineStageId: stageId,
+                    status: 'open',
+                    contactId: contactId,
+                    monetaryValue: monetaryValue
+                };
+
+                console.log('💼 Creating Opportunity in GHL:', JSON.stringify(opportunityPayload, null, 2));
+
+                const oppResponse = await fetch('https://services.leadconnectorhq.com/opportunities/', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${apiKey}`,
+                        'Content-Type': 'application/json',
+                        'Version': '2021-07-28'
+                    },
+                    body: JSON.stringify(opportunityPayload)
+                });
+
+                const oppData = await oppResponse.json();
+
+                if (!oppResponse.ok) {
+                    console.error('❌ GHL Opportunity Creation Failed:', JSON.stringify(oppData, null, 2));
+                    // We don't throw here to avoid failing the whole request if just the opp fails
+                } else {
+                    console.log('✅ GHL Opportunity Created:', oppData);
+                }
+            } else {
+                console.warn('⚠️ Could not create opportunity: Contact ID not found in response');
+            }
+        } catch (oppError) {
+            console.error('❌ Error creating opportunity:', oppError.message);
+        }
+
         res.json({ success: true, data });
 
     } catch (error) {

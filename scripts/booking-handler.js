@@ -82,8 +82,13 @@ function collectBookingData() {
     const month = document.getElementById('month')?.value || 'N/A';
 
     // Get selected venue
-    const selectedVenueCard = document.querySelector('.card-option.selected h3');
-    const venue = selectedVenueCard ? selectedVenueCard.innerText : 'Not Selected';
+    // Update: logic to grab from card-option.selected or fallback
+    let venue = 'Not Selected';
+    const selectedCard = document.querySelector('.card-option.selected');
+    if (selectedCard) {
+        const h3 = selectedCard.querySelector('h3');
+        if (h3) venue = h3.innerText.trim();
+    }
 
     // Get selected known activities
     const selectedActivities = Array.from(document.querySelectorAll('.activity-card.selected .activity-content span'))
