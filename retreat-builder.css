@@ -204,6 +204,23 @@ h4 {
     line-height: 1.5;
 }
 
+
+/* CARD ACTIONS */
+.card-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.card-actions .btn {
+    margin-top: 0;
+    flex: 1;
+    text-align: center;
+    padding: 10px 15px;
+    font-size: 0.9rem;
+}
+
 /* STICKY FOOTER */
 .sticky-footer {
     position: fixed;
@@ -304,8 +321,17 @@ h4 {
         padding-top: 25px !important;
         padding-left: 20px !important;
         padding-right: 20px !important;
-        padding-bottom: 220px !important;
-        /* Increased for taller mobile sticky footer */
+        padding-bottom: 250px !important;
+        /* Increased to clear sticky footer */
+    }
+
+    .card-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .card-actions .btn {
+        width: 100%;
     }
 
     .carousel-arrow {
