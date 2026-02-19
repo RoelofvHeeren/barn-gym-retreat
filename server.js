@@ -27,50 +27,91 @@ app.post('/api/booking', async (req, res) => {
         const formData = req.body;
         console.log('📩 Received booking request:', JSON.stringify(formData, null, 2));
 
-        const customFields = [
-            { key: 'drAttb54oE9hYTKTz5sl', value: formData.venueName }, // Retreat Venue
-            { key: 'Y4U3UcWXvy15n7xQiRR1', value: formData.guestCount }, // Number of Guests
-            { key: 'qGZC8Mu4EKPt7uv1TrKC', value: formData.duration }, // Retreat Duration
-            { key: 'NpnWGV4VIYF44wzNmB4F', value: formData.month }, // Preferred Month
-            { key: 'RZp139wBFsAaJ6ftQ6Tz', value: formData.itineraryText }, // Retreat Itinerary
-            { key: 'QXRLWvPeNZKgUAFYbaP8', value: formData.opportunityValue } // Estimated Value
-        ];
+        // ---------------------------------------------------------
+        // 1. Check if contact exists
+        // ---------------------------------------------------------
+        let contactId = null;
+        let contactData = null;
 
-        console.log('📦 Sending Custom Fields to GHL:', JSON.stringify(customFields, null, 2));
+        // Try to find by email first
+        if (formData.contactEmail) {
+            try {
+                const lookupUrl = `https://services.leadconnectorhq.com/contacts/lookup?email=${encodeURIComponent(formData.contactEmail)}`;
+                const lookupRes = await fetch(lookupUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${apiKey}`,
+                        'Version': '2021-07-28'
+                    }
+                });
 
+                if (lookupRes.ok) {
+                    const lookupData = await lookupRes.json();
+                    if (lookupData.contacts && lookupData.contacts.length > 0) {
+                        contactId = lookupData.contacts[0].id;
+                        console.log(`🔍 Found existing contact: ${contactId}`);
+                    }
+                }
+            } catch (err) {
+                console.warn('⚠️ Contact lookup failed:', err.message);
+            }
+        }
 
-        const ghlResponse = await fetch('https://services.leadconnectorhq.com/contacts/', {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${apiKey}`,
-                'Content-Type': 'application/json',
-                'Version': '2021-07-28'
-            },
-            body: JSON.stringify({
-                locationId: locationId,
-                name: formData.contactName,
-                email: formData.contactEmail,
-                phone: formData.contactPhone,
-                companyName: formData.companyName,
-                tags: ['retreat-inquiry']
-            })
-        });
+        // ---------------------------------------------------------
+        // 2. Create or Update Contact
+        // ---------------------------------------------------------
+        const contactPayload = {
+            locationId: locationId,
+            name: formData.contactName,
+            email: formData.contactEmail,
+            phone: formData.contactPhone,
+            companyName: formData.companyName,
+            tags: ['retreat-inquiry'],
+            customFields: customFields // Updating custom fields on contact too
+        };
+
+        let ghlResponse;
+
+        if (contactId) {
+            // UPDATE existing contact
+            console.log(`Vm Updating existing contact ${contactId}...`);
+            ghlResponse = await fetch(`https://services.leadconnectorhq.com/contacts/${contactId}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `Bearer ${apiKey}`,
+                    'Content-Type': 'application/json',
+                    'Version': '2021-07-28'
+                },
+                body: JSON.stringify(contactPayload)
+            });
+        } else {
+            // CREATE new contact
+            console.log('✨ Creating new contact...');
+            ghlResponse = await fetch('https://services.leadconnectorhq.com/contacts/', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${apiKey}`,
+                    'Content-Type': 'application/json',
+                    'Version': '2021-07-28'
+                },
+                body: JSON.stringify(contactPayload)
+            });
+        }
 
         const data = await ghlResponse.json();
 
         if (!ghlResponse.ok) {
-            console.error('❌ GHL API Error Status:', ghlResponse.status);
-            console.error('❌ GHL API Error Response:', JSON.stringify(data, null, 2));
-            throw new Error(data.message || data.error || 'GHL API Error');
+            console.error('❌ GHL Contact API Error:', ghlResponse.status, JSON.stringify(data, null, 2));
+            throw new Error(data.message || 'Failed to sync contact with GHL');
         }
 
-        console.log('✅ GHL Contact Created:', data);
+        contactId = data.contact?.id || data.id || contactId;
+        console.log('✅ Contact synced successfully:', contactId);
 
         // ---------------------------------------------------------
-        // Create Opportunity in GHL
+        // 3. Create Opportunity in GHL
         // ---------------------------------------------------------
         try {
-            const contactId = data.contact?.id || data.id; // Adjust based on actual GHL response structure
             if (contactId) {
                 const pipelineId = '9iysVOLCI7MkI8fvhpzO'; // Corporate Retreats Pipeline
                 const stageId = '2c9461d3-3e66-4401-bd9a-9b7fee58a74e'; // New Lead Stage
@@ -86,7 +127,7 @@ app.post('/api/booking', async (req, res) => {
                     status: 'open',
                     contactId: contactId,
                     monetaryValue: monetaryValue,
-                    customFields: customFields // Moved from Contact to Opportunity
+                    customFields: customFields
                 };
 
                 console.log('💼 Creating Opportunity in GHL:', JSON.stringify(opportunityPayload, null, 2));
@@ -110,13 +151,13 @@ app.post('/api/booking', async (req, res) => {
                     console.log('✅ GHL Opportunity Created:', oppData);
                 }
             } else {
-                console.warn('⚠️ Could not create opportunity: Contact ID not found in response');
+                console.warn('⚠️ Could not create opportunity: Contact ID missing');
             }
         } catch (oppError) {
             console.error('❌ Error creating opportunity:', oppError.message);
         }
 
-        res.json({ success: true, data });
+        res.json({ success: true, contactId });
 
     } catch (error) {
         console.error('❌ API Error:', error.message);
