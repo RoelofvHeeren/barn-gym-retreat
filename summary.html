@@ -12,8 +12,8 @@
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&family=Raleway:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="retreat-builder.css?v=2">
-    <script src="scripts/booking-state.js"></script>
+    <link rel="stylesheet" href="/retreat-builder.css?v=2">
+    <script src="/scripts/booking-state.js"></script>
     <style>
         body {
             margin: 0;
@@ -111,7 +111,7 @@
 
     <script>
         const state = getBookingState();
-        
+
         // Safeguard: Redirect if no venue selected (prevents "My Company x null")
         if (!state.location) {
             console.warn('No venue in state, redirecting to start');
