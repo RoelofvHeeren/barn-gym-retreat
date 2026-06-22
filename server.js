@@ -13,10 +13,10 @@ app.use(express.static(path.join(__dirname, 'dist')));
 // API Endpoint for Booking
 app.post('/api/booking', async (req, res) => {
     const apiKey = (process.env.GHL_API_KEY || '').trim();
-    const locationId = (process.env.GHL_LOCATION_ID || 'VYZcxHGdxD0Dj1cj1ZU4').trim();
+    const locationId = (process.env.GHL_LOCATION_ID || '').trim();
 
-    if (!apiKey) {
-        console.error('❌ GHL_API_KEY is missing in environment variables');
+    if (!apiKey || !locationId) {
+        console.error('❌ GHL_API_KEY or GHL_LOCATION_ID is missing in environment variables');
         return res.status(500).json({ success: false, error: 'Server configuration error' });
     }
 

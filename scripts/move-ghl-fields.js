@@ -1,11 +1,11 @@
 require('dotenv').config();
 
 const apiKey = (process.env.GHL_API_KEY || '').trim();
-const locationId = (process.env.GHL_LOCATION_ID || 'VYZcxHGdxD0Dj1cj1ZU4').trim();
+const locationId = (process.env.GHL_LOCATION_ID || '').trim();
 const folderId = 'UZmwpO2kGuqlSBzBzOEt'; // Inferred Corporate Retreats folder ID based on analysis
 
-if (!apiKey) {
-    console.error('❌ GHL_API_KEY is missing');
+if (!apiKey || !locationId) {
+    console.error('❌ GHL_API_KEY or GHL_LOCATION_ID is missing');
     process.exit(1);
 }
 
