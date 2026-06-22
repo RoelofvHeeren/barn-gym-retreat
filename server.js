@@ -10,8 +10,6 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'dist')));
 
-const GHL_PIPELINE_ID = 'AbixtrhMo6OnTq664tNN'; // 1. Inbound Leads
-const GHL_PIPELINE_STAGE_ID = '3ef9cbc8-8571-45d9-ae91-d49eb720b2cd'; // Application Complete
 const RETREAT_LEAD_TAG = 'retreat lead';
 
 // API Endpoint for Booking
@@ -122,51 +120,6 @@ app.post('/api/booking', async (req, res) => {
 
         contactId = data.contact?.id || data.id || contactId;
         console.log('✅ Contact synced successfully:', contactId);
-
-        // ---------------------------------------------------------
-        // 3. Create Opportunity in GHL
-        // ---------------------------------------------------------
-        try {
-            if (contactId) {
-                // Ensure monetary value is a number
-                const monetaryValue = parseFloat(formData.opportunityValue) || 0;
-
-                const opportunityPayload = {
-                    pipelineId: GHL_PIPELINE_ID,
-                    locationId: locationId,
-                    name: formData.opportunity_name || `${formData.companyName} x ${formData.venueName}`,
-                    pipelineStageId: GHL_PIPELINE_STAGE_ID,
-                    status: 'open',
-                    contactId: contactId,
-                    monetaryValue: monetaryValue
-                };
-
-                console.log('💼 Creating Opportunity in GHL:', JSON.stringify(opportunityPayload, null, 2));
-
-                const oppResponse = await fetch('https://services.leadconnectorhq.com/opportunities/', {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${apiKey}`,
-                        'Content-Type': 'application/json',
-                        'Version': '2021-07-28'
-                    },
-                    body: JSON.stringify(opportunityPayload)
-                });
-
-                const oppData = await oppResponse.json();
-
-                if (!oppResponse.ok) {
-                    console.error('❌ GHL Opportunity Creation Failed:', JSON.stringify(oppData, null, 2));
-                    // We don't throw here to avoid failing the whole request if just the opp fails
-                } else {
-                    console.log('✅ GHL Opportunity Created:', oppData);
-                }
-            } else {
-                console.warn('⚠️ Could not create opportunity: Contact ID missing');
-            }
-        } catch (oppError) {
-            console.error('❌ Error creating opportunity:', oppError.message);
-        }
 
         res.json({ success: true, contactId });
 
