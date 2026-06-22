@@ -10,6 +10,10 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'dist')));
 
+const GHL_PIPELINE_ID = 'AbixtrhMo6OnTq664tNN'; // 1. Inbound Leads
+const GHL_PIPELINE_STAGE_ID = '3ef9cbc8-8571-45d9-ae91-d49eb720b2cd'; // Application Complete
+const RETREAT_LEAD_TAG = 'retreat lead';
+
 // API Endpoint for Booking
 app.post('/api/booking', async (req, res) => {
     const apiKey = (process.env.GHL_API_KEY || '').trim();
@@ -28,12 +32,12 @@ app.post('/api/booking', async (req, res) => {
         console.log('📩 Received booking request:', JSON.stringify(formData, null, 2));
 
         const customFields = [
-            { key: 'BjInSO18Ys1QzeyKNI3d', value: formData.venueName }, // Retreat Venue
-            { key: '7ZdXPGKQb8xD3BBOSBgU', value: formData.guestCount }, // Number of Guests
-            { key: 'UWQqzLGGk7Uiu5jPhLDO', value: formData.duration }, // Retreat Duration
-            { key: 'Rwyqk50CKW31aDa7E17C', value: formData.month }, // Preferred Month
-            { key: 'RZ2HQrGvVKUMwuidVo4Q', value: formData.itineraryText }, // Retreat Itinerary
-            { key: 'Nrrw6Ol2eBsf3e95ylNo', value: formData.opportunityValue } // Estimated Value
+            { id: 'BjInSO18Ys1QzeyKNI3d', value: formData.venueName }, // Retreat Venue
+            { id: '7ZdXPGKQb8xD3BBOSBgU', value: formData.guestCount }, // Number of Guests
+            { id: 'UWQqzLGGk7Uiu5jPhLDO', value: formData.duration }, // Retreat Duration
+            { id: 'Rwyqk50CKW31aDa7E17C', value: formData.month }, // Preferred Month
+            { id: 'RZ2HQrGvVKUMwuidVo4Q', value: formData.itineraryText }, // Retreat Itinerary
+            { id: 'Nrrw6Ol2eBsf3e95ylNo', value: formData.opportunityValue } // Estimated Value
         ];
 
         console.log('📦 Sending Custom Fields to GHL:', JSON.stringify(customFields, null, 2));
@@ -77,7 +81,7 @@ app.post('/api/booking', async (req, res) => {
             email: formData.contactEmail,
             phone: formData.contactPhone,
             companyName: formData.companyName,
-            tags: ['retreat-inquiry'],
+            tags: ['retreat-inquiry', RETREAT_LEAD_TAG],
             customFields: customFields // Updating custom fields on contact too
         };
 
@@ -124,21 +128,17 @@ app.post('/api/booking', async (req, res) => {
         // ---------------------------------------------------------
         try {
             if (contactId) {
-                const pipelineId = '9iysVOLCI7MkI8fvhpzO'; // Corporate Retreats Pipeline
-                const stageId = '2c9461d3-3e66-4401-bd9a-9b7fee58a74e'; // New Lead Stage
-
                 // Ensure monetary value is a number
                 const monetaryValue = parseFloat(formData.opportunityValue) || 0;
 
                 const opportunityPayload = {
-                    pipelineId: pipelineId,
+                    pipelineId: GHL_PIPELINE_ID,
                     locationId: locationId,
                     name: formData.opportunity_name || `${formData.companyName} x ${formData.venueName}`,
-                    pipelineStageId: stageId,
+                    pipelineStageId: GHL_PIPELINE_STAGE_ID,
                     status: 'open',
                     contactId: contactId,
-                    monetaryValue: monetaryValue,
-                    customFields: customFields
+                    monetaryValue: monetaryValue
                 };
 
                 console.log('💼 Creating Opportunity in GHL:', JSON.stringify(opportunityPayload, null, 2));
