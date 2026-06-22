@@ -28,12 +28,12 @@ app.post('/api/booking', async (req, res) => {
         console.log('📩 Received booking request:', JSON.stringify(formData, null, 2));
 
         const customFields = [
-            { key: 'drAttb54oE9hYTKTz5sl', value: formData.venueName }, // Retreat Venue
-            { key: 'Y4U3UcWXvy15n7xQiRR1', value: formData.guestCount }, // Number of Guests
-            { key: 'qGZC8Mu4EKPt7uv1TrKC', value: formData.duration }, // Retreat Duration
-            { key: 'NpnWGV4VIYF44wzNmB4F', value: formData.month }, // Preferred Month
-            { key: 'RZp139wBFsAaJ6ftQ6Tz', value: formData.itineraryText }, // Retreat Itinerary
-            { key: 'QXRLWvPeNZKgUAFYbaP8', value: formData.opportunityValue } // Estimated Value
+            { key: 'BjInSO18Ys1QzeyKNI3d', value: formData.venueName }, // Retreat Venue
+            { key: '7ZdXPGKQb8xD3BBOSBgU', value: formData.guestCount }, // Number of Guests
+            { key: 'UWQqzLGGk7Uiu5jPhLDO', value: formData.duration }, // Retreat Duration
+            { key: 'Rwyqk50CKW31aDa7E17C', value: formData.month }, // Preferred Month
+            { key: 'RZ2HQrGvVKUMwuidVo4Q', value: formData.itineraryText }, // Retreat Itinerary
+            { key: 'Nrrw6Ol2eBsf3e95ylNo', value: formData.opportunityValue } // Estimated Value
         ];
 
         console.log('📦 Sending Custom Fields to GHL:', JSON.stringify(customFields, null, 2));

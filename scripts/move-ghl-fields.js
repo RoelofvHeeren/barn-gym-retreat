@@ -11,12 +11,12 @@ if (!apiKey) {
 
 // IDs of fields to move
 const fieldsToMove = [
-    'drAttb54oE9hYTKTz5sl', // Retreat Venue
-    'Y4U3UcWXvy15n7xQiRR1', // Number of Guests
-    'qGZC8Mu4EKPt7uv1TrKC', // Retreat Duration
-    'NpnWGV4VIYF44wzNmB4F', // Preferred Month
-    'RZp139wBFsAaJ6ftQ6Tz', // Retreat Itinerary
-    'QXRLWvPeNZKgUAFYbaP8'  // Estimated Value
+    'BjInSO18Ys1QzeyKNI3d', // Retreat Venue
+    '7ZdXPGKQb8xD3BBOSBgU', // Number of Guests
+    'UWQqzLGGk7Uiu5jPhLDO', // Retreat Duration
+    'Rwyqk50CKW31aDa7E17C', // Preferred Month
+    'RZ2HQrGvVKUMwuidVo4Q', // Retreat Itinerary
+    'Nrrw6Ol2eBsf3e95ylNo'  // Estimated Value
 ];
 
 async function moveFields() {
